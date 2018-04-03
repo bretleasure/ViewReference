@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<assembly xmlns="urn:schemas-microsoft-com:asm.v1" manifestVersion="1.0">
+
+  <assemblyIdentity name="CAP.Apps.ViewReference" version="1.0.0.0"></assemblyIdentity>
+
+  <clrClass clsid="{35678d1f-aeb7-4a22-9fef-624c83e66007}" progid="CAP.StandardAddInServer" threadingModel="Both" name="CAP.Apps.ViewReference.StandardAddInServer" runtimeVersion=""></clrClass>
+
+  <file name="CAP.Apps.ViewReference.dll" hashalg="SHA1"></file>
+
+</assembly>
