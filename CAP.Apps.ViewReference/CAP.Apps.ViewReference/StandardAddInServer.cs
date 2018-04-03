@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using Inventor;
@@ -18,7 +19,7 @@ namespace CAP.Apps.ViewReference
     {
 
         // Inventor application object.
-        private Inventor.Application m_inventorApplication;
+        //private Inventor.Application m_inventorApplication;
 
         public StandardAddInServer()
         {
@@ -38,21 +39,35 @@ namespace CAP.Apps.ViewReference
             // Initialize AddIn members.
             AddinGlobal.InventorApp = addInSiteObject.Application;
 
-            //Check/Create AppData Folder
-            Tools.CheckCreateAppDataFolder(AddinGlobal.AppFolder);
+            //Create App Folder if it doesnt exist
+            if (!System.IO.Directory.Exists(AddinGlobal.AppFolder))
+            {
+                DirectoryInfo di = System.IO.Directory.CreateDirectory(AddinGlobal.AppFolder);
+                di.Attributes = FileAttributes.Hidden;
+            }
+
+            //Get User Settings
+            ViewRefTools.Get_SavedSettings();
 
             try
             {
                 Icon CreateUpdate = new Icon(this.GetType(), "Resources.capico.ico");
                 Icon CreateUpdate_sm = new Icon(CreateUpdate, 16, 16);
+                InventorButton btn_CreateUpdate = new InventorButton("Create/Update", "vr_CreateUpdate", "Create/Update View References", "Create/Update View References in this document.", CreateUpdate, CreateUpdate_sm);
+                btn_CreateUpdate.Execute = ViewRef_ButtonEvents.CreateUpdate_References;
 
-                InventorButton button1 = new InventorButton("Button 1", "vr_Button1", "This is button 1", "Clicking this for button 1 action", CreateUpdate, CreateUpdate_sm);
+                Icon RemoveRef = new Icon(this.GetType(), "Resources.capico.ico");
+                Icon RemoveRef_sm = new Icon(RemoveRef, 16, 16);
+                InventorButton btn_Remove = new InventorButton("Remove", "vr_Remove", "Remove View References", "Remove View References in this document.", RemoveRef, RemoveRef_sm);
+                btn_Remove.Execute = ViewRef_ButtonEvents.Remove_References;
 
-                button1.Execute = ViewRef_Events.CreateUpdate_References;
+                Icon Configure = new Icon(this.GetType(), "Resources.gear.ico");
+                Icon Configure_sm = new Icon(Configure, 16, 16);
+                InventorButton btn_Configure = new InventorButton("Configure", "vr_Config", "Configure View Reference", "Select Options for View Reference.", Configure, Configure_sm);
+                btn_Configure.Execute = ViewRef_ButtonEvents.ShowConfigForm;
 
                 if (firstTime)
                 {
-
                     UserInterfaceManager uiMan = AddinGlobal.InventorApp.UserInterfaceManager;
 
                     if (uiMan.InterfaceStyle == InterfaceStyleEnum.kRibbonInterface)
@@ -63,10 +78,10 @@ namespace CAP.Apps.ViewReference
                         RibbonPanel panel = tab.RibbonPanels.Add("View Reference", "vr_Panel", Guid.NewGuid().ToString());
                         CommandControls controls = panel.CommandControls;
 
-                        controls.AddButton(button1.ButtonDef(), true, true);
+                        controls.AddButton(btn_CreateUpdate.ButtonDef(), true, true);
+                        controls.AddButton(btn_Remove.ButtonDef(), true, true);
+                        controls.AddButton(btn_Configure.ButtonDef(), false, true);
                     }
-
-
                 }
             }
             catch (Exception e)
@@ -86,7 +101,7 @@ namespace CAP.Apps.ViewReference
             // TODO: Add ApplicationAddInServer.Deactivate implementation
 
             // Release objects.
-            m_inventorApplication = null;
+            AddinGlobal.InventorApp = null;
 
             GC.Collect();
             GC.WaitForPendingFinalizers();

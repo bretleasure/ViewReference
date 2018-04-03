@@ -8,13 +8,28 @@ namespace CAP.Apps.ViewReference
 {
     public class ViewReference
     {
-        string CalloutStyle;
-        string DetailLabelStyle;
-        string SectionLabelStyle;
-        string AuxLabelStyle;
-        string BaseLabelStyle;
-        string ProjectedLabelStyle;
+        public string CalloutStyle;
 
+        public string DetailLabelStyle;
+        public string SectionLabelStyle;
+        public string AuxLabelStyle;
+        public string StandardLabelStyle;
+        public string ProjectedLabelStyle;
+        public string AssociativeDraftLabelStyle;
+        public string DraftLabelStyle;
+        public string OverlayLabelStyle;
+
+        public bool DetailView;
+        public bool SectionView;
+        public bool AuxView;
+        public bool StandardView;
+        public bool ProjectedView;
+        public bool AssociativeDraftView;
+        public bool DraftView;
+        public bool OverlayView;
+        
+
+        
 
     }
 }
