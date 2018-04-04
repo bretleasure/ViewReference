@@ -33,8 +33,6 @@ namespace CAP.Apps.ViewReference
             // The AddInSiteObject provides access to the Inventor Application object.
             // The FirstTime flag indicates if the addin is loaded for the first time.
 
-            // TODO: Add ApplicationAddInServer.Activate implementation.
-            // e.g. event initialization, command creation etc.
 
             // Initialize AddIn members.
             AddinGlobal.InventorApp = addInSiteObject.Application;
@@ -51,12 +49,12 @@ namespace CAP.Apps.ViewReference
 
             try
             {
-                Icon CreateUpdate = new Icon(this.GetType(), "Resources.capico.ico");
+                Icon CreateUpdate = new Icon(this.GetType(), "Resources.ViewRef 32x32.ico");
                 Icon CreateUpdate_sm = new Icon(CreateUpdate, 16, 16);
                 InventorButton btn_CreateUpdate = new InventorButton("Create/Update", "vr_CreateUpdate", "Create/Update View References", "Create/Update View References in this document.", CreateUpdate, CreateUpdate_sm);
                 btn_CreateUpdate.Execute = ViewRef_ButtonEvents.CreateUpdate_References;
 
-                Icon RemoveRef = new Icon(this.GetType(), "Resources.capico.ico");
+                Icon RemoveRef = new Icon(this.GetType(), "Resources.ViewRef 32x32.ico");
                 Icon RemoveRef_sm = new Icon(RemoveRef, 16, 16);
                 InventorButton btn_Remove = new InventorButton("Remove", "vr_Remove", "Remove View References", "Remove View References in this document.", RemoveRef, RemoveRef_sm);
                 btn_Remove.Execute = ViewRef_ButtonEvents.Remove_References;
@@ -98,8 +96,7 @@ namespace CAP.Apps.ViewReference
             // The AddIn will be unloaded either manually by the user or
             // when the Inventor session is terminated
 
-            // TODO: Add ApplicationAddInServer.Deactivate implementation
-
+            
             // Release objects.
             AddinGlobal.InventorApp = null;
 
@@ -122,7 +119,7 @@ namespace CAP.Apps.ViewReference
 
             get
             {
-                // TODO: Add ApplicationAddInServer.Automation getter implementation
+                
                 return null;
             }
         }
