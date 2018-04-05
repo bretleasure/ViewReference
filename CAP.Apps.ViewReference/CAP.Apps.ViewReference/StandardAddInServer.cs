@@ -51,10 +51,10 @@ namespace CAP.Apps.ViewReference
             {
                 Icon CreateUpdate = new Icon(this.GetType(), "Resources.ViewRef 32x32.ico");
                 Icon CreateUpdate_sm = new Icon(CreateUpdate, 16, 16);
-                InventorButton btn_CreateUpdate = new InventorButton("Create/Update", "vr_CreateUpdate", "Create/Update View References", "Create/Update View References in this document.", CreateUpdate, CreateUpdate_sm);
+                InventorButton btn_CreateUpdate = new InventorButton("Create/\rUpdate", "vr_CreateUpdate", "Create/Update View References", "Create/Update View References in this document.", CreateUpdate, CreateUpdate_sm);
                 btn_CreateUpdate.Execute = ViewRef_ButtonEvents.CreateUpdate_References;
 
-                Icon RemoveRef = new Icon(this.GetType(), "Resources.ViewRef 32x32.ico");
+                Icon RemoveRef = new Icon(this.GetType(), "Resources.ViewRef 32x32 Remove2.ico");
                 Icon RemoveRef_sm = new Icon(RemoveRef, 16, 16);
                 InventorButton btn_Remove = new InventorButton("Remove", "vr_Remove", "Remove View References", "Remove View References in this document.", RemoveRef, RemoveRef_sm);
                 btn_Remove.Execute = ViewRef_ButtonEvents.Remove_References;

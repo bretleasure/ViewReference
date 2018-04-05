@@ -13,20 +13,13 @@ namespace CAP.Apps.ViewReference
         public string DetailLabelStyle;
         public string SectionLabelStyle;
         public string AuxLabelStyle;
-        public string StandardLabelStyle;
         public string ProjectedLabelStyle;
-        public string AssociativeDraftLabelStyle;
-        public string DraftLabelStyle;
-        public string OverlayLabelStyle;
 
         public bool DetailView;
         public bool SectionView;
         public bool AuxView;
-        public bool StandardView;
         public bool ProjectedView;
-        public bool AssociativeDraftView;
-        public bool DraftView;
-        public bool OverlayView;
+
         
 
         

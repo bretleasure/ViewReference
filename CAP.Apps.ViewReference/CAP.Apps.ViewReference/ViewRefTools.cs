@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Inventor;
 using CAP.Utilities;
+using RemoveOldViewReferences.RemoveOldViewReferences;
 
 namespace CAP.Apps.ViewReference
 {
@@ -14,11 +15,11 @@ namespace CAP.Apps.ViewReference
         {
             InvView iView = new InvView();
 
-            if (oView.AttributeSets.NameIsUsed["ViewReference"])
+            if (oView.AttributeSets.NameIsUsed["ViewReference-v4"])
             {
                 //Attributes Exist
 
-                AttributeSet oAttribSet = oView.AttributeSets["ViewReference"];
+                AttributeSet oAttribSet = oView.AttributeSets["ViewReference-v4"];
 
                 iView.ViewName = oAttribSet["ViewName"].Value.ToString();
                 iView.ViewSheetName = oAttribSet["ViewSheetName"].Value.ToString();
@@ -31,14 +32,6 @@ namespace CAP.Apps.ViewReference
 
                 iView.LabelText = oAttribSet["LabelText"].Value.ToString();
 
-
-                //iView.DetailStyle = oAttribSet["DetailStyle"].Value.ToString();
-                //iView.SectionStyle = oAttribSet["SectionStyle"].Value.ToString();
-                //iView.AuxStyle = oAttribSet["AuxStyle"].Value.ToString();
-                //iView.BaseStyle = oAttribSet["BaseStyle"].Value.ToString();
-                //iView.ProjectedStyle = oAttribSet["ProjectedStyle"].Value.ToString();
-
-                //TODO: ADD WAY TO GET OLD STYLE ATTRIBUTES FROM VIEW
             }
             else
             {
@@ -51,12 +44,12 @@ namespace CAP.Apps.ViewReference
 
         public static void SaveAttributesToView(DrawingView dwgView, InvView iView)
         {
-            if (!dwgView.AttributeSets.NameIsUsed["ViewReference"])
+            if (!dwgView.AttributeSets.NameIsUsed["ViewReference-v4"])
             {
-                dwgView.AttributeSets.Add("ViewReference", true);
+                dwgView.AttributeSets.Add("ViewReference-v4", true);
             }
 
-            AttributeSet oAttribSet = dwgView.AttributeSets["ViewReference"];
+            AttributeSet oAttribSet = dwgView.AttributeSets["ViewReference-v4"];
 
             AssignAttributeValue(oAttribSet, "ViewName", iView.ViewName);
             AssignAttributeValue(oAttribSet, "ViewSheetName", iView.ViewSheetName);
@@ -115,20 +108,55 @@ namespace CAP.Apps.ViewReference
             if (iView != null)
             {
                 oView.Name = iView.ViewName;
-                RemoveLabelReferences(oView, iView);
+                oView.Label.FormattedText = iView.LabelText;
+
+                //RemoveLabelReferences(oView, iView);
                 ClearViewAttributes(oView);
             }
             else
             {
+                if (OldReferencesExist(oView))
+                {
+                    //Remove Old References
+                    ViewRef_Remove OldVR = new ViewRef_Remove();
+                    OldVR.Remove_ViewRefs(AddinGlobal.InventorApp);
+
+                    //Remove Old ViewReference Attribute Set
+                    if (oView.AttributeSets.NameIsUsed["ViewReference"])
+                        oView.AttributeSets["ViewReference"].Delete();
+                }
+
                 //References were never added, or they were added as the original app
-                //Check for Original Referencesl
-                //TODO: add check for original references in vb .dll file
+
+            }
+        }
+
+        static bool OldReferencesExist(DrawingView oView)
+        {
+            if (oView.AttributeSets.NameIsUsed["ViewReference"])
+                return true;
+            else
+            {
+                if (!oView.Label.FormattedText.Contains("<DrawingViewName/>"))
+                {
+                    //Original References Exist
+                    return true;
+                }
+                else
+                {
+                    //No References Exist
+                    return false;
+                }
+                    
             }
         }
 
         static void CreateViewReferences(DrawingView oView, string LabelStyle)
         {
             InvView iView = new InvView();
+
+            iView.CalloutStyle = AddinGlobal.vRefSettings.CalloutStyle;
+            iView.ViewLabelStyle = LabelStyle;
 
             //Get View Properties
             GetViewProperties(oView, out iView.ViewName, out iView.ViewSheetNumber, out iView.ViewSheetName, out iView.ParentSheetNumber, out iView.ParentSheetName);
@@ -138,7 +166,7 @@ namespace CAP.Apps.ViewReference
 
             //View Label
             iView.LabelText = oView.Label.FormattedText;
-            oView.Label.FormattedText = CreateViewLabel(iView);
+            oView.Label.FormattedText = CreateViewLabel(iView, LabelStyle, oView.Label.FormattedText);
 
 
             //Save View Attributes
@@ -147,17 +175,19 @@ namespace CAP.Apps.ViewReference
 
         static string CreateViewCallout(InvView iView)
         {
-            string StartString = AddinGlobal.vRefSettings.CalloutStyle;
+            string StartString = iView.CalloutStyle;
             
             return ReplaceAttributesWithValues(StartString, iView);
         }
 
-        static string CreateViewLabel(InvView iView)
+        static string CreateViewLabel(InvView iView, string LabelStyle, string CurrentLabelText)
         {
             //Get portion of View label that contains the View Name
-            string ViewCalloutText = GetViewCalloutTextFromLabelText(iView.LabelText);
+            string ViewCalloutText = GetViewCalloutTextFromLabelText(CurrentLabelText);
 
-            return ReplaceAttributesWithValues(ViewCalloutText, iView);
+            string NewViewCalloutText = ReplaceAttributesWithValues(LabelStyle, iView);
+
+            return CurrentLabelText.Replace(ViewCalloutText, NewViewCalloutText);
         }
 
         /// <summary>
@@ -167,11 +197,14 @@ namespace CAP.Apps.ViewReference
         /// <returns></returns>
         static string ReplaceAttributesWithValues(string StartString, InvView iView)
         {
-            StartString.Replace("<VIEW>", iView.ViewName);
-            StartString.Replace("<VIEW SHEET #>", iView.ViewSheetNumber);
-            StartString.Replace("<VIEW SHEET NAME>", iView.ViewSheetName);
-            StartString.Replace("<PARENT SHEET #>", iView.ParentSheetNumber);
-            StartString.Replace("<PARENT SHEET NAME>", iView.ParentSheetName);
+            StartString = StartString.Replace("<VIEW>", iView.ViewName);
+            StartString = StartString.Replace("<VIEW SHEET #>", iView.ViewSheetNumber);
+            StartString = StartString.Replace("<VIEW SHEET NAME>", iView.ViewSheetName);
+            StartString = StartString.Replace("<PARENT SHEET #>", iView.ParentSheetNumber);
+            StartString = StartString.Replace("<PARENT SHEET NAME>", iView.ParentSheetName);
+
+            StartString = StartString.Replace("<DELIM>", "<Delimiter/>");
+            StartString = StartString.Replace("<SCALE>", "<DrawingViewScale/>");
 
             return StartString;
         }
@@ -198,12 +231,16 @@ namespace CAP.Apps.ViewReference
 
         static string GetSheetName(string Inventor_SheetName)
         {
-            return Inventor_SheetName.Substring(0, Inventor_SheetName.IndexOf(":") - 1);
+            return Inventor_SheetName.Substring(0, Inventor_SheetName.IndexOf(":"));
         }
 
-        private static void ClearViewAttributes(DrawingView oView)
+        /// <summary>
+        /// Clears All attributes from View by Deleting ViewReference Attribute Set
+        /// </summary>
+        /// <param name="oView"></param>
+        static void ClearViewAttributes(DrawingView oView)
         {
-            oView.AttributeSets["ViewReference"].Delete();
+            oView.AttributeSets["ViewReference-v4"].Delete();
         }
 
         /// <summary>
@@ -213,43 +250,47 @@ namespace CAP.Apps.ViewReference
         /// <returns></returns>
         static string GetViewCalloutTextFromLabelText(string LabelText)
         {
+            //DETAIL <DrawingViewName/> 
+
             int ViewLength = ("<DrawingViewName/>").Length;
 
             return LabelText.Substring(LabelText.IndexOf("<DrawingViewName/>"), LabelText.LastIndexOf("<DrawingViewName/>") - LabelText.IndexOf("<DrawingViewName/>") + ViewLength);
+            //return LabelText.Substring(LabelText.IndexOf("<DrawingViewName/>"), LabelText.LastIndexOf("<DrawingViewName/>") + ViewLength);
         }
 
         static void RemoveLabelReferences(DrawingView oView, InvView iView)
         {
-            string ViewLabel = oView.Label.FormattedText;
 
-            if (iView.LabelText != "")
-            {
-                oView.Label.FormattedText = iView.LabelText;
-            }
-            else
-            {
-                //TODO: Add Old Way to Remove References
-                //Label Text attribute doesnt exist, replace with default text from Standards Library
-                string DefaultDetailText;
-                string DefaultSectionText;
-                string DefaultAuxText;
+            //string ViewLabel = oView.Label.FormattedText;
 
-                string result = "";
+            //if (iView.LabelText != "")
+            //{
+            //    oView.Label.FormattedText = iView.LabelText;
+            //}
+            //else
+            //{
+            //    //TODO: Add Old Way to Remove References
+            //    //Label Text attribute doesnt exist, replace with default text from Standards Library
+            //    string DefaultDetailText;
+            //    string DefaultSectionText;
+            //    string DefaultAuxText;
+
+            //    string result = "";
                 
-                switch (oView.ViewType)
-                {
-                    case DrawingViewTypeEnum.kDetailDrawingViewType:
-                        //result = ViewLabel.Replace(Label)
-                        break;
-                    case DrawingViewTypeEnum.kSectionDrawingViewType:
+            //    switch (oView.ViewType)
+            //    {
+            //        case DrawingViewTypeEnum.kDetailDrawingViewType:
+            //            //result = ViewLabel.Replace(Label)
+            //            break;
+            //        case DrawingViewTypeEnum.kSectionDrawingViewType:
 
-                        break;
-                    case DrawingViewTypeEnum.kAuxiliaryDrawingViewType:
+            //            break;
+            //        case DrawingViewTypeEnum.kAuxiliaryDrawingViewType:
 
-                        break;
-                }
+            //            break;
+            //    }
 
-            }
+            //}
         }
 
         static void Get_DefaultViewText(out string DetailText, out string SectionText, out string AuxText)

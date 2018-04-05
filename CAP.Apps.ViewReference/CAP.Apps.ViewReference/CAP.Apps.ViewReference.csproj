@@ -87,6 +87,12 @@
     <Reference Include="CAP.Utilities">
       <HintPath>..\..\..\CAP Utilities\CAP.Utilities\CAP.Utilities\bin\Debug\CAP.Utilities.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="RemoveOldViewReferences">
+      <HintPath>..\..\..\remove-old-view-references\RemoveOldViewReferences\RemoveOldViewReferences\bin\Debug\RemoveOldViewReferences.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
     <Reference Include="stdole, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
@@ -95,8 +101,11 @@
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Messaging" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddinGlobal.cs" />
@@ -156,6 +165,11 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\ViewRef 32x32.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ViewRef 32x32 Add.ico" />
+    <EmbeddedResource Include="Resources\ViewRef 32x32 Remove.ico" />
+    <EmbeddedResource Include="Resources\ViewRef 32x32 Remove2.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
