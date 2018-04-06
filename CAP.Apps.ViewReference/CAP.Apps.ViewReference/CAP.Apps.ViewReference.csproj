@@ -83,6 +83,7 @@
       <SpecificVersion>False</SpecificVersion>
       <EmbedInteropTypes>False</EmbedInteropTypes>
       <HintPath>C:\Windows\Microsoft.NET\assembly\GAC_MSIL\Autodesk.Inventor.Interop\v4.0_22.0.0.0__d84147f8b4276564\autodesk.inventor.interop.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="CAP.Utilities">
       <HintPath>..\..\..\CAP Utilities\CAP.Utilities\CAP.Utilities\bin\Debug\CAP.Utilities.dll</HintPath>
