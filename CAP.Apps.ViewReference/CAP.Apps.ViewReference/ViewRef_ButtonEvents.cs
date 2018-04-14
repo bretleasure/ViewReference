@@ -26,6 +26,9 @@ namespace CAP.Apps.ViewReference
                 return;
             }
 
+            if (System.IO.File.Exists(@"C:\Users\Public\Documents\ViewReferenceLog.txt"))
+                System.IO.File.Delete(@"C:\Users\Public\Documents\ViewReferenceLog.txt");
+
             if (AddinGlobal.vRefSettings == null)
             {
                 DialogResult oDRes = MessageBox.Show("You have not configured View Reference.  Configure now?", "Configure View Reference", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk);

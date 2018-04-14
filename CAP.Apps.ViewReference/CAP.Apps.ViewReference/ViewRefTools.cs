@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -92,14 +93,37 @@ namespace CAP.Apps.ViewReference
 
         public static void AddReferencesToView(DrawingView oView, string LabelStyle)
         {
-            InvView CurrentRefs = new InvView();
-            CurrentRefs = ViewRefTools.GetSavedAttributesFromView(oView);
+            RecordLog("View Name = " + oView.Name);
+            RecordLog("View Type = " + oView.ViewType.ToString());
+            RecordLog("View Label = " + oView.Label.FormattedText);
+            RecordLog("View Loc = " + oView.Parent.Name);
 
-            //Step 1 - Remove Current References if they Exist
-            ViewRefTools.ResetView(oView, CurrentRefs);
+            string ViewName = oView.Name;
+            try
+            {
+                if (oView.ParentView != null)
+                {
+                    InvView CurrentRefs = new InvView();
+                    CurrentRefs = GetSavedAttributesFromView(oView);
 
-            //Step 2 - Create New References
-            ViewRefTools.CreateViewReferences(oView, LabelStyle);
+                    //Step 1 - Remove Current References if they Exist
+                    ResetView(oView, CurrentRefs);
+
+                    //Step 2 - Create New References
+                    CreateViewReferences(oView, LabelStyle);
+
+                    RecordLog("Adding Reference Successful");
+                }
+                
+            }
+            catch (Exception e)
+            {
+                RecordLog(e.ToString());
+
+                RecordLog("Adding Reference Failed");
+            }
+
+            RecordLog("-----------------------------------------------------------------------------");
 
         }
 
@@ -128,6 +152,21 @@ namespace CAP.Apps.ViewReference
 
                 //References were never added, or they were added as the original app
 
+            }
+        }
+
+        static void RecordLog(string text)
+        {
+            string filepath = @"C:\Users\Public\Documents\ViewReferenceLog";
+
+            LogFile(filepath, text);
+        }
+
+        static void LogFile(string filePath, string text)
+        {
+            using (StreamWriter file = new StreamWriter(filePath + ".txt", true))
+            {
+                file.WriteLine(text);
             }
         }
 
