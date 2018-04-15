@@ -19,6 +19,8 @@ namespace CAP.Apps.ViewReference
         public static string AppId = "5865579890990954428";
 
         public static ViewReference vRefSettings;
+        
+        public static string LogFile = @"C:\Users\Public\Documents\Autodesk\View Reference Log";
 
     }
 }

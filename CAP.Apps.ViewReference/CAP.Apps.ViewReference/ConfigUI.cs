@@ -87,7 +87,7 @@ namespace CAP.Apps.ViewReference
             txb_DetailStyle.Text = "<VIEW><DELIM>SHEET <PARENT SHEET #>";            
             txb_SectionStyle.Text = "<VIEW>-<VIEW><DELIM>SHEET <PARENT SHEET #>";
             txb_AuxStyle.Text = "<VIEW>-<VIEW><DELIM>SHEET <PARENT SHEET #>";
-            txb_ProjectedStyle.Text = "<VIEW><DELIM>SHEET <PARENT SHEET #>";
+            txb_ProjectedStyle.Text = "<VIEW>-<VIEW><DELIM>SHEET <PARENT SHEET #>";
         }
 
         private void btn_Label2_Click(object sender, EventArgs e)
@@ -97,7 +97,7 @@ namespace CAP.Apps.ViewReference
             txb_DetailStyle.Text = "<VIEW> (<PARENT SHEET #>)";
             txb_SectionStyle.Text = "<VIEW>-<VIEW> (<PARENT SHEET #>)";
             txb_AuxStyle.Text = "<VIEW>-<VIEW> (<PARENT SHEET #>)";
-            txb_ProjectedStyle.Text = "<VIEW> (<PARENT SHEET #>)";
+            txb_ProjectedStyle.Text = "<VIEW>-<VIEW> (<PARENT SHEET #>)";
         }
 
         private void btn_Label3_Click(object sender, EventArgs e)
@@ -107,7 +107,7 @@ namespace CAP.Apps.ViewReference
             txb_DetailStyle.Text = "<VIEW><PARENT SHEET #>";
             txb_SectionStyle.Text = "<VIEW><PARENT SHEET #>-<VIEW><PARENT SHEET #>";
             txb_AuxStyle.Text = "<VIEW><PARENT SHEET #>-<VIEW><PARENT SHEET #>";
-            txb_ProjectedStyle.Text = "<VIEW><PARENT SHEET #>";
+            txb_ProjectedStyle.Text = "<VIEW><PARENT SHEET #>-<VIEW><PARENT SHEET #>";
         }
 
         private void btn_SaveSettings_Click(object sender, EventArgs e)

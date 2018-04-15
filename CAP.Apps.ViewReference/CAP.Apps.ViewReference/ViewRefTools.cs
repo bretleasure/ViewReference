@@ -93,12 +93,6 @@ namespace CAP.Apps.ViewReference
 
         public static void AddReferencesToView(DrawingView oView, string LabelStyle)
         {
-            RecordLog("View Name = " + oView.Name);
-            RecordLog("View Type = " + oView.ViewType.ToString());
-            RecordLog("View Label = " + oView.Label.FormattedText);
-            RecordLog("View Loc = " + oView.Parent.Name);
-
-            string ViewName = oView.Name;
             try
             {
                 if (oView.ParentView != null)
@@ -110,20 +104,25 @@ namespace CAP.Apps.ViewReference
                     ResetView(oView, CurrentRefs);
 
                     //Step 2 - Create New References
-                    CreateViewReferences(oView, LabelStyle);
-
-                    RecordLog("Adding Reference Successful");
+                    CreateViewReferences(oView, LabelStyle);;
                 }
-                
+
             }
             catch (Exception e)
             {
+                RecordLog("View Name = " + oView.Name);
+                RecordLog("View Type = " + oView.ViewType.ToString());
+                RecordLog("View Label = " + oView.Label.FormattedText);
+                RecordLog("View Loc = " + oView.Parent.Name);
+
                 RecordLog(e.ToString());
 
                 RecordLog("Adding Reference Failed");
+
+                RecordLog("-----------------------------------------------------------------------------");
             }
 
-            RecordLog("-----------------------------------------------------------------------------");
+
 
         }
 
@@ -157,17 +156,15 @@ namespace CAP.Apps.ViewReference
 
         static void RecordLog(string text)
         {
-            string filepath = @"C:\Users\Public\Documents\ViewReferenceLog";
+            string filepath = AddinGlobal.LogFile;
 
-            LogFile(filepath, text);
+            Tools.LogFile(filepath, text);
         }
 
-        static void LogFile(string filePath, string text)
+        public static void DeleteLogFile()
         {
-            using (StreamWriter file = new StreamWriter(filePath + ".txt", true))
-            {
-                file.WriteLine(text);
-            }
+            if (System.IO.File.Exists(AddinGlobal.LogFile + ".txt"))
+                System.IO.File.Delete(AddinGlobal.LogFile + ".txt");
         }
 
         static bool OldReferencesExist(DrawingView oView)

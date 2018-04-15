@@ -26,8 +26,8 @@ namespace CAP.Apps.ViewReference
                 return;
             }
 
-            if (System.IO.File.Exists(@"C:\Users\Public\Documents\ViewReferenceLog.txt"))
-                System.IO.File.Delete(@"C:\Users\Public\Documents\ViewReferenceLog.txt");
+            //Delete Error Log File if exists
+            ViewRefTools.DeleteLogFile();
 
             if (AddinGlobal.vRefSettings == null)
             {
