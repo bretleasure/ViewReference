@@ -12,6 +12,26 @@ namespace CAP.Apps.ViewReference
 {
     public abstract class ViewRefTools
     {
+		public static bool ViewReferencesExistInDocument(DrawingDocument oDwgDoc)
+		{
+			bool Exist = false;
+
+			foreach (Sheet oSheet in oDwgDoc.Sheets)
+			{
+				foreach (DrawingView oView in oSheet.DrawingViews)
+				{
+					if (oView.AttributeSets.NameIsUsed["ViewReference-v4"])
+					{
+						//References Exist
+						Exist = true;
+						break;
+					}
+				}
+			}
+
+			return Exist;
+		}
+
         public static InvView GetSavedAttributesFromView(DrawingView oView)
         {
             InvView iView = new InvView();
@@ -85,13 +105,40 @@ namespace CAP.Apps.ViewReference
                 ViewReference vRef = new ViewReference();
                 vRef = (ViewReference)XMLTools.Get_ObjectFromXML(AddinGlobal.AppFolder + AddinGlobal.SettingsFile, vRef);
 
-                AddinGlobal.vRefSettings = vRef;
+                AddinGlobal.vRefSettings = vRef;				
             }
             catch { }
-            
-        }
 
-        public static void AddReferencesToView(DrawingView oView, string LabelStyle)
+			//Create Event Listener
+			CreateUpdateEventListener();
+
+		}
+
+		public static void CreateUpdateEventListener()
+		{
+			if (AddinGlobal.vRefSettings.UpdateBeforeSave)
+				AddinGlobal.InventorApp.ApplicationEvents.OnSaveDocument += ApplicationEvents_OnSaveDocument;
+			else
+				AddinGlobal.InventorApp.ApplicationEvents.OnSaveDocument -= ApplicationEvents_OnSaveDocument;
+		}
+
+		private static void ApplicationEvents_OnSaveDocument(_Document DocumentObject, EventTimingEnum BeforeOrAfter, NameValueMap Context, out HandlingCodeEnum HandlingCode)
+		{
+			if (BeforeOrAfter == EventTimingEnum.kBefore)
+			{
+				if (DocumentObject.DocumentType == DocumentTypeEnum.kDrawingDocumentObject)
+				{
+					if (ViewReferencesExistInDocument(DocumentObject as DrawingDocument))
+					{
+						ViewRef_ButtonEvents.CreateUpdate_References();
+					}
+				}
+			}			
+
+			HandlingCode = HandlingCodeEnum.kEventHandled;
+		}
+
+		public static void AddReferencesToView(DrawingView oView, string LabelStyle)
         {
             try
             {

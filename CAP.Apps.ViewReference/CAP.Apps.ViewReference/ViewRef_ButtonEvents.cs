@@ -18,6 +18,8 @@ namespace CAP.Apps.ViewReference
 
         static ViewReference vRef;
 
+		
+
         public static void CreateUpdate_References()
         {
             //Check Entitlement

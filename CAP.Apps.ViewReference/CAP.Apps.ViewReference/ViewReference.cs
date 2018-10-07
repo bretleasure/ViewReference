@@ -20,7 +20,7 @@ namespace CAP.Apps.ViewReference
         public bool AuxView;
         public bool ProjectedView;
 
-        
+		public bool UpdateBeforeSave;
 
         
 

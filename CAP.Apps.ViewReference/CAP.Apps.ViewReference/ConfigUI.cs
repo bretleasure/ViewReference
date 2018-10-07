@@ -124,11 +124,15 @@ namespace CAP.Apps.ViewReference
             vRef.SectionView = ckb_Section.Checked;
             vRef.AuxView = ckb_Aux.Checked;
             vRef.ProjectedView = ckb_Projected.Checked;
+			vRef.UpdateBeforeSave = ckb_UpdateBeforeSave.Checked;
 
             AddinGlobal.vRefSettings = vRef;
 
             //Save object to XML
             XMLTools.CreateXML(vRef, AddinGlobal.AppFolder + AddinGlobal.SettingsFile);
+
+			//Create/Update Event Listener
+			ViewRefTools.CreateUpdateEventListener();
 
             this.Close();
         }
@@ -149,6 +153,8 @@ namespace CAP.Apps.ViewReference
                 ckb_Section.Checked = vRef.SectionView;
                 ckb_Aux.Checked = vRef.AuxView;
                 ckb_Projected.Checked = vRef.ProjectedView;
+
+				ckb_UpdateBeforeSave.Checked = vRef.UpdateBeforeSave;
             }
             
         }
