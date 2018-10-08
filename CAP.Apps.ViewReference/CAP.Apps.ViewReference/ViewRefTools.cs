@@ -116,11 +116,12 @@ namespace CAP.Apps.ViewReference
 
 		public static void CreateUpdateEventListener()
 		{
-			if (AddinGlobal.vRefSettings.UpdateBeforeSave)
-				AddinGlobal.InventorApp.ApplicationEvents.OnSaveDocument += ApplicationEvents_OnSaveDocument;
-			else
-				AddinGlobal.InventorApp.ApplicationEvents.OnSaveDocument -= ApplicationEvents_OnSaveDocument;
-		}
+            if (AddinGlobal.vRefSettings.UpdateBeforeSave)
+                AddinGlobal.InventorApp.ApplicationEvents.OnSaveDocument += ApplicationEvents_OnSaveDocument;
+            else
+                AddinGlobal.InventorApp.ApplicationEvents.OnSaveDocument -= ApplicationEvents_OnSaveDocument;
+
+        }
 
 		private static void ApplicationEvents_OnSaveDocument(_Document DocumentObject, EventTimingEnum BeforeOrAfter, NameValueMap Context, out HandlingCodeEnum HandlingCode)
 		{

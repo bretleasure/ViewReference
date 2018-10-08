@@ -134,6 +134,8 @@ namespace CAP.Apps.ViewReference
 			//Create/Update Event Listener
 			ViewRefTools.CreateUpdateEventListener();
 
+            vRef = null;
+
             this.Close();
         }
 
@@ -156,6 +158,8 @@ namespace CAP.Apps.ViewReference
 
 				ckb_UpdateBeforeSave.Checked = vRef.UpdateBeforeSave;
             }
+
+            vRef = null;
             
         }
 
