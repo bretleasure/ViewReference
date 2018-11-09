@@ -45,24 +45,30 @@ namespace CAP.Apps.ViewReference
             }
 
             //Get User Settings
-            ViewRefTools.Get_SavedSettings();
+            ViewReference_Tools.Get_SavedSettings();
+
+            //Create Event Listener
+            ViewReference_Tools.CreateUpdateEventListener();
 
             try
             {
-                Icon CreateUpdate = new Icon(this.GetType(), "Resources.ViewRef 32x32.ico");
-                Icon CreateUpdate_sm = new Icon(CreateUpdate, 16, 16);
-                InventorButton btn_CreateUpdate = new InventorButton("Create /\rUpdate", "vr_CreateUpdate", "Create/Update View References", "Create/Update View References in this document.", CreateUpdate, CreateUpdate_sm);
-                btn_CreateUpdate.Execute = ViewRef_ButtonEvents.CreateUpdate_References;
+                //Make sure Icons are marked as Embedded Resource in the properties
 
-                Icon RemoveRef = new Icon(this.GetType(), "Resources.ViewRef 32x32 Remove2.ico");
-                Icon RemoveRef_sm = new Icon(RemoveRef, 16, 16);
-                InventorButton btn_Remove = new InventorButton("Remove", "vr_Remove", "Remove View References", "Remove View References in this document.", RemoveRef, RemoveRef_sm);
-                btn_Remove.Execute = ViewRef_ButtonEvents.Remove_References;
+                Icon CreateUpdate_Icon = new Icon(this.GetType(), "Resources.ViewRef 32x32.ico");
+                Icon CreateUpdate_Icon_sm = new Icon(CreateUpdate_Icon, 16, 16);
+                InventorButton CreateUpdate_Btn = new InventorButton("Create /\rUpdate", "vr_CreateUpdate", "Create/Update View References", "Create/Update View References in this document.", CreateUpdate_Icon, CreateUpdate_Icon_sm);
+                CreateUpdate_Btn.Execute = ViewReference_ButtonEvents.CreateUpdate_References;
 
-                Icon Configure = new Icon(this.GetType(), "Resources.gear.ico");
-                Icon Configure_sm = new Icon(Configure, 16, 16);
-                InventorButton btn_Configure = new InventorButton("Configure", "vr_Config", "Configure View Reference", "Select Options for View Reference.", Configure, Configure_sm);
-                btn_Configure.Execute = ViewRef_ButtonEvents.ShowConfigForm;
+                Icon Remove_Icon = new Icon(this.GetType(), "Resources.ViewRef 32x32 Remove2.ico");
+                Icon Remove_Icon_sm = new Icon(Remove_Icon, 16, 16);
+                InventorButton Remove_Btn = new InventorButton("Remove", "vr_Remove", "Remove View References", "Remove View References in this document.", Remove_Icon, Remove_Icon_sm);
+                Remove_Btn.Execute = ViewReference_ButtonEvents.Remove_References;
+
+                Icon Config_Icon = new Icon(this.GetType(), "Resources.gear.ico");
+                Icon Config_Icon_sm = new Icon(Config_Icon, 16, 16);
+                InventorButton Config_Btn = new InventorButton("Configure", "vr_Config", "Configure View Reference", "Select Options for View Reference.", Config_Icon, Config_Icon_sm);
+                Config_Btn.Execute = ViewReference_ButtonEvents.ShowConfigForm;
+
 
                 if (firstTime)
                 {
@@ -76,16 +82,17 @@ namespace CAP.Apps.ViewReference
                         RibbonPanel panel = tab.RibbonPanels.Add("View Reference", "vr_Panel", Guid.NewGuid().ToString());
                         CommandControls controls = panel.CommandControls;
 
-                        controls.AddButton(btn_CreateUpdate.ButtonDef(), true, true);
-                        controls.AddButton(btn_Remove.ButtonDef(), true, true);
-                        controls.AddButton(btn_Configure.ButtonDef(), false, true);
+                        controls.AddButton(CreateUpdate_Btn.ButtonDef(), true, true);
+                        controls.AddButton(Remove_Btn.ButtonDef(), true, true);
+                        controls.AddButton(Config_Btn.ButtonDef(), false, true);
+
                     }
                 }
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.ToString());
-            }       
+                MessageBox.Show("There was an error loading the View Reference Add-in." + System.Environment.NewLine + System.Environment.NewLine + e.ToString());
+            }
 
 
         }
@@ -96,7 +103,7 @@ namespace CAP.Apps.ViewReference
             // The AddIn will be unloaded either manually by the user or
             // when the Inventor session is terminated
 
-            
+
             // Release objects.
             AddinGlobal.InventorApp = null;
 
@@ -119,7 +126,7 @@ namespace CAP.Apps.ViewReference
 
             get
             {
-                
+
                 return null;
             }
         }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CAP.Apps.ViewReference
 {
-    public class ViewReference
+    public class ViewReference_Settings
     {
         public string CalloutStyle;
 
@@ -20,9 +20,7 @@ namespace CAP.Apps.ViewReference
         public bool AuxView;
         public bool ProjectedView;
 
-		public bool UpdateBeforeSave;
-
-        
+        public bool UpdateBeforeSave;
 
     }
 }

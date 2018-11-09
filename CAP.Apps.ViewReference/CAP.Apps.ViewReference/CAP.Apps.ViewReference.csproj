@@ -4,7 +4,7 @@
     <ProjectType>Local</ProjectType>
     <ProductVersion>8.0.50727</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{3DC284CE-6572-439D-ADA3-E703FF8498B6}</ProjectGuid>
+    <ProjectGuid>{AAD472AA-862D-4732-8121-C98E3216E9EE}</ProjectGuid>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ApplicationIcon>
@@ -78,22 +78,22 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyName>CAP.Apps.ViewReference</AssemblyName>
+  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Autodesk.Inventor.Interop, Version=22.2.0.0, Culture=neutral, PublicKeyToken=d84147f8b4276564, processorArchitecture=MSIL">
+    <Reference Include="autodesk.inventor.interop, Version=22.0.0.0, Culture=neutral, PublicKeyToken=d84147f8b4276564, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-      <HintPath>..\..\..\..\..\Windows\Microsoft.NET\assembly\GAC_MSIL\Autodesk.Inventor.Interop\v4.0_20.0.0.0__d84147f8b4276564\Autodesk.Inventor.Interop.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>C:\Windows\Microsoft.NET\assembly\GAC_MSIL\Autodesk.Inventor.Interop\v4.0_22.0.0.0__d84147f8b4276564\autodesk.inventor.interop.dll</HintPath>
+      <Private>False</Private>
     </Reference>
-    <Reference Include="CAP.Utilities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="CAP.Utilities">
       <HintPath>..\..\..\CAP Utilities\CAP.Utilities\CAP.Utilities\bin\Debug\CAP.Utilities.dll</HintPath>
-      <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="RemoveOldViewReferences, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="RemoveOldViewReferences">
       <HintPath>Referenced .dlls\RemoveOldViewReferences.dll</HintPath>
     </Reference>
     <Reference Include="stdole, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
@@ -118,20 +118,20 @@
     <Compile Include="ConfigUI.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ConfigUI.Designer.cs">
+    <Compile Include="ConfigUI.designer.cs">
       <DependentUpon>ConfigUI.cs</DependentUpon>
     </Compile>
     <Compile Include="InvView.cs" />
-    <Compile Include="ViewReference.cs" />
-    <Compile Include="ViewRefTools.cs" />
-    <Compile Include="ViewRef_ButtonEvents.cs" />
+    <Compile Include="ViewReference_Settings.cs" />
+    <Compile Include="ViewReference_Tools.cs" />
+    <Compile Include="ViewReference_ButtonEvents.cs" />
     <Compile Include="InventorButton.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="StandardAddInServer.cs">
+    <Compile Include="AddInServer.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -165,14 +165,10 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\gear.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\ViewRef 32x32.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Resources\ViewRef 32x32 Add.ico" />
     <EmbeddedResource Include="Resources\ViewRef 32x32 Remove.ico" />
     <EmbeddedResource Include="Resources\ViewRef 32x32 Remove2.ico" />
+    <EmbeddedResource Include="Resources\ViewRef 32x32.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

@@ -112,7 +112,7 @@ namespace CAP.Apps.ViewReference
 
         private void btn_SaveSettings_Click(object sender, EventArgs e)
         {
-            ViewReference vRef = new ViewReference();
+            ViewReference_Settings vRef = new ViewReference_Settings();
 
             vRef.CalloutStyle = txb_CalloutStyle.Text;
             vRef.DetailLabelStyle = txb_DetailStyle.Text;
@@ -126,13 +126,13 @@ namespace CAP.Apps.ViewReference
             vRef.ProjectedView = ckb_Projected.Checked;
 			vRef.UpdateBeforeSave = ckb_UpdateBeforeSave.Checked;
 
-            AddinGlobal.vRefSettings = vRef;
+            AddinGlobal.AppSettings = vRef;
 
             //Save object to XML
             XMLTools.CreateXML(vRef, AddinGlobal.AppFolder + AddinGlobal.SettingsFile);
 
 			//Create/Update Event Listener
-			ViewRefTools.CreateUpdateEventListener();
+			ViewReference_Tools.CreateUpdateEventListener();
 
             vRef = null;
 
@@ -141,7 +141,7 @@ namespace CAP.Apps.ViewReference
 
         private void ImportParameters()
         {
-            ViewReference vRef = AddinGlobal.vRefSettings;
+            ViewReference_Settings vRef = AddinGlobal.AppSettings;
 
             if (vRef != null)
             {

@@ -22,7 +22,7 @@ namespace CAP.Apps.ViewReference
 
         void Create(string DisplayName, string InternalName, string DescriptionText, string ToolTipText, Icon LargeIcon, Icon SmallIcon)
         {
-            
+
 
             stdole.IPictureDisp LargeIconIPictureDisp = null;
             stdole.IPictureDisp SmallIconIpictureDisp = null;
@@ -43,7 +43,7 @@ namespace CAP.Apps.ViewReference
 
         private static stdole.IPictureDisp IconToPicture(Icon Icon)
         {
-            return ImageConverter.ImageToPicture(Icon.ToBitmap());            
+            return ImageConverter.ImageToPicture(Icon.ToBitmap());
         }
 
         private void oButtonDef_OnExecute(NameValueMap Context)
@@ -53,7 +53,7 @@ namespace CAP.Apps.ViewReference
                 Execute();
             else
                 MessageBox.Show("Nothing to execute");
-        }        
+        }
 
         public ButtonDefinition ButtonDef()
         {
