@@ -9,29 +9,28 @@ using CAP.Utilities;
 
 namespace CAP.Apps.ViewReference
 {
-    public class ViewRef_ButtonEvents
+    public class ViewReference_ButtonEvents
     {
        
         static Inventor.Application InvApp = AddinGlobal.InventorApp;
 
         static DrawingDocument dwgDoc;
 
-        static ViewReference vRef;
-
-		
+        static ViewReference_Settings oSettings;
 
         public static void CreateUpdate_References()
         {
             //Check Entitlement
-            if (!Tools.CheckForValidUser("View Reference", AddinGlobal.AppId))
+            if (!Tools.CheckForValidUser("CAP.Apps.ViewReference", AddinGlobal.AppId))
             {
                 return;
             }
+            
 
             //Delete Error Log File if exists
-            ViewRefTools.DeleteLogFile();
+            ViewReference_Tools.DeleteLogFile();
 
-            if (AddinGlobal.vRefSettings == null)
+            if (AddinGlobal.AppSettings == null)
             {
                 DialogResult oDRes = MessageBox.Show("You have not configured View Reference.  Configure now?", "Configure View Reference", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk);
 
@@ -43,7 +42,7 @@ namespace CAP.Apps.ViewReference
 
             dwgDoc = (DrawingDocument)InvApp.ActiveDocument;
 
-            vRef = AddinGlobal.vRefSettings;
+            oSettings = AddinGlobal.AppSettings;
 
             foreach (Sheet oSheet in dwgDoc.Sheets)
             {
@@ -52,27 +51,27 @@ namespace CAP.Apps.ViewReference
                     switch (oView.ViewType)
                     {
                         case DrawingViewTypeEnum.kDetailDrawingViewType:
-                            if (vRef.DetailView)
+                            if (oSettings.DetailView)
                             {
-                                ViewRefTools.AddReferencesToView(oView, vRef.DetailLabelStyle);
+                                ViewReference_Tools.AddReferencesToView(oView, oSettings.DetailLabelStyle);
                             }
                             break;
                         case DrawingViewTypeEnum.kSectionDrawingViewType:
-                            if (vRef.SectionView)
+                            if (oSettings.SectionView)
                             {
-                                ViewRefTools.AddReferencesToView(oView, vRef.SectionLabelStyle);
+                                ViewReference_Tools.AddReferencesToView(oView, oSettings.SectionLabelStyle);
                             }
                             break;
                         case DrawingViewTypeEnum.kAuxiliaryDrawingViewType:
-                            if (vRef.AuxView)
+                            if (oSettings.AuxView)
                             {
-                                ViewRefTools.AddReferencesToView(oView, vRef.AuxLabelStyle);
+                                ViewReference_Tools.AddReferencesToView(oView, oSettings.AuxLabelStyle);
                             }
                             break;
                         case DrawingViewTypeEnum.kProjectedDrawingViewType:
-                            if (vRef.ProjectedView)
+                            if (oSettings.ProjectedView)
                             {
-                                ViewRefTools.AddReferencesToView(oView, vRef.ProjectedLabelStyle);
+                                ViewReference_Tools.AddReferencesToView(oView, oSettings.ProjectedLabelStyle);
                             }
                             break;
                         default:
@@ -83,12 +82,11 @@ namespace CAP.Apps.ViewReference
                 } //View foreach
 
             } //Sheet foreach
-            
-        }        
+
+        }
 
         public static void Remove_References()
         {
-
             //Check Entitlement
             if (!Tools.CheckForValidUser("View Reference", AddinGlobal.AppId))
             {
@@ -102,23 +100,21 @@ namespace CAP.Apps.ViewReference
                 foreach (DrawingView oView in oSheet.DrawingViews)
                 {
                     InvView SavedRefs = new InvView();
-                    SavedRefs = ViewRefTools.GetSavedAttributesFromView(oView);
+                    SavedRefs = ViewReference_Tools.GetSavedAttributesFromView(oView);
 
-                    ViewRefTools.ResetView(oView, SavedRefs);
-                    
+                    ViewReference_Tools.ResetView(oView, SavedRefs);
+
                 }
-            }            
-            
-        }
+            }
 
-        
+        }
 
         public static void ShowConfigForm()
         {
             ConfigUI config = new ConfigUI();
-            config.ShowDialog();            
+            config.ShowDialog();
         }
 
-        
+
     }
 }

@@ -10,27 +10,40 @@ using RemoveOldViewReferences.RemoveOldViewReferences;
 
 namespace CAP.Apps.ViewReference
 {
-    public abstract class ViewRefTools
+    public abstract class ViewReference_Tools
     {
-		public static bool ViewReferencesExistInDocument(DrawingDocument oDwgDoc)
-		{
-			bool Exist = false;
+        public static void Get_SavedSettings()
+        {
+            string SettingsFileName = AddinGlobal.AppFolder + AddinGlobal.SettingsFile;
 
-			foreach (Sheet oSheet in oDwgDoc.Sheets)
-			{
-				foreach (DrawingView oView in oSheet.DrawingViews)
-				{
-					if (oView.AttributeSets.NameIsUsed["ViewReference-v4"])
-					{
-						//References Exist
-						Exist = true;
-						break;
-					}
-				}
-			}
+            if (System.IO.File.Exists(SettingsFileName))
+            {
+                ViewReference_Settings oSettings = new ViewReference_Settings();
+                oSettings = (ViewReference_Settings)XMLTools.Get_ObjectFromXML(AddinGlobal.AppFolder + AddinGlobal.SettingsFile, oSettings);
 
-			return Exist;
-		}
+                AddinGlobal.AppSettings = oSettings;
+            }
+        }
+
+        public static bool ViewReferencesExistInDocument(DrawingDocument oDwgDoc)
+        {
+            bool Exist = false;
+
+            foreach (Sheet oSheet in oDwgDoc.Sheets)
+            {
+                foreach (DrawingView oView in oSheet.DrawingViews)
+                {
+                    if (oView.AttributeSets.NameIsUsed["ViewReference-v4"])
+                    {
+                        //References Exist
+                        Exist = true;
+                        break;
+                    }
+                }
+            }
+
+            return Exist;
+        }
 
         public static InvView GetSavedAttributesFromView(DrawingView oView)
         {
@@ -98,48 +111,35 @@ namespace CAP.Apps.ViewReference
             }
         }
 
-        public static void Get_SavedSettings()
+        public static void CreateUpdateEventListener()
         {
-            try
+            if (AddinGlobal.AppSettings != null)
             {
-                ViewReference vRef = new ViewReference();
-                vRef = (ViewReference)XMLTools.Get_ObjectFromXML(AddinGlobal.AppFolder + AddinGlobal.SettingsFile, vRef);
-
-                AddinGlobal.vRefSettings = vRef;				
+                if (AddinGlobal.AppSettings.UpdateBeforeSave)
+                    AddinGlobal.InventorApp.ApplicationEvents.OnSaveDocument += ApplicationEvents_OnSaveDocument;
+                else
+                    AddinGlobal.InventorApp.ApplicationEvents.OnSaveDocument -= ApplicationEvents_OnSaveDocument;
             }
-            catch { }
-
-			//Create Event Listener
-			CreateUpdateEventListener();
-
-		}
-
-		public static void CreateUpdateEventListener()
-		{
-            if (AddinGlobal.vRefSettings.UpdateBeforeSave)
-                AddinGlobal.InventorApp.ApplicationEvents.OnSaveDocument += ApplicationEvents_OnSaveDocument;
-            else
-                AddinGlobal.InventorApp.ApplicationEvents.OnSaveDocument -= ApplicationEvents_OnSaveDocument;
-
+            
         }
 
-		private static void ApplicationEvents_OnSaveDocument(_Document DocumentObject, EventTimingEnum BeforeOrAfter, NameValueMap Context, out HandlingCodeEnum HandlingCode)
-		{
-			if (BeforeOrAfter == EventTimingEnum.kBefore)
-			{
-				if (DocumentObject.DocumentType == DocumentTypeEnum.kDrawingDocumentObject)
-				{
-					if (ViewReferencesExistInDocument(DocumentObject as DrawingDocument))
-					{
-						ViewRef_ButtonEvents.CreateUpdate_References();
-					}
-				}
-			}			
+        private static void ApplicationEvents_OnSaveDocument(_Document DocumentObject, EventTimingEnum BeforeOrAfter, NameValueMap Context, out HandlingCodeEnum HandlingCode)
+        {
+            if (BeforeOrAfter == EventTimingEnum.kBefore)
+            {
+                if (DocumentObject.DocumentType == DocumentTypeEnum.kDrawingDocumentObject)
+                {
+                    if (ViewReferencesExistInDocument(DocumentObject as DrawingDocument))
+                    {
+                        ViewReference_ButtonEvents.CreateUpdate_References();
+                    }
+                }
+            }
 
-			HandlingCode = HandlingCodeEnum.kEventHandled;
-		}
+            HandlingCode = HandlingCodeEnum.kEventHandled;
+        }
 
-		public static void AddReferencesToView(DrawingView oView, string LabelStyle)
+        public static void AddReferencesToView(DrawingView oView, string LabelStyle)
         {
             try
             {
@@ -152,7 +152,7 @@ namespace CAP.Apps.ViewReference
                     ResetView(oView, CurrentRefs);
 
                     //Step 2 - Create New References
-                    CreateViewReferences(oView, LabelStyle);;
+                    CreateViewReferences(oView, LabelStyle); ;
                 }
 
             }
@@ -231,7 +231,7 @@ namespace CAP.Apps.ViewReference
                     //No References Exist
                     return false;
                 }
-                    
+
             }
         }
 
@@ -239,7 +239,7 @@ namespace CAP.Apps.ViewReference
         {
             InvView iView = new InvView();
 
-            iView.CalloutStyle = AddinGlobal.vRefSettings.CalloutStyle;
+            iView.CalloutStyle = AddinGlobal.AppSettings.CalloutStyle;
             iView.ViewLabelStyle = LabelStyle;
 
             //Get View Properties
@@ -260,7 +260,7 @@ namespace CAP.Apps.ViewReference
         static string CreateViewCallout(InvView iView)
         {
             string StartString = iView.CalloutStyle;
-            
+
             return ReplaceAttributesWithValues(StartString, iView);
         }
 
@@ -342,40 +342,40 @@ namespace CAP.Apps.ViewReference
             //return LabelText.Substring(LabelText.IndexOf("<DrawingViewName/>"), LabelText.LastIndexOf("<DrawingViewName/>") + ViewLength);
         }
 
-        static void RemoveLabelReferences(DrawingView oView, InvView iView)
-        {
+        //static void RemoveLabelReferences(DrawingView oView, InvView iView)
+        //{
 
-            //string ViewLabel = oView.Label.FormattedText;
+        //    string ViewLabel = oView.Label.FormattedText;
 
-            //if (iView.LabelText != "")
-            //{
-            //    oView.Label.FormattedText = iView.LabelText;
-            //}
-            //else
-            //{
-            //    //TODO: Add Old Way to Remove References
-            //    //Label Text attribute doesnt exist, replace with default text from Standards Library
-            //    string DefaultDetailText;
-            //    string DefaultSectionText;
-            //    string DefaultAuxText;
+        //    if (iView.LabelText != "")
+        //    {
+        //        oView.Label.FormattedText = iView.LabelText;
+        //    }
+        //    else
+        //    {
+        //        //TODO: Add Old Way to Remove References
+        //        //Label Text attribute doesnt exist, replace with default text from Standards Library
+        //        string DefaultDetailText;
+        //        string DefaultSectionText;
+        //        string DefaultAuxText;
 
-            //    string result = "";
-                
-            //    switch (oView.ViewType)
-            //    {
-            //        case DrawingViewTypeEnum.kDetailDrawingViewType:
-            //            //result = ViewLabel.Replace(Label)
-            //            break;
-            //        case DrawingViewTypeEnum.kSectionDrawingViewType:
+        //        string result = "";
 
-            //            break;
-            //        case DrawingViewTypeEnum.kAuxiliaryDrawingViewType:
+        //        switch (oView.ViewType)
+        //        {
+        //            case DrawingViewTypeEnum.kDetailDrawingViewType:
+        //                //result = ViewLabel.Replace(Label)
+        //                break;
+        //            case DrawingViewTypeEnum.kSectionDrawingViewType:
 
-            //            break;
-            //    }
+        //                break;
+        //            case DrawingViewTypeEnum.kAuxiliaryDrawingViewType:
 
-            //}
-        }
+        //                break;
+        //        }
+
+        //    }
+        //}
 
         static void Get_DefaultViewText(out string DetailText, out string SectionText, out string AuxText)
         {

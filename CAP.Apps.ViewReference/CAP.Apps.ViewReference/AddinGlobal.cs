@@ -12,14 +12,14 @@ namespace CAP.Apps.ViewReference
     {
         public static Inventor.Application InventorApp;
 
-        public static string AppFolder = Tools.GetAppFolder("View Reference");
+        public static string AppFolder = Tools.GetAppFolder("CAP.Apps.ViewReference");
 
-        public static string SettingsFile = Tools.GetHexString("View Reference Settings") + ".xml";
+        public static string SettingsFile = Tools.GetHexString("CAP.Apps.ViewReference Settings") + ".xml";
 
         public static string AppId = "5865579890990954428";
 
-        public static ViewReference vRefSettings;
-        
+        public static ViewReference_Settings AppSettings;
+
         public static string LogFile = @"C:\Users\Public\Documents\Autodesk\View Reference Log";
 
     }

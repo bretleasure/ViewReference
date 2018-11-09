@@ -8,7 +8,6 @@ namespace CAP.Apps.ViewReference
 {
     public class InvView
     {
-        
         public string ViewName;
 
         public string ViewSheetNumber;
@@ -20,15 +19,6 @@ namespace CAP.Apps.ViewReference
         public string LabelText;
         public string CalloutStyle;
         public string ViewLabelStyle;
-
-        //public string DetailStyle;
-        //public string SectionStyle;
-        //public string AuxStyle;
-        //public string BaseStyle;
-        //public string ProjectedStyle;
-
-        
-
 
     }
 }
