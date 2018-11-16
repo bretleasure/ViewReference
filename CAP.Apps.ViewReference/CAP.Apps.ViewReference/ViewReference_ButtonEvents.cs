@@ -88,7 +88,7 @@ namespace CAP.Apps.ViewReference
         public static void Remove_References()
         {
             //Check Entitlement
-            if (!Tools.CheckForValidUser("View Reference", AddinGlobal.AppId))
+            if (!Tools.CheckForValidUser("CAP.Apps.ViewReference", AddinGlobal.AppId))
             {
                 return;
             }

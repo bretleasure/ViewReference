@@ -33,7 +33,7 @@ namespace CAP.Apps.ViewReference
         private void link_Help_Click(object sender, EventArgs e)
         {
 
-            string website = "https://www.cadappsplus.com/products/view-reference/view-ref-doc";
+            string website = "https://www.braluc.solutions/apps/view-reference/documentation";
 
             System.Diagnostics.Process.Start(website);
             this.Close();
@@ -112,6 +112,9 @@ namespace CAP.Apps.ViewReference
 
         private void btn_SaveSettings_Click(object sender, EventArgs e)
         {
+            if (!ValidateParameters())
+                return;
+
             ViewReference_Settings vRef = new ViewReference_Settings();
 
             vRef.CalloutStyle = txb_CalloutStyle.Text;
@@ -137,6 +140,17 @@ namespace CAP.Apps.ViewReference
             vRef = null;
 
             this.Close();
+        }
+
+        private bool ValidateParameters()
+        {
+            if (!ckb_Detail.Checked && !ckb_Section.Checked && !ckb_Aux.Checked && !ckb_Projected.Checked)
+            {
+                MessageBox.Show("You haven't selected any view types to have references added to.", "No View Types Selected", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return false;
+            }
+            else
+                return true;
         }
 
         private void ImportParameters()
