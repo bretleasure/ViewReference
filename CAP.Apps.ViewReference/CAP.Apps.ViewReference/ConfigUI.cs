@@ -30,15 +30,6 @@ namespace CAP.Apps.ViewReference
             this.Close();
         }
 
-        private void link_Help_Click(object sender, EventArgs e)
-        {
-
-            string website = "https://www.braluc.solutions/apps/view-reference/documentation";
-
-            System.Diagnostics.Process.Start(website);
-            this.Close();
-        }
-
         private void ckb_Detail_CheckedChanged(object sender, EventArgs e)
         {
             pnl_DetailStyle.Enabled = ckb_Detail.Checked;
@@ -213,6 +204,14 @@ namespace CAP.Apps.ViewReference
                 ActiveTextbox = null;
             }
             
+        }
+
+        private void link_Help_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            string website = "https://www.braluc.solutions/viewreference-documentation";
+
+            System.Diagnostics.Process.Start(website);
+            this.Close();
         }
     }
 }

@@ -2,8 +2,8 @@
   <!--Created for Autodesk Inventor Version 22.0-->
   <ClassId>{35678d1f-aeb7-4a22-9fef-624c83e66007}</ClassId>
   <ClientId>{35678d1f-aeb7-4a22-9fef-624c83e66007}</ClientId>
-  <DisplayName>CADAppsPlus_ViewReference</DisplayName>
-  <Description>View Reference Add-in by CAD Apps Plus</Description>
+  <DisplayName>BralucSolutions_ViewReference</DisplayName>
+  <Description>View Reference Add-in by Braluc Solutions</Description>
   <Assembly>CAP.Apps.ViewReference.dll</Assembly>
   <LoadOnStartUp>1</LoadOnStartUp>
   <UserUnloadable>1</UserUnloadable>

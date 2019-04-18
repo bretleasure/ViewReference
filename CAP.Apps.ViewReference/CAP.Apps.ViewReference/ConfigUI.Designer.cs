@@ -511,7 +511,7 @@
             this.link_Help.TabStop = true;
             this.link_Help.Text = "Help with Attributes";
             this.link_Help.VisitedLinkColor = System.Drawing.Color.Blue;
-            this.link_Help.Click += new System.EventHandler(this.link_Help_Click);
+            this.link_Help.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.link_Help_LinkClicked);
             // 
             // panel2
             // 
