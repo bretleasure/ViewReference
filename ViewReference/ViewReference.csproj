@@ -176,6 +176,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\View Reference.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Place_Component_Plus.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>

@@ -54,8 +54,8 @@ namespace ViewReference
             {
                 //Make sure Icons are marked as Embedded Resource in the properties
 
-                Icon CreateUpdate_Icon = new Icon(this.GetType(), "Resources.View Reference.ico");
-                Icon CreateUpdate_Icon_sm = new Icon(CreateUpdate_Icon, 16, 16);
+                Icon CreateUpdate_Icon = new Icon(this.GetType(), "Resources.Place_Component_Plus.ico");
+                 Icon CreateUpdate_Icon_sm = new Icon(CreateUpdate_Icon, 16, 16);
 
                 InventorButton CreateUpdate_Btn = new InventorButton("Create /\rUpdate", "vr_CreateUpdate", "Create/Update View References", "Create/Update View References in this document.", CreateUpdate_Icon, CreateUpdate_Icon_sm);
                 CreateUpdate_Btn.Execute = ViewReference_ButtonEvents.CreateUpdate_References;
