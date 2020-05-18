@@ -153,10 +153,8 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\capico.ico" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ViewReference - Debug.addin">
@@ -165,19 +163,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\gear.ico" />
-    <EmbeddedResource Include="Resources\ViewRef 32x32 Add.ico" />
-    <EmbeddedResource Include="Resources\ViewRef 32x32 Remove.ico" />
-    <EmbeddedResource Include="Resources\ViewRef 32x32 Remove2.ico" />
-    <EmbeddedResource Include="Resources\ViewRef 32x32.ico" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\View Reference Btn Ico.ico" />
+    <EmbeddedResource Include="Resources\ViewRef-Add.ico" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\View Reference.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\Place_Component_Plus.ico" />
+    <EmbeddedResource Include="Resources\ViewRef-Remove.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

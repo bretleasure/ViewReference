@@ -69,7 +69,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.link_Help = new System.Windows.Forms.LinkLabel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label6 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -87,7 +86,7 @@
             // btn_ViewName
             // 
             this.btn_ViewName.Location = new System.Drawing.Point(21, 292);
-            this.btn_ViewName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_ViewName.Margin = new System.Windows.Forms.Padding(4);
             this.btn_ViewName.Name = "btn_ViewName";
             this.btn_ViewName.Size = new System.Drawing.Size(200, 31);
             this.btn_ViewName.TabIndex = 0;
@@ -99,7 +98,7 @@
             // btn_ViewSheetNumber
             // 
             this.btn_ViewSheetNumber.Location = new System.Drawing.Point(21, 330);
-            this.btn_ViewSheetNumber.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_ViewSheetNumber.Margin = new System.Windows.Forms.Padding(4);
             this.btn_ViewSheetNumber.Name = "btn_ViewSheetNumber";
             this.btn_ViewSheetNumber.Size = new System.Drawing.Size(200, 31);
             this.btn_ViewSheetNumber.TabIndex = 1;
@@ -111,7 +110,7 @@
             // btn_ViewSheetName
             // 
             this.btn_ViewSheetName.Location = new System.Drawing.Point(21, 368);
-            this.btn_ViewSheetName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_ViewSheetName.Margin = new System.Windows.Forms.Padding(4);
             this.btn_ViewSheetName.Name = "btn_ViewSheetName";
             this.btn_ViewSheetName.Size = new System.Drawing.Size(200, 31);
             this.btn_ViewSheetName.TabIndex = 2;
@@ -123,7 +122,7 @@
             // btn_ParentSheetNumber
             // 
             this.btn_ParentSheetNumber.Location = new System.Drawing.Point(21, 406);
-            this.btn_ParentSheetNumber.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_ParentSheetNumber.Margin = new System.Windows.Forms.Padding(4);
             this.btn_ParentSheetNumber.Name = "btn_ParentSheetNumber";
             this.btn_ParentSheetNumber.Size = new System.Drawing.Size(200, 31);
             this.btn_ParentSheetNumber.TabIndex = 3;
@@ -135,7 +134,7 @@
             // btn_ParentSheetName
             // 
             this.btn_ParentSheetName.Location = new System.Drawing.Point(21, 444);
-            this.btn_ParentSheetName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_ParentSheetName.Margin = new System.Windows.Forms.Padding(4);
             this.btn_ParentSheetName.Name = "btn_ParentSheetName";
             this.btn_ParentSheetName.Size = new System.Drawing.Size(200, 31);
             this.btn_ParentSheetName.TabIndex = 4;
@@ -147,7 +146,7 @@
             // btn_LineBreak
             // 
             this.btn_LineBreak.Location = new System.Drawing.Point(21, 521);
-            this.btn_LineBreak.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_LineBreak.Margin = new System.Windows.Forms.Padding(4);
             this.btn_LineBreak.Name = "btn_LineBreak";
             this.btn_LineBreak.Size = new System.Drawing.Size(200, 31);
             this.btn_LineBreak.TabIndex = 5;
@@ -159,7 +158,7 @@
             // btn_Delim
             // 
             this.btn_Delim.Location = new System.Drawing.Point(21, 559);
-            this.btn_Delim.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_Delim.Margin = new System.Windows.Forms.Padding(4);
             this.btn_Delim.Name = "btn_Delim";
             this.btn_Delim.Size = new System.Drawing.Size(200, 31);
             this.btn_Delim.TabIndex = 6;
@@ -171,7 +170,7 @@
             // btn_Scale
             // 
             this.btn_Scale.Location = new System.Drawing.Point(21, 482);
-            this.btn_Scale.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_Scale.Margin = new System.Windows.Forms.Padding(4);
             this.btn_Scale.Name = "btn_Scale";
             this.btn_Scale.Size = new System.Drawing.Size(200, 31);
             this.btn_Scale.TabIndex = 7;
@@ -184,9 +183,9 @@
             // 
             this.ckb_Detail.AutoSize = true;
             this.ckb_Detail.Location = new System.Drawing.Point(4, 4);
-            this.ckb_Detail.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ckb_Detail.Margin = new System.Windows.Forms.Padding(4);
             this.ckb_Detail.Name = "ckb_Detail";
-            this.ckb_Detail.Size = new System.Drawing.Size(106, 21);
+            this.ckb_Detail.Size = new System.Drawing.Size(101, 20);
             this.ckb_Detail.TabIndex = 8;
             this.ckb_Detail.Text = "Detail Views";
             this.ckb_Detail.UseVisualStyleBackColor = true;
@@ -196,9 +195,9 @@
             // 
             this.ckb_Section.AutoSize = true;
             this.ckb_Section.Location = new System.Drawing.Point(4, 32);
-            this.ckb_Section.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ckb_Section.Margin = new System.Windows.Forms.Padding(4);
             this.ckb_Section.Name = "ckb_Section";
-            this.ckb_Section.Size = new System.Drawing.Size(117, 21);
+            this.ckb_Section.Size = new System.Drawing.Size(111, 20);
             this.ckb_Section.TabIndex = 9;
             this.ckb_Section.Text = "Section Views";
             this.ckb_Section.UseVisualStyleBackColor = true;
@@ -208,9 +207,9 @@
             // 
             this.ckb_Aux.AutoSize = true;
             this.ckb_Aux.Location = new System.Drawing.Point(4, 60);
-            this.ckb_Aux.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ckb_Aux.Margin = new System.Windows.Forms.Padding(4);
             this.ckb_Aux.Name = "ckb_Aux";
-            this.ckb_Aux.Size = new System.Drawing.Size(122, 21);
+            this.ckb_Aux.Size = new System.Drawing.Size(116, 20);
             this.ckb_Aux.TabIndex = 10;
             this.ckb_Aux.Text = "Auxiliary Views";
             this.ckb_Aux.UseVisualStyleBackColor = true;
@@ -220,9 +219,9 @@
             // 
             this.ckb_Projected.AutoSize = true;
             this.ckb_Projected.Location = new System.Drawing.Point(4, 89);
-            this.ckb_Projected.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ckb_Projected.Margin = new System.Windows.Forms.Padding(4);
             this.ckb_Projected.Name = "ckb_Projected";
-            this.ckb_Projected.Size = new System.Drawing.Size(130, 21);
+            this.ckb_Projected.Size = new System.Drawing.Size(124, 20);
             this.ckb_Projected.TabIndex = 14;
             this.ckb_Projected.Text = "Projected Views";
             this.ckb_Projected.UseVisualStyleBackColor = true;
@@ -234,7 +233,7 @@
             this.label1.Location = new System.Drawing.Point(17, 74);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(135, 17);
+            this.label1.Size = new System.Drawing.Size(129, 16);
             this.label1.TabIndex = 15;
             this.label1.Text = "Add References To:";
             // 
@@ -247,7 +246,7 @@
             this.panel1.Controls.Add(this.ckb_Projected);
             this.panel1.Controls.Add(this.ckb_Aux);
             this.panel1.Location = new System.Drawing.Point(21, 94);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(199, 128);
             this.panel1.TabIndex = 17;
@@ -256,7 +255,7 @@
             // 
             this.txb_CalloutStyle.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txb_CalloutStyle.Location = new System.Drawing.Point(16, 85);
-            this.txb_CalloutStyle.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txb_CalloutStyle.Margin = new System.Windows.Forms.Padding(4);
             this.txb_CalloutStyle.Name = "txb_CalloutStyle";
             this.txb_CalloutStyle.Size = new System.Drawing.Size(799, 22);
             this.txb_CalloutStyle.TabIndex = 19;
@@ -266,7 +265,7 @@
             // 
             this.btn_Cancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_Cancel.Location = new System.Drawing.Point(912, 604);
-            this.btn_Cancel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_Cancel.Margin = new System.Windows.Forms.Padding(4);
             this.btn_Cancel.Name = "btn_Cancel";
             this.btn_Cancel.Size = new System.Drawing.Size(177, 28);
             this.btn_Cancel.TabIndex = 20;
@@ -278,7 +277,7 @@
             // 
             this.btn_SaveSettings.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_SaveSettings.Location = new System.Drawing.Point(727, 604);
-            this.btn_SaveSettings.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_SaveSettings.Margin = new System.Windows.Forms.Padding(4);
             this.btn_SaveSettings.Name = "btn_SaveSettings";
             this.btn_SaveSettings.Size = new System.Drawing.Size(177, 28);
             this.btn_SaveSettings.TabIndex = 21;
@@ -290,7 +289,7 @@
             // 
             this.btn_Callout4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_Callout4.Location = new System.Drawing.Point(440, 14);
-            this.btn_Callout4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_Callout4.Margin = new System.Windows.Forms.Padding(4);
             this.btn_Callout4.Name = "btn_Callout4";
             this.btn_Callout4.Size = new System.Drawing.Size(133, 37);
             this.btn_Callout4.TabIndex = 33;
@@ -303,7 +302,7 @@
             // 
             this.btn_Callout3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_Callout3.Location = new System.Drawing.Point(299, 14);
-            this.btn_Callout3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_Callout3.Margin = new System.Windows.Forms.Padding(4);
             this.btn_Callout3.Name = "btn_Callout3";
             this.btn_Callout3.Size = new System.Drawing.Size(133, 37);
             this.btn_Callout3.TabIndex = 32;
@@ -316,7 +315,7 @@
             // 
             this.btn_Callout2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_Callout2.Location = new System.Drawing.Point(157, 14);
-            this.btn_Callout2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_Callout2.Margin = new System.Windows.Forms.Padding(4);
             this.btn_Callout2.Name = "btn_Callout2";
             this.btn_Callout2.Size = new System.Drawing.Size(133, 37);
             this.btn_Callout2.TabIndex = 31;
@@ -329,7 +328,7 @@
             // 
             this.btn_Callout1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_Callout1.Location = new System.Drawing.Point(16, 14);
-            this.btn_Callout1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_Callout1.Margin = new System.Windows.Forms.Padding(4);
             this.btn_Callout1.Name = "btn_Callout1";
             this.btn_Callout1.Size = new System.Drawing.Size(133, 37);
             this.btn_Callout1.TabIndex = 30;
@@ -344,7 +343,7 @@
             this.label10.Location = new System.Drawing.Point(12, 65);
             this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(84, 17);
+            this.label10.Size = new System.Drawing.Size(78, 16);
             this.label10.TabIndex = 29;
             this.label10.Text = "Style String:";
             // 
@@ -354,7 +353,7 @@
             this.pnl_DetailStyle.Controls.Add(this.label3);
             this.pnl_DetailStyle.Enabled = false;
             this.pnl_DetailStyle.Location = new System.Drawing.Point(8, 71);
-            this.pnl_DetailStyle.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnl_DetailStyle.Margin = new System.Windows.Forms.Padding(4);
             this.pnl_DetailStyle.Name = "pnl_DetailStyle";
             this.pnl_DetailStyle.Size = new System.Drawing.Size(812, 55);
             this.pnl_DetailStyle.TabIndex = 23;
@@ -362,7 +361,7 @@
             // txb_DetailStyle
             // 
             this.txb_DetailStyle.Location = new System.Drawing.Point(8, 25);
-            this.txb_DetailStyle.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txb_DetailStyle.Margin = new System.Windows.Forms.Padding(4);
             this.txb_DetailStyle.Name = "txb_DetailStyle";
             this.txb_DetailStyle.Size = new System.Drawing.Size(799, 22);
             this.txb_DetailStyle.TabIndex = 19;
@@ -374,7 +373,7 @@
             this.label3.Location = new System.Drawing.Point(4, 5);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(81, 17);
+            this.label3.Size = new System.Drawing.Size(78, 16);
             this.label3.TabIndex = 18;
             this.label3.Text = "Detail View:";
             // 
@@ -384,7 +383,7 @@
             this.pnl_AuxStyle.Controls.Add(this.label4);
             this.pnl_AuxStyle.Enabled = false;
             this.pnl_AuxStyle.Location = new System.Drawing.Point(8, 197);
-            this.pnl_AuxStyle.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnl_AuxStyle.Margin = new System.Windows.Forms.Padding(4);
             this.pnl_AuxStyle.Name = "pnl_AuxStyle";
             this.pnl_AuxStyle.Size = new System.Drawing.Size(812, 55);
             this.pnl_AuxStyle.TabIndex = 25;
@@ -392,7 +391,7 @@
             // txb_AuxStyle
             // 
             this.txb_AuxStyle.Location = new System.Drawing.Point(8, 25);
-            this.txb_AuxStyle.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txb_AuxStyle.Margin = new System.Windows.Forms.Padding(4);
             this.txb_AuxStyle.Name = "txb_AuxStyle";
             this.txb_AuxStyle.Size = new System.Drawing.Size(799, 22);
             this.txb_AuxStyle.TabIndex = 19;
@@ -404,7 +403,7 @@
             this.label4.Location = new System.Drawing.Point(4, 5);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(97, 17);
+            this.label4.Size = new System.Drawing.Size(93, 16);
             this.label4.TabIndex = 18;
             this.label4.Text = "Auxiliary View:";
             // 
@@ -414,7 +413,7 @@
             this.pnl_SectionStyle.Controls.Add(this.label5);
             this.pnl_SectionStyle.Enabled = false;
             this.pnl_SectionStyle.Location = new System.Drawing.Point(8, 134);
-            this.pnl_SectionStyle.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnl_SectionStyle.Margin = new System.Windows.Forms.Padding(4);
             this.pnl_SectionStyle.Name = "pnl_SectionStyle";
             this.pnl_SectionStyle.Size = new System.Drawing.Size(812, 55);
             this.pnl_SectionStyle.TabIndex = 24;
@@ -422,7 +421,7 @@
             // txb_SectionStyle
             // 
             this.txb_SectionStyle.Location = new System.Drawing.Point(8, 25);
-            this.txb_SectionStyle.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txb_SectionStyle.Margin = new System.Windows.Forms.Padding(4);
             this.txb_SectionStyle.Name = "txb_SectionStyle";
             this.txb_SectionStyle.Size = new System.Drawing.Size(799, 22);
             this.txb_SectionStyle.TabIndex = 19;
@@ -434,7 +433,7 @@
             this.label5.Location = new System.Drawing.Point(4, 5);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(92, 17);
+            this.label5.Size = new System.Drawing.Size(88, 16);
             this.label5.TabIndex = 18;
             this.label5.Text = "Section View:";
             // 
@@ -444,7 +443,7 @@
             this.pnl_ProjectedStyle.Controls.Add(this.label9);
             this.pnl_ProjectedStyle.Enabled = false;
             this.pnl_ProjectedStyle.Location = new System.Drawing.Point(8, 260);
-            this.pnl_ProjectedStyle.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnl_ProjectedStyle.Margin = new System.Windows.Forms.Padding(4);
             this.pnl_ProjectedStyle.Name = "pnl_ProjectedStyle";
             this.pnl_ProjectedStyle.Size = new System.Drawing.Size(812, 55);
             this.pnl_ProjectedStyle.TabIndex = 27;
@@ -452,7 +451,7 @@
             // txb_ProjectedStyle
             // 
             this.txb_ProjectedStyle.Location = new System.Drawing.Point(8, 25);
-            this.txb_ProjectedStyle.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txb_ProjectedStyle.Margin = new System.Windows.Forms.Padding(4);
             this.txb_ProjectedStyle.Name = "txb_ProjectedStyle";
             this.txb_ProjectedStyle.Size = new System.Drawing.Size(799, 22);
             this.txb_ProjectedStyle.TabIndex = 19;
@@ -464,7 +463,7 @@
             this.label9.Location = new System.Drawing.Point(4, 5);
             this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(105, 17);
+            this.label9.Size = new System.Drawing.Size(101, 16);
             this.label9.TabIndex = 18;
             this.label9.Text = "Projected View:";
             // 
@@ -472,7 +471,7 @@
             // 
             this.btn_Label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_Label3.Location = new System.Drawing.Point(352, 14);
-            this.btn_Label3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_Label3.Margin = new System.Windows.Forms.Padding(4);
             this.btn_Label3.Name = "btn_Label3";
             this.btn_Label3.Size = new System.Drawing.Size(160, 49);
             this.btn_Label3.TabIndex = 33;
@@ -485,7 +484,7 @@
             // 
             this.btn_Label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_Label2.Location = new System.Drawing.Point(184, 14);
-            this.btn_Label2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_Label2.Margin = new System.Windows.Forms.Padding(4);
             this.btn_Label2.Name = "btn_Label2";
             this.btn_Label2.Size = new System.Drawing.Size(160, 49);
             this.btn_Label2.TabIndex = 32;
@@ -498,7 +497,7 @@
             // 
             this.btn_Label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_Label1.Location = new System.Drawing.Point(16, 14);
-            this.btn_Label1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_Label1.Margin = new System.Windows.Forms.Padding(4);
             this.btn_Label1.Name = "btn_Label1";
             this.btn_Label1.Size = new System.Drawing.Size(160, 49);
             this.btn_Label1.TabIndex = 31;
@@ -513,7 +512,7 @@
             this.label2.Location = new System.Drawing.Point(21, 242);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(155, 34);
+            this.label2.Size = new System.Drawing.Size(145, 32);
             this.label2.TabIndex = 33;
             this.label2.Text = "Click Attribute Below to \r\nAdd to Current Style:";
             // 
@@ -523,7 +522,7 @@
             this.label11.Location = new System.Drawing.Point(544, 14);
             this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(257, 51);
+            this.label11.Size = new System.Drawing.Size(248, 48);
             this.label11.TabIndex = 34;
             this.label11.Text = "*LABEL MAY NOT INCLUDE \"DETAIL\"\r\nOR \"SECTION\" DEPENDING ON YOUR\r\nVIEW ANNOTATION " +
     "STYLE";
@@ -535,24 +534,11 @@
             this.label12.Location = new System.Drawing.Point(17, 17);
             this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(820, 40);
+            this.label12.Size = new System.Drawing.Size(649, 32);
             this.label12.TabIndex = 34;
             this.label12.Text = "Configure View Reference by selecting view types to include references and either" +
     " choosing a preset style or\r\nbuilding your own by using the Attribute Buttons on" +
     " the left.";
-            // 
-            // link_Help
-            // 
-            this.link_Help.AutoSize = true;
-            this.link_Help.Location = new System.Drawing.Point(60, 610);
-            this.link_Help.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.link_Help.Name = "link_Help";
-            this.link_Help.Size = new System.Drawing.Size(129, 17);
-            this.link_Help.TabIndex = 35;
-            this.link_Help.TabStop = true;
-            this.link_Help.Text = "Help with Attributes";
-            this.link_Help.VisitedLinkColor = System.Drawing.Color.Blue;
-            this.link_Help.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.link_Help_LinkClicked);
             // 
             // panel2
             // 
@@ -565,7 +551,7 @@
             this.panel2.Controls.Add(this.txb_CalloutStyle);
             this.panel2.Controls.Add(this.label10);
             this.panel2.Location = new System.Drawing.Point(248, 94);
-            this.panel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel2.Margin = new System.Windows.Forms.Padding(4);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(839, 128);
             this.panel2.TabIndex = 36;
@@ -576,7 +562,7 @@
             this.label6.Location = new System.Drawing.Point(244, 74);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(123, 17);
+            this.label6.Size = new System.Drawing.Size(117, 16);
             this.label6.TabIndex = 37;
             this.label6.Text = "View Callout Style:";
             // 
@@ -593,7 +579,7 @@
             this.panel3.Controls.Add(this.pnl_AuxStyle);
             this.panel3.Controls.Add(this.pnl_DetailStyle);
             this.panel3.Location = new System.Drawing.Point(248, 258);
-            this.panel3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel3.Margin = new System.Windows.Forms.Padding(4);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(839, 331);
             this.panel3.TabIndex = 38;
@@ -604,7 +590,7 @@
             this.label7.Location = new System.Drawing.Point(244, 239);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(115, 17);
+            this.label7.Size = new System.Drawing.Size(110, 16);
             this.label7.TabIndex = 39;
             this.label7.Text = "View Label Style:";
             // 
@@ -612,9 +598,9 @@
             // 
             this.ckb_UpdateBeforeSave.AutoSize = true;
             this.ckb_UpdateBeforeSave.Location = new System.Drawing.Point(341, 609);
-            this.ckb_UpdateBeforeSave.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ckb_UpdateBeforeSave.Margin = new System.Windows.Forms.Padding(4);
             this.ckb_UpdateBeforeSave.Name = "ckb_UpdateBeforeSave";
-            this.ckb_UpdateBeforeSave.Size = new System.Drawing.Size(235, 21);
+            this.ckb_UpdateBeforeSave.Size = new System.Drawing.Size(223, 20);
             this.ckb_UpdateBeforeSave.TabIndex = 40;
             this.ckb_UpdateBeforeSave.Text = "Update References Before Save";
             this.ckb_UpdateBeforeSave.UseVisualStyleBackColor = true;
@@ -627,7 +613,6 @@
             this.Controls.Add(this.ckb_UpdateBeforeSave);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
-            this.Controls.Add(this.link_Help);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btn_SaveSettings);
@@ -646,7 +631,7 @@
             this.Controls.Add(this.label7);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ConfigUI";
@@ -714,7 +699,6 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.LinkLabel link_Help;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Panel panel3;
