@@ -176,30 +176,36 @@ namespace ViewReference
 
         public static void ResetView(DrawingView oView, InvView iView)
         {
-            if (iView != null)
+            try
             {
-                oView.Name = iView.ViewName;
-                oView.Label.FormattedText = iView.LabelText;
+                if (iView != null)
+                {
+                    oView.Name = iView.ViewName;
+                    oView.Label.FormattedText = iView.LabelText;
 
-                //RemoveLabelReferences(oView, iView);
+                }
+                else
+                {
+                    if (OldReferencesExist(oView))
+                    {
+                        //Remove Old References
+                        ViewRef_Remove OldVR = new ViewRef_Remove();
+                        OldVR.Remove_ViewRefs(AddinGlobal.InventorApp);
+
+                        //Remove Old ViewReference Attribute Set
+                        if (oView.AttributeSets.NameIsUsed["ViewReference"])
+                            oView.AttributeSets["ViewReference"].Delete();
+                    }
+
+                    //References were never added, or they were added as the original app
+
+                }
+            }
+            finally
+            {
                 ClearViewAttributes(oView);
             }
-            else
-            {
-                if (OldReferencesExist(oView))
-                {
-                    //Remove Old References
-                    ViewRef_Remove OldVR = new ViewRef_Remove();
-                    OldVR.Remove_ViewRefs(AddinGlobal.InventorApp);
-
-                    //Remove Old ViewReference Attribute Set
-                    if (oView.AttributeSets.NameIsUsed["ViewReference"])
-                        oView.AttributeSets["ViewReference"].Delete();
-                }
-
-                //References were never added, or they were added as the original app
-
-            }
+            
         }
 
         static void RecordLog(string text)
@@ -324,7 +330,10 @@ namespace ViewReference
         /// <param name="oView"></param>
         static void ClearViewAttributes(DrawingView oView)
         {
-            oView.AttributeSets["ViewReference-v4"].Delete();
+            if (oView.AttributeSets.NameIsUsed["ViewReference-v4"])
+            {
+                oView.AttributeSets["ViewReference-v4"].Delete();
+            }            
         }
 
         /// <summary>
