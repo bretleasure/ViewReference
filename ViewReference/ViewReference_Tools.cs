@@ -47,33 +47,36 @@ namespace ViewReference
 
         public static InvView GetSavedAttributesFromView(DrawingView oView)
         {
-            InvView iView = new InvView();
-
             if (oView.AttributeSets.NameIsUsed["ViewReference-v4"])
             {
-                //Attributes Exist
+                try
+                {
+                    InvView iView = new InvView();
 
-                AttributeSet oAttribSet = oView.AttributeSets["ViewReference-v4"];
+                    AttributeSet oAttribSet = oView.AttributeSets["ViewReference-v4"];
 
-                iView.ViewName = oAttribSet["ViewName"].Value.ToString();
-                iView.ViewSheetName = oAttribSet["ViewSheetName"].Value.ToString();
-                iView.ViewSheetNumber = oAttribSet["ViewSheetNumber"].Value.ToString();
-                iView.ParentSheetName = oAttribSet["ParentSheetName"].Value.ToString();
-                iView.ParentSheetNumber = oAttribSet["ParentSheetName"].Value.ToString();
+                    iView.ViewName = oAttribSet["ViewName"].Value.ToString();
+                    iView.ViewSheetName = oAttribSet["ViewSheetName"].Value.ToString();
+                    iView.ViewSheetNumber = oAttribSet["ViewSheetNumber"].Value.ToString();
+                    iView.ParentSheetName = oAttribSet["ParentSheetName"].Value.ToString();
+                    iView.ParentSheetNumber = oAttribSet["ParentSheetName"].Value.ToString();
 
-                iView.CalloutStyle = oAttribSet["CalloutStyle"].Value.ToString();
-                iView.ViewLabelStyle = oAttribSet["ViewLabelStyle"].Value.ToString();
+                    iView.CalloutStyle = oAttribSet["CalloutStyle"].Value.ToString();
+                    iView.ViewLabelStyle = oAttribSet["ViewLabelStyle"].Value.ToString();
 
-                iView.LabelText = oAttribSet["LabelText"].Value.ToString();
+                    iView.LabelText = oAttribSet["LabelText"].Value.ToString();
 
+                    return iView;
+                }
+                catch
+                {
+                    return null;
+                }
             }
             else
             {
-                iView = null;
+                return null;
             }
-
-            return iView;
-
         }
 
         public static void SaveAttributesToView(DrawingView dwgView, InvView iView)
@@ -176,30 +179,41 @@ namespace ViewReference
 
         public static void ResetView(DrawingView oView, InvView iView)
         {
-            if (iView != null)
+            try
             {
-                oView.Name = iView.ViewName;
-                oView.Label.FormattedText = iView.LabelText;
+                if (iView != null)
+                {
+                    //Skip if references dont exist in the view label
+                    //Can happen if labels were manually edited to remove the references
+                    //and the attributes still exist in the view object
+                    if (!oView.Label.FormattedText.Contains("<DrawingViewName/>"))
+                    {                        
+                        oView.Name = iView.ViewName;
+                        oView.Label.FormattedText = iView.LabelText;
+                    }
+                }
+                else
+                {
+                    if (OldReferencesExist(oView))
+                    {
+                        //Remove Old References
+                        ViewRef_Remove OldVR = new ViewRef_Remove();
+                        OldVR.Remove_ViewRefs(AddinGlobal.InventorApp);
 
-                //RemoveLabelReferences(oView, iView);
+                        //Remove Old ViewReference Attribute Set
+                        if (oView.AttributeSets.NameIsUsed["ViewReference"])
+                            oView.AttributeSets["ViewReference"].Delete();
+                    }
+
+                    //References were never added, or they were added as the original app
+
+                }
+            }
+            finally
+            {
                 ClearViewAttributes(oView);
             }
-            else
-            {
-                if (OldReferencesExist(oView))
-                {
-                    //Remove Old References
-                    ViewRef_Remove OldVR = new ViewRef_Remove();
-                    OldVR.Remove_ViewRefs(AddinGlobal.InventorApp);
-
-                    //Remove Old ViewReference Attribute Set
-                    if (oView.AttributeSets.NameIsUsed["ViewReference"])
-                        oView.AttributeSets["ViewReference"].Delete();
-                }
-
-                //References were never added, or they were added as the original app
-
-            }
+            
         }
 
         static void RecordLog(string text)
@@ -324,7 +338,10 @@ namespace ViewReference
         /// <param name="oView"></param>
         static void ClearViewAttributes(DrawingView oView)
         {
-            oView.AttributeSets["ViewReference-v4"].Delete();
+            oView.AttributeSets.Cast<AttributeSet>()
+                .Where(set => set.Name.ToLower().Contains("viewreference"))
+                .ToList()
+                .ForEach(set => set.Delete());
         }
 
         /// <summary>
