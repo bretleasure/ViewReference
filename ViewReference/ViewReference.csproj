@@ -20,7 +20,10 @@
   <ItemGroup>
     <Reference Include="Autodesk.Inventor.Interop">
       <HintPath>lib\Autodesk.Inventor.Interop.dll</HintPath>
-      <Private>true</Private>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="CAP.Utilities">
+      <HintPath>lib\CAP.Utilities.dll</HintPath>
     </Reference>
     <Reference Include="RemoveOldViewReferences">
       <HintPath>lib\RemoveOldViewReferences.dll</HintPath>
