@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Inventor;
 using CAP.Utilities;
 using RemoveOldViewReferences.RemoveOldViewReferences;
+using Microsoft.Extensions.Logging;
 
 namespace ViewReference
 {
@@ -47,6 +48,8 @@ namespace ViewReference
 
         public static InvView GetSavedAttributesFromView(DrawingView oView)
         {
+            AddinGlobal.Logger.LogInformation($"Getting attributes from view {oView.Name}");
+
             if (oView.AttributeSets.NameIsUsed["ViewReference-v4"])
             {
                 try
@@ -68,19 +71,23 @@ namespace ViewReference
 
                     return iView;
                 }
-                catch
+                catch (Exception ex)
                 {
+                    AddinGlobal.Logger.LogError(ex, $"Failed to get attributes from view {oView.Name}");
                     return null;
                 }
             }
             else
             {
+                AddinGlobal.Logger.LogInformation($"View {oView.Name} does not contain any saved attributes");
                 return null;
             }
         }
 
         public static void SaveAttributesToView(DrawingView dwgView, InvView iView)
         {
+            AddinGlobal.Logger.LogInformation($"Saving attributes to view");
+
             if (!dwgView.AttributeSets.NameIsUsed["ViewReference-v4"])
             {
                 dwgView.AttributeSets.Add("ViewReference-v4", true);
@@ -154,31 +161,20 @@ namespace ViewReference
                     //Step 1 - Remove Current References if they Exist
                     ResetView(oView, CurrentRefs);
 
-                    //Step 2 - Create New References
+                    //Step 2 - Create New References                    
                     CreateViewReferences(oView, LabelStyle); ;
                 }
 
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                RecordLog("View Name = " + oView.Name);
-                RecordLog("View Type = " + oView.ViewType.ToString());
-                RecordLog("View Label = " + oView.Label.FormattedText);
-                RecordLog("View Loc = " + oView.Parent.Name);
-
-                RecordLog(e.ToString());
-
-                RecordLog("Adding Reference Failed");
-
-                RecordLog("-----------------------------------------------------------------------------");
+                AddinGlobal.Logger.LogError(ex, $"Failed to add references to view {oView.Name}");
             }
-
-
-
         }
 
         public static void ResetView(DrawingView oView, InvView iView)
         {
+            
             try
             {
                 if (iView != null)
@@ -187,15 +183,23 @@ namespace ViewReference
                     //Can happen if labels were manually edited to remove the references
                     //and the attributes still exist in the view object
                     if (!oView.Label.FormattedText.Contains("<DrawingViewName/>"))
-                    {                        
+                    {
+                        AddinGlobal.Logger.LogInformation($"Removing references from {oView.Name}");
+
                         oView.Name = iView.ViewName;
                         oView.Label.FormattedText = iView.LabelText;
+                    }
+                    else
+                    {
+                        AddinGlobal.Logger.LogInformation($"{oView.Name} does not contain any references to remove.");
                     }
                 }
                 else
                 {
                     if (OldReferencesExist(oView))
                     {
+                        AddinGlobal.Logger.LogInformation($"View {oView.Name} contains old references. Resetting view now");
+
                         //Remove Old References
                         ViewRef_Remove OldVR = new ViewRef_Remove();
                         OldVR.Remove_ViewRefs(AddinGlobal.InventorApp);
@@ -214,19 +218,6 @@ namespace ViewReference
                 ClearViewAttributes(oView);
             }
             
-        }
-
-        static void RecordLog(string text)
-        {
-            string filepath = AddinGlobal.LogFile;
-
-            Tools.LogFile(filepath, text);
-        }
-
-        public static void DeleteLogFile()
-        {
-            if (System.IO.File.Exists(AddinGlobal.LogFile + ".txt"))
-                System.IO.File.Delete(AddinGlobal.LogFile + ".txt");
         }
 
         static bool OldReferencesExist(DrawingView oView)
@@ -251,12 +242,15 @@ namespace ViewReference
 
         static void CreateViewReferences(DrawingView oView, string LabelStyle)
         {
+            AddinGlobal.Logger.LogInformation($"Adding references to view {oView.Name}");
+
             InvView iView = new InvView();
 
             iView.CalloutStyle = AddinGlobal.AppSettings.CalloutStyle;
             iView.ViewLabelStyle = LabelStyle;
 
             //Get View Properties
+            AddinGlobal.Logger.LogInformation("Getting View Properties");
             GetViewProperties(oView, out iView.ViewName, out iView.ViewSheetNumber, out iView.ViewSheetName, out iView.ParentSheetNumber, out iView.ParentSheetName);
 
             //View Callout
@@ -273,6 +267,8 @@ namespace ViewReference
 
         static string CreateViewCallout(InvView iView)
         {
+            AddinGlobal.Logger.LogInformation($"Creating View callout using style: {iView.CalloutStyle}");
+
             string StartString = iView.CalloutStyle;
 
             return ReplaceAttributesWithValues(StartString, iView);
@@ -280,6 +276,8 @@ namespace ViewReference
 
         static string CreateViewLabel(InvView iView, string LabelStyle, string CurrentLabelText)
         {
+            AddinGlobal.Logger.LogInformation($"Creating view label using style: {LabelStyle}");
+
             //Get portion of View label that contains the View Name
             string ViewCalloutText = GetViewCalloutTextFromLabelText(CurrentLabelText);
 
@@ -338,6 +336,8 @@ namespace ViewReference
         /// <param name="oView"></param>
         static void ClearViewAttributes(DrawingView oView)
         {
+            AddinGlobal.Logger.LogInformation($"Clearing attributes for view {oView.Name}");
+
             oView.AttributeSets.Cast<AttributeSet>()
                 .Where(set => set.Name.ToLower().Contains("viewreference"))
                 .ToList()

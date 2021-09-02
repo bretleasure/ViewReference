@@ -5,6 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Inventor;
 using CAP.Utilities;
+using System.Reflection;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace ViewReference
 {
@@ -22,5 +25,19 @@ namespace ViewReference
 
         public static string LogFile = @"C:\Users\Public\Documents\Autodesk\View Reference Log";
 
+        public static ILogger Logger;
+
+        public static ILogger<T> GetLogger<T>()
+        {
+            var serviceProvider = new ServiceCollection()
+                .AddLogging(logging =>
+                {
+                    logging.AddFile(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\logs\Log.txt");
+                })
+                .BuildServiceProvider();
+
+            return serviceProvider.GetService<ILogger<T>>();
+
+        }
     }
 }

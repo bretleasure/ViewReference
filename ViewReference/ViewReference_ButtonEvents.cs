@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Inventor;
 using CAP.Utilities;
+using Microsoft.Extensions.Logging;
 
 namespace ViewReference
 {
@@ -23,12 +24,9 @@ namespace ViewReference
             //Check Entitlement
             if (!Tools.CheckForValidUser(AddinGlobal.InventorApp, "ViewReference", AddinGlobal.AppId))
             {
+                AddinGlobal.Logger.LogInformation("User does not have valid entitlement");
                 return;
             }
-            
-
-            //Delete Error Log File if exists
-            ViewReference_Tools.DeleteLogFile();
 
             if (AddinGlobal.AppSettings == null)
             {
@@ -90,6 +88,7 @@ namespace ViewReference
             //Check Entitlement
             if (!Tools.CheckForValidUser(AddinGlobal.InventorApp, "ViewReference", AddinGlobal.AppId))
             {
+                AddinGlobal.Logger.LogInformation("User does not have valid entitlement");
                 return;
             }
 

@@ -6,6 +6,7 @@ using Inventor;
 using Microsoft.Win32;
 using System.Windows.Forms;
 using CAP.Utilities;
+using Microsoft.Extensions.Logging;
 
 namespace ViewReference
 {
@@ -31,11 +32,14 @@ namespace ViewReference
         {
             // This method is called by Inventor when it loads the addin.
             // The AddInSiteObject provides access to the Inventor Application object.
-            // The FirstTime flag indicates if the addin is loaded for the first time.
-
+            // The FirstTime flag indicates if the addin is loaded for the first time.            
 
             // Initialize AddIn members.
             AddinGlobal.InventorApp = addInSiteObject.Application;
+
+            AddinGlobal.Logger = AddinGlobal.GetLogger<StandardAddInServer>();
+
+            AddinGlobal.Logger.LogInformation("Initializing View Reference Addin");
 
             //Create App Folder if it doesnt exist
             if (!System.IO.Directory.Exists(AddinGlobal.AppFolder))
@@ -44,10 +48,13 @@ namespace ViewReference
                 di.Attributes = FileAttributes.Hidden;
             }
 
+            
             //Get User Settings
+            AddinGlobal.Logger.LogInformation("Retrieving Settings");
             ViewReference_Tools.Get_SavedSettings();
 
             //Create Event Listener
+            AddinGlobal.Logger.LogInformation("Creating Event Listener");
             ViewReference_Tools.CreateUpdateEventListener();
 
             try
@@ -90,9 +97,10 @@ namespace ViewReference
                     }
                 }
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                MessageBox.Show("There was an error loading the View Reference Add-in." + System.Environment.NewLine + System.Environment.NewLine + e.ToString());
+                AddinGlobal.Logger.LogInformation(ex, "Could not load addin");
+                MessageBox.Show("Could not load the View Reference Addin. Check log file for details");
             }
 
 
