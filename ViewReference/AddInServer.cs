@@ -59,6 +59,8 @@ namespace ViewReference
 
             try
             {
+                AddinGlobal.Logger.LogInformation("Creating Ribbon Buttons");
+
                 //Make sure Icons are marked as Embedded Resource in the properties
 
                 Icon CreateUpdate_Icon = new Icon(this.GetType(), "Resources.ViewRef-Add.ico");
@@ -89,6 +91,8 @@ namespace ViewReference
 
                         RibbonPanel panel = tab.RibbonPanels.Add("View Reference", "vr_Panel", Guid.NewGuid().ToString());
                         CommandControls controls = panel.CommandControls;
+
+                        AddinGlobal.Logger.LogInformation("Adding buttons to the ribbon");
 
                         controls.AddButton(CreateUpdate_Btn.ButtonDef(), true, true);
                         controls.AddButton(Remove_Btn.ButtonDef(), true, true);

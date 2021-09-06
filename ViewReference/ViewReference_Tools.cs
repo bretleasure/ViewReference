@@ -8,6 +8,7 @@ using Inventor;
 using CAP.Utilities;
 using RemoveOldViewReferences.RemoveOldViewReferences;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 
 namespace ViewReference
 {
@@ -15,15 +16,21 @@ namespace ViewReference
     {
         public static void Get_SavedSettings()
         {
-            string SettingsFileName = AddinGlobal.AppFolder + AddinGlobal.SettingsFile;
-
-            if (System.IO.File.Exists(SettingsFileName))
+            if (System.IO.File.Exists(AddinGlobal.SettingsFilePath))
             {
-                ViewReference_Settings oSettings = new ViewReference_Settings();
-                oSettings = (ViewReference_Settings)XMLTools.Get_ObjectFromXML(AddinGlobal.AppFolder + AddinGlobal.SettingsFile, oSettings);
+                //ViewReference_Settings oSettings = new ViewReference_Settings();
+                //oSettings = (ViewReference_Settings)XMLTools.Get_ObjectFromXML(AddinGlobal.SettingsFilePath, oSettings);
+                AddinGlobal.AppSettings = (ViewReference_Settings)JsonConvert.DeserializeObject(AddinGlobal.SettingsFilePath);
 
-                AddinGlobal.AppSettings = oSettings;
+                //AddinGlobal.AppSettings = oSettings;
             }
+        }
+
+        public static void SaveSettings()
+        {
+            var json = JsonConvert.SerializeObject(AddinGlobal.AppSettings);
+
+            System.IO.File.WriteAllText(AddinGlobal.SettingsFilePath, json);
         }
 
         public static bool ViewReferencesExistInDocument(DrawingDocument oDwgDoc)
@@ -126,9 +133,15 @@ namespace ViewReference
             if (AddinGlobal.AppSettings != null)
             {
                 if (AddinGlobal.AppSettings.UpdateBeforeSave)
+                {
+                    AddinGlobal.Logger.LogInformation("Adding update View References to run before save");
                     AddinGlobal.InventorApp.ApplicationEvents.OnSaveDocument += ApplicationEvents_OnSaveDocument;
+                }
                 else
+                {
+                    AddinGlobal.Logger.LogInformation("Removing update View References to run before save");
                     AddinGlobal.InventorApp.ApplicationEvents.OnSaveDocument -= ApplicationEvents_OnSaveDocument;
+                }
             }
             
         }

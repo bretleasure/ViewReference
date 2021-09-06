@@ -123,7 +123,7 @@ namespace ViewReference
             AddinGlobal.AppSettings = vRef;
 
             //Save object to XML
-            XMLTools.CreateXML(vRef, AddinGlobal.AppFolder + AddinGlobal.SettingsFile);
+            ViewReference_Tools.SaveSettings();
 
 			//Create/Update Event Listener
 			ViewReference_Tools.CreateUpdateEventListener();
