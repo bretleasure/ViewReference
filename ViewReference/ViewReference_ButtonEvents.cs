@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Inventor;
 using iAD.Utilities;
-using CAP.Utilities;
 using Microsoft.Extensions.Logging;
 
 namespace ViewReference
@@ -24,13 +23,6 @@ namespace ViewReference
         {
             try
             {
-                //Check Entitlement
-                if (!Tools.CheckForValidUser(AddinGlobal.InventorApp, "ViewReference", AddinGlobal.AppId))
-                {
-                    AddinGlobal.Logger.LogInformation("User does not have valid entitlement");
-                    return;
-                }
-
                 if (AddinGlobal.AppSettings == null)
                 {
                     DialogResult oDRes = MessageBox.Show("You have not configured View Reference.  Configure now?", "Configure View Reference", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk);
@@ -93,13 +85,6 @@ namespace ViewReference
 
         public static void Remove_References()
         {
-            //Check Entitlement
-            if (!Tools.CheckForValidUser(AddinGlobal.InventorApp, "ViewReference", AddinGlobal.AppId))
-            {
-                AddinGlobal.Logger.LogInformation("User does not have valid entitlement");
-                return;
-            }
-
             dwgDoc = (DrawingDocument)InvApp.ActiveDocument;
 
             foreach (Sheet oSheet in dwgDoc.Sheets)

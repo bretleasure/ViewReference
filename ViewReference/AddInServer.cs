@@ -6,7 +6,6 @@ using Inventor;
 using Microsoft.Win32;
 using System.Windows.Forms;
 using iAD.Utilities;
-using CAP.Utilities;
 using Microsoft.Extensions.Logging;
 
 namespace ViewReference
@@ -38,17 +37,15 @@ namespace ViewReference
             // Initialize AddIn members.
             AddinGlobal.InventorApp = addInSiteObject.Application;
 
-            AddinGlobal.Logger = AddinGlobal.GetLogger<StandardAddInServer>();
+            AddinGlobal.Logger = Logging.GetLogger<StandardAddInServer>();
 
             AddinGlobal.Logger.LogInformation("Initializing View Reference Addin");
 
-            //Create App Folder if it doesnt exist
-            if (!System.IO.Directory.Exists(AddinGlobal.AppFolder))
+            if (!LicTools.CheckForValidUser(AddinGlobal.InventorApp, "View Reference", AddinGlobal.AppId))
             {
-                DirectoryInfo di = System.IO.Directory.CreateDirectory(AddinGlobal.AppFolder);
-                di.Attributes = FileAttributes.Hidden;
+                AddinGlobal.Logger.LogWarning("Invalid License");
+                return;
             }
-
             
             //Get User Settings
             AddinGlobal.Logger.LogInformation("Retrieving Settings");

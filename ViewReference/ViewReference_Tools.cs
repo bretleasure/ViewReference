@@ -9,28 +9,27 @@ using iAD.Utilities;
 using RemoveOldViewReferences.RemoveOldViewReferences;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using File = System.IO.File;
 
 namespace ViewReference
 {
     public abstract class ViewReference_Tools
     {
+        private const string AttributeSetName = "ViewReference-v4";
+
         public static void Get_SavedSettings()
         {
             if (System.IO.File.Exists(AddinGlobal.SettingsFilePath))
             {
-                //ViewReference_Settings oSettings = new ViewReference_Settings();
-                //oSettings = (ViewReference_Settings)XMLTools.Get_ObjectFromXML(AddinGlobal.SettingsFilePath, oSettings);
-                AddinGlobal.AppSettings = (ViewReference_Settings)JsonConvert.DeserializeObject(AddinGlobal.SettingsFilePath);
-
-                //AddinGlobal.AppSettings = oSettings;
+                var settingsJson = File.ReadAllText(AddinGlobal.SettingsFilePath);
+                AddinGlobal.AppSettings = JsonConvert.DeserializeObject<ViewReference_Settings>(settingsJson);
             }
         }
 
         public static void SaveSettings()
         {
             var json = JsonConvert.SerializeObject(AddinGlobal.AppSettings);
-
-            System.IO.File.WriteAllText(AddinGlobal.SettingsFilePath, json);
+            File.WriteAllText(AddinGlobal.SettingsFilePath, json);
         }
 
         public static bool ViewReferencesExistInDocument(DrawingDocument oDwgDoc)
@@ -41,7 +40,7 @@ namespace ViewReference
             {
                 foreach (DrawingView oView in oSheet.DrawingViews)
                 {
-                    if (oView.AttributeSets.NameIsUsed["ViewReference-v4"])
+                    if (oView.AttributeSets.NameIsUsed[AttributeSetName])
                     {
                         //References Exist
                         Exist = true;
@@ -57,13 +56,13 @@ namespace ViewReference
         {
             AddinGlobal.Logger.LogInformation($"Getting attributes from view {oView.Name}");
 
-            if (oView.AttributeSets.NameIsUsed["ViewReference-v4"])
+            if (oView.AttributeSets.NameIsUsed[AttributeSetName])
             {
                 try
                 {
                     InvView iView = new InvView();
 
-                    AttributeSet oAttribSet = oView.AttributeSets["ViewReference-v4"];
+                    AttributeSet oAttribSet = oView.AttributeSets[AttributeSetName];
 
                     iView.ViewName = oAttribSet["ViewName"].Value.ToString();
                     iView.ViewSheetName = oAttribSet["ViewSheetName"].Value.ToString();
@@ -95,12 +94,12 @@ namespace ViewReference
         {
             AddinGlobal.Logger.LogInformation($"Saving attributes to view");
 
-            if (!dwgView.AttributeSets.NameIsUsed["ViewReference-v4"])
+            if (!dwgView.AttributeSets.NameIsUsed[AttributeSetName])
             {
-                dwgView.AttributeSets.Add("ViewReference-v4", true);
+                dwgView.AttributeSets.Add(AttributeSetName, true);
             }
 
-            AttributeSet oAttribSet = dwgView.AttributeSets["ViewReference-v4"];
+            AttributeSet oAttribSet = dwgView.AttributeSets[AttributeSetName];
 
             AssignAttributeValue(oAttribSet, "ViewName", iView.ViewName);
             AssignAttributeValue(oAttribSet, "ViewSheetName", iView.ViewSheetName);
