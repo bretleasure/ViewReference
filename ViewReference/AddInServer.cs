@@ -41,11 +41,11 @@ namespace ViewReference
 
             AddinGlobal.Logger.LogInformation("Initializing View Reference Addin");
 
-            if (!LicTools.CheckForValidUser(AddinGlobal.InventorApp, "View Reference", AddinGlobal.AppId))
-            {
-                AddinGlobal.Logger.LogWarning("Invalid License");
-                return;
-            }
+            //if (!LicTools.CheckForValidUser(AddinGlobal.InventorApp, "View Reference", AddinGlobal.AppId))
+            //{
+            //    AddinGlobal.Logger.LogWarning("Invalid License");
+            //    return;
+            //}
             
             //Get User Settings
             AddinGlobal.Logger.LogInformation("Retrieving Settings");
