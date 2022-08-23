@@ -78,7 +78,7 @@ namespace ViewReference
             }
             catch (Exception ex)
             {
-                AddinGlobal.Logger.LogError(ex, "An error occurred while adding View References");
+                //AddinGlobal.Logger.LogError(ex, "An error occurred while adding View References");
                 MessageBox.Show("An error occurred wile adding View References. Check log for details");
             }
         }

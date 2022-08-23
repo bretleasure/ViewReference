@@ -21,7 +21,5 @@ namespace ViewReference
         public static string AppId = "5865579890990954428";
 
         public static ViewReference_Settings AppSettings;
-
-        public static ILogger Logger;
     }
 }

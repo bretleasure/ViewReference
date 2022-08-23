@@ -37,9 +37,9 @@ namespace ViewReference
             // Initialize AddIn members.
             AddinGlobal.InventorApp = addInSiteObject.Application;
 
-            AddinGlobal.Logger = Logging.GetLogger<StandardAddInServer>();
+            //AddinGlobal.Logger = Logging.GetLogger<StandardAddInServer>();
 
-            AddinGlobal.Logger.LogInformation("Initializing View Reference Addin");
+            //AddinGlobal.Logger.LogInformation("Initializing View Reference Addin");
 
             //if (!LicTools.CheckForValidUser(AddinGlobal.InventorApp, "View Reference", AddinGlobal.AppId))
             //{
@@ -48,16 +48,16 @@ namespace ViewReference
             //}
             
             //Get User Settings
-            AddinGlobal.Logger.LogInformation("Retrieving Settings");
+            //AddinGlobal.Logger.LogInformation("Retrieving Settings");
             ViewReference_Tools.Get_SavedSettings();
 
             //Create Event Listener
-            AddinGlobal.Logger.LogInformation("Creating Event Listener");
+            //AddinGlobal.Logger.LogInformation("Creating Event Listener");
             ViewReference_Tools.CreateUpdateEventListener();
 
             try
             {
-                AddinGlobal.Logger.LogInformation("Creating Ribbon Buttons");
+                //AddinGlobal.Logger.LogInformation("Creating Ribbon Buttons");
 
                 //Make sure Icons are marked as Embedded Resource in the properties
 
@@ -90,7 +90,7 @@ namespace ViewReference
                         RibbonPanel panel = tab.RibbonPanels.Add("View Reference", "vr_Panel", Guid.NewGuid().ToString());
                         CommandControls controls = panel.CommandControls;
 
-                        AddinGlobal.Logger.LogInformation("Adding buttons to the ribbon");
+                        //AddinGlobal.Logger.LogInformation("Adding buttons to the ribbon");
 
                         controls.AddButton(CreateUpdate_Btn.ButtonDef(), true, true);
                         controls.AddButton(Remove_Btn.ButtonDef(), true, true);
@@ -101,7 +101,7 @@ namespace ViewReference
             }
             catch (Exception ex)
             {
-                AddinGlobal.Logger.LogInformation(ex, "Could not load addin");
+                //AddinGlobal.Logger.LogInformation(ex, "Could not load addin");
                 MessageBox.Show("Could not load the View Reference Addin. Check log file for details");
             }
 
