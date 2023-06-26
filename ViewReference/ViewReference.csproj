@@ -19,13 +19,12 @@
     <PackageReference Include="stdole" Version="16.9.31023.347" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\RemoveOldViewReferences\RemoveOldViewReferences.vbproj" />
+  </ItemGroup>
+  <ItemGroup>
     <Reference Include="Autodesk.Inventor.Interop">
       <HintPath>lib\Autodesk.Inventor.Interop.dll</HintPath>
       <Private>false</Private>
-    </Reference>
-    <Reference Include="RemoveOldViewReferences">
-      <HintPath>lib\RemoveOldViewReferences.dll</HintPath>
-      <Private>true</Private>
     </Reference>
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
