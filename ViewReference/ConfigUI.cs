@@ -106,7 +106,7 @@ namespace ViewReference
             if (!ValidateParameters())
                 return;
 
-            ViewReference_Settings vRef = new ViewReference_Settings();
+            ViewReferenceSettings vRef = new ViewReferenceSettings();
 
             vRef.CalloutStyle = txb_CalloutStyle.Text;
             vRef.DetailLabelStyle = txb_DetailStyle.Text;
@@ -120,13 +120,13 @@ namespace ViewReference
             vRef.ProjectedView = ckb_Projected.Checked;
 			vRef.UpdateBeforeSave = ckb_UpdateBeforeSave.Checked;
 
-            AddinGlobal.AppSettings = vRef;
+            AddinGlobal.Settings = vRef;
 
             //Save object to XML
-            ViewReference_Tools.SaveSettings();
+            ViewReferenceTools.SaveSettings();
 
 			//Create/Update Event Listener
-			ViewReference_Tools.CreateUpdateEventListener();
+			ViewReferenceTools.CreateUpdateEventListener();
 
             vRef = null;
 
@@ -146,7 +146,7 @@ namespace ViewReference
 
         private void ImportParameters()
         {
-            ViewReference_Settings vRef = AddinGlobal.AppSettings;
+            ViewReferenceSettings vRef = AddinGlobal.Settings;
 
             if (vRef != null)
             {

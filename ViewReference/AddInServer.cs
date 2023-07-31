@@ -37,9 +37,7 @@ namespace ViewReference
             // Initialize AddIn members.
             AddinGlobal.InventorApp = addInSiteObject.Application;
 
-            //AddinGlobal.Logger = Logging.GetLogger<StandardAddInServer>();
-
-            //AddinGlobal.Logger.LogInformation("Initializing View Reference Addin");
+            AddinGlobal.Automation = new ViewReferenceAutomation();
 
             //if (!LicTools.CheckForValidUser(AddinGlobal.InventorApp, "View Reference", AddinGlobal.AppId))
             //{
@@ -48,12 +46,12 @@ namespace ViewReference
             //}
             
             //Get User Settings
-            //AddinGlobal.Logger.LogInformation("Retrieving Settings");
-            ViewReference_Tools.Get_SavedSettings();
+
+            ViewReferenceTools.GetSavedSettings();
 
             //Create Event Listener
-            //AddinGlobal.Logger.LogInformation("Creating Event Listener");
-            ViewReference_Tools.CreateUpdateEventListener();
+
+            ViewReferenceTools.CreateUpdateEventListener();
 
             try
             {
@@ -61,21 +59,9 @@ namespace ViewReference
 
                 //Make sure Icons are marked as Embedded Resource in the properties
 
-                Icon CreateUpdate_Icon = new Icon(this.GetType(), "Resources.ViewRef-Add.ico");
-                 Icon CreateUpdate_Icon_sm = new Icon(CreateUpdate_Icon, 16, 16);
-
-                InventorButton CreateUpdate_Btn = new InventorButton("Create /\rUpdate", "vr_CreateUpdate", "Create/Update View References", "Create/Update View References in this document.", CreateUpdate_Icon, CreateUpdate_Icon_sm);
-                CreateUpdate_Btn.Execute = ViewReference_ButtonEvents.CreateUpdate_References;
-
-                Icon Remove_Icon = new Icon(this.GetType(), "Resources.ViewRef-Remove.ico");
-                Icon Remove_Icon_sm = new Icon(Remove_Icon, 16, 16);
-                InventorButton Remove_Btn = new InventorButton("Remove", "vr_Remove", "Remove View References", "Remove View References in this document.", Remove_Icon, Remove_Icon_sm);
-                Remove_Btn.Execute = ViewReference_ButtonEvents.Remove_References;
-
-                Icon Config_Icon = new Icon(this.GetType(), "Resources.gear.ico");
-                Icon Config_Icon_sm = new Icon(Config_Icon, 16, 16);
-                InventorButton Config_Btn = new InventorButton("Configure", "vr_Config", "Configure View Reference", "Select Options for View Reference.", Config_Icon, Config_Icon_sm);
-                Config_Btn.Execute = ViewReference_ButtonEvents.ShowConfigForm;
+                var createUpdateButton = new CreateReferencesButton();
+                var removeButton = new RemoveReferencesButton();
+                var configureButton = new ConfigureButton();
 
 
                 if (firstTime)
@@ -90,11 +76,9 @@ namespace ViewReference
                         RibbonPanel panel = tab.RibbonPanels.Add("View Reference", "vr_Panel", Guid.NewGuid().ToString());
                         CommandControls controls = panel.CommandControls;
 
-                        //AddinGlobal.Logger.LogInformation("Adding buttons to the ribbon");
-
-                        controls.AddButton(CreateUpdate_Btn.ButtonDef(), true, true);
-                        controls.AddButton(Remove_Btn.ButtonDef(), true, true);
-                        controls.AddButton(Config_Btn.ButtonDef(), false, true);
+                        controls.AddButton(createUpdateButton.Definition, true, true);
+                        controls.AddButton(removeButton.Definition, true, true);
+                        controls.AddButton(configureButton.Definition, false, true);
 
                     }
                 }
@@ -137,8 +121,7 @@ namespace ViewReference
 
             get
             {
-
-                return null;
+                return AddinGlobal.Automation;
             }
         }
 

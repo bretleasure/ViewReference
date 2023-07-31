@@ -10,52 +10,40 @@ using stdole;
 
 namespace ViewReference
 {
-    public class InventorButton
+    public abstract class InventorButton
     {
-        private ButtonDefinition oButtonDef;
-        public Action Execute;
-
-        public InventorButton(string DisplayName, string InternalName, string DescriptionText, string ToolTipText, Icon LargeIcon, Icon SmallIcon)
+        public InventorButton()
         {
-            Create(DisplayName, InternalName, DescriptionText, ToolTipText, LargeIcon, SmallIcon);
+            var largeIcon = new Icon(this.GetType(), GetIconResourceName());
+            var smallIcon = new Icon(largeIcon, 16, 16);
+            
+            var largeIconIPictureDisp = IconToPicture(largeIcon);
+            var smallIconIpictureDisp = IconToPicture(smallIcon);
+            
+            Definition = AddinGlobal.InventorApp.CommandManager.ControlDefinitions.AddButtonDefinition(GetButtonName(), GetInternalName(),
+                CommandType,  null, GetDescriptionText(), GetToolTipText(), smallIconIpictureDisp, largeIconIPictureDisp);
+            Definition.Enabled = true;
+            Definition.OnExecute += Execute;
         }
 
-        void Create(string DisplayName, string InternalName, string DescriptionText, string ToolTipText, Icon LargeIcon, Icon SmallIcon)
+        private static stdole.IPictureDisp IconToPicture(Icon icon)
         {
-            stdole.IPictureDisp LargeIconIPictureDisp = null;
-            stdole.IPictureDisp SmallIconIpictureDisp = null;
-
-            if (LargeIcon != null)
-            {
-                LargeIconIPictureDisp = IconToPicture(LargeIcon);
-                SmallIconIpictureDisp = IconToPicture(SmallIcon);
-            }
-
-            oButtonDef = AddinGlobal.InventorApp.CommandManager.ControlDefinitions.AddButtonDefinition(DisplayName, InternalName, CommandTypesEnum.kEditMaskCmdType, null, DescriptionText, ToolTipText, SmallIconIpictureDisp, LargeIconIPictureDisp);
-
-
-            oButtonDef.Enabled = true;
-            oButtonDef.OnExecute += oButtonDef_OnExecute;
-
+            return ImageConverter.IconToPicture(icon);
         }
 
-        private static stdole.IPictureDisp IconToPicture(Icon Icon)
-        {
-            return ImageConverter.IconToPicture(Icon);
-        }
+        public abstract void Execute(NameValueMap context);
+        public abstract string GetButtonName();
+        public virtual string GetInternalName() => Guid.NewGuid().ToString();
+        public abstract string GetDescriptionText();
+        public abstract string GetToolTipText();
+        public abstract string GetIconResourceName();
+        public virtual CommandTypesEnum CommandType => CommandTypesEnum.kEditMaskCmdType;
 
-        private void oButtonDef_OnExecute(NameValueMap Context)
+        public ButtonDefinition Definition { get; private set; }
+        public bool Enabled
         {
-            //throw new NotImplementedException();
-            if (Execute != null)
-                Execute();
-            else
-                MessageBox.Show("Nothing to execute");
-        }
-
-        public ButtonDefinition ButtonDef()
-        {
-            return oButtonDef;
+            get => Definition.Enabled;
+            set => Definition.Enabled = value;
         }
 
         private class ImageConverter : AxHost

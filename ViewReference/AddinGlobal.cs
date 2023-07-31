@@ -12,14 +12,24 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace ViewReference
 {
-    public class AddinGlobal
+    public static class AddinGlobal
     {
-        public static Inventor.Application InventorApp;
+        public static Inventor.Application InventorApp { get; set; }
 
         public static string SettingsFilePath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "appsettings.json");
 
-        public static string AppId = "5865579890990954428";
+        public static string AppId { get; } = "5865579890990954428";
 
-        public static ViewReference_Settings AppSettings;
+        public static ViewReferenceSettings Settings { get; set; }
+
+        public static ViewReferenceAutomation Automation { get; set; }
+
+		public static string AttributeSetName { get; } = "ViewReference-v4";
+        
+        public static void ShowConfigForm()
+        {
+            ConfigUI config = new ConfigUI();
+            config.ShowDialog();
+        }
     }
 }
