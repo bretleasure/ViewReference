@@ -105,29 +105,26 @@ namespace ViewReference
             if (!ValidateParameters())
                 return;
 
-            ViewReferenceSettings vRef = new ViewReferenceSettings();
+            AddinGlobal.Settings = new ViewReferenceSettings
+            {
+                CalloutStyle = txb_CalloutStyle.Text,
+                DetailLabelStyle = txb_DetailStyle.Text,
+                SectionLabelStyle = txb_SectionStyle.Text,
+                AuxLabelStyle = txb_AuxStyle.Text,
+                ProjectedLabelStyle = txb_ProjectedStyle.Text,
 
-            vRef.CalloutStyle = txb_CalloutStyle.Text;
-            vRef.DetailLabelStyle = txb_DetailStyle.Text;
-            vRef.SectionLabelStyle = txb_SectionStyle.Text;
-            vRef.AuxLabelStyle = txb_AuxStyle.Text;
-            vRef.ProjectedLabelStyle = txb_ProjectedStyle.Text;
-
-            vRef.DetailView = ckb_Detail.Checked;
-            vRef.SectionView = ckb_Section.Checked;
-            vRef.AuxView = ckb_Aux.Checked;
-            vRef.ProjectedView = ckb_Projected.Checked;
-			vRef.UpdateBeforeSave = ckb_UpdateBeforeSave.Checked;
-
-            AddinGlobal.Settings = vRef;
+                DetailView = ckb_Detail.Checked,
+                SectionView = ckb_Section.Checked,
+                AuxView = ckb_Aux.Checked,
+                ProjectedView = ckb_Projected.Checked,
+                UpdateBeforeSave = ckb_UpdateBeforeSave.Checked
+        };
 
             //Save object to XML
             ViewReferenceTools.SaveSettings();
 
 			//Create/Update Event Listener
 			ViewReferenceTools.CreateUpdateEventListener();
-
-            vRef = null;
 
             this.Close();
         }
@@ -145,26 +142,21 @@ namespace ViewReference
 
         private void ImportParameters()
         {
-            ViewReferenceSettings vRef = AddinGlobal.Settings;
-
-            if (vRef != null)
+            if (AddinGlobal.Settings != null)
             {
-                txb_CalloutStyle.Text = vRef.CalloutStyle;
-                txb_DetailStyle.Text = vRef.DetailLabelStyle;
-                txb_SectionStyle.Text = vRef.SectionLabelStyle;
-                txb_AuxStyle.Text = vRef.AuxLabelStyle;
-                txb_ProjectedStyle.Text = vRef.ProjectedLabelStyle;
+                txb_CalloutStyle.Text = AddinGlobal.Settings.CalloutStyle;
+                txb_DetailStyle.Text = AddinGlobal.Settings.DetailLabelStyle;
+                txb_SectionStyle.Text = AddinGlobal.Settings.SectionLabelStyle;
+                txb_AuxStyle.Text = AddinGlobal.Settings.AuxLabelStyle;
+                txb_ProjectedStyle.Text = AddinGlobal.Settings.ProjectedLabelStyle;
 
-                ckb_Detail.Checked = vRef.DetailView;
-                ckb_Section.Checked = vRef.SectionView;
-                ckb_Aux.Checked = vRef.AuxView;
-                ckb_Projected.Checked = vRef.ProjectedView;
+                ckb_Detail.Checked = AddinGlobal.Settings.DetailView;
+                ckb_Section.Checked = AddinGlobal.Settings.SectionView;
+                ckb_Aux.Checked = AddinGlobal.Settings.AuxView;
+                ckb_Projected.Checked = AddinGlobal.Settings.ProjectedView;
 
-				ckb_UpdateBeforeSave.Checked = vRef.UpdateBeforeSave;
-            }
-
-            vRef = null;
-            
+				ckb_UpdateBeforeSave.Checked = AddinGlobal.Settings.UpdateBeforeSave;
+            }            
         }
 
         private void Set_ActiveTextbox(object sender, EventArgs e)
@@ -205,12 +197,5 @@ namespace ViewReference
             
         }
 
-        private void link_Help_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            string website = "https://www.braluc.solutions/viewreference-documentation";
-
-            System.Diagnostics.Process.Start(website);
-            this.Close();
-        }
     }
 }

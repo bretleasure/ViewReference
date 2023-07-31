@@ -51,7 +51,7 @@ namespace ViewReference
             {
                 if (documentObject is DrawingDocument dwgDoc)
                 {
-                    if (dwgDoc.ViewReferencesExistInDocument())
+                    if (!dwgDoc.ViewReferencesExistInDocument())
                     {
                         AddinGlobal.Automation.CreateReferences(AddinGlobal.Settings);
                     }
