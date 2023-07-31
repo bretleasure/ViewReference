@@ -4,14 +4,19 @@
     <TargetFramework>net472</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <None Remove="Resources\gear.ico" />
-    <None Remove="Resources\ViewRef-Add.ico" />
-    <None Remove="Resources\ViewRef-Remove.ico" />
+    <Compile Remove="Resources\**" />
+    <EmbeddedResource Remove="Resources\**" />
+    <None Remove="Resources\**" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\gear.ico" />
-    <EmbeddedResource Include="Resources\ViewRef-Add.ico" />
-    <EmbeddedResource Include="Resources\ViewRef-Remove.ico" />
+    <None Remove="Buttons\Icons\gear.ico" />
+    <None Remove="Buttons\Icons\ViewRef-Add.ico" />
+    <None Remove="Buttons\Icons\ViewRef-Remove.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Buttons\Icons\gear.ico" />
+    <EmbeddedResource Include="Buttons\Icons\ViewRef-Add.ico" />
+    <EmbeddedResource Include="Buttons\Icons\ViewRef-Remove.ico" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />

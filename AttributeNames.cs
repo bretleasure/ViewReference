@@ -1,13 +1,20 @@
-﻿namespace ViewReference
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ViewReference
 {
     public class AttributeNames
     {
-        public const string ViewName = "<VIEW>";
-        public const string ViewSheetNumber = "<VIEW SHEET #>";
-        public const string ViewSheetName = "<VIEW SHEET NAME>";
-        public const string ParentSheetNumber = "<PARENT SHEET #>";
-        public const string ParentSheetName = "<PARENT SHEET NAME>";
-        public const string Delim = "<DELIM>";
-        public const string Scale = "<SCALE>";
+        public const string ViewName = "ViewName";
+        public const string ViewSheetNumber = "ViewSheetNumber";
+        public const string ViewSheetName = "ViewSheetName";
+        public const string ParentSheetNumber = "ParentSheetNumber";
+        public const string ParentSheetName = "ParentSheetName";
+        public const string CalloutStyle = "CalloutStyle";
+        public const string ViewLabelStyle = "ViewLabelStyle";
+        public const string LabelText = "LabelText";
     }
 }

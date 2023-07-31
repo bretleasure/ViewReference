@@ -5,6 +5,7 @@ using System.Runtime.InteropServices;
 using Inventor;
 using Microsoft.Win32;
 using System.Windows.Forms;
+using ViewReference.Buttons;
 
 namespace ViewReference
 {
@@ -47,15 +48,12 @@ namespace ViewReference
 
             try
             {
-                //Make sure Icons are marked as Embedded Resource in the properties
-
-                var createUpdateButton = new CreateReferencesButton();
-                var removeButton = new RemoveReferencesButton();
-                var configureButton = new ConfigureButton();
-
-
                 if (firstTime)
                 {
+                    var createButton = new CreateReferencesButton();
+                    var removeButton = new RemoveReferencesButton();
+                    var configButton = new ConfigureButton();
+
                     UserInterfaceManager uiMan = AddinGlobal.InventorApp.UserInterfaceManager;
 
                     if (uiMan.InterfaceStyle == InterfaceStyleEnum.kRibbonInterface)
@@ -66,9 +64,9 @@ namespace ViewReference
                         RibbonPanel panel = tab.RibbonPanels.Add("View Reference", "vr_Panel", Guid.NewGuid().ToString());
                         CommandControls controls = panel.CommandControls;
 
-                        controls.AddButton(createUpdateButton.Definition, true, true);
+                        controls.AddButton(createButton.Definition, true, true);
                         controls.AddButton(removeButton.Definition, true, true);
-                        controls.AddButton(configureButton.Definition, false, true);
+                        controls.AddButton(configButton.Definition, false, true);
 
                     }
                 }
@@ -76,7 +74,7 @@ namespace ViewReference
             catch (Exception ex)
             {
                 //AddinGlobal.Logger.LogInformation(ex, "Could not load addin");
-                MessageBox.Show("Could not load the View Reference Addin. Check log file for details");
+                MessageBox.Show("Could not load the View Reference Addin.");
             }
 
 

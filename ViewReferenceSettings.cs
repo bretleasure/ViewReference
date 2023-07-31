@@ -21,11 +21,11 @@ namespace ViewReference
 
         public static ViewReferenceSettings Default => new ViewReferenceSettings
         {
-            CalloutStyle = $"{AttributeNames.ViewName} ({AttributeNames.ViewSheetNumber})",
-            DetailLabelStyle = $"{AttributeNames.ViewName} ({AttributeNames.ParentSheetNumber})",
-            SectionLabelStyle = $"{AttributeNames.ViewName}-{AttributeNames.ViewName} ({AttributeNames.ParentSheetNumber})",
-            AuxLabelStyle = $"{AttributeNames.ViewName} ({AttributeNames.ParentSheetNumber})",
-            ProjectedLabelStyle = $"{AttributeNames.ViewName} ({AttributeNames.ParentSheetNumber})",
+            CalloutStyle = $"{AttributeTags.ViewName} ({AttributeTags.ViewSheetNumber})",
+            DetailLabelStyle = $"{AttributeTags.ViewName} ({AttributeTags.ParentSheetNumber})",
+            SectionLabelStyle = $"{AttributeTags.ViewName}-{AttributeTags.ViewName} ({AttributeTags.ParentSheetNumber})",
+            AuxLabelStyle = $"{AttributeTags.ViewName} ({AttributeTags.ParentSheetNumber})",
+            ProjectedLabelStyle = $"{AttributeTags.ViewName} ({AttributeTags.ParentSheetNumber})",
             DetailView = true,
             SectionView = true,
             AuxView = false,

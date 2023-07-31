@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Inventor;
+using ViewReference.Extensions;
 
 namespace ViewReference
 {
@@ -31,15 +32,15 @@ namespace ViewReference
                 {
                     AttributeSet oAttribSet = view.AttributeSets[AddinGlobal.AttributeSetName];
                     View = view;
-                    ViewName = oAttribSet["ViewName"].Value.ToString();
-                    ViewSheetName = oAttribSet["ViewSheetName"].Value.ToString();
-                    ViewSheetNumber = oAttribSet["ViewSheetNumber"].Value.ToString();
-                    ParentSheetName = oAttribSet["ParentSheetName"].Value.ToString();
-                    ParentSheetNumber = oAttribSet["ParentSheetName"].Value.ToString();
+                    ViewName = oAttribSet[AttributeNames.ViewName].Value.ToString();
+                    ViewSheetName = oAttribSet[AttributeNames.ViewSheetName].Value.ToString();
+                    ViewSheetNumber = oAttribSet[AttributeNames.ViewSheetNumber].Value.ToString();
+                    ParentSheetName = oAttribSet[AttributeNames.ParentSheetName].Value.ToString();
+                    ParentSheetNumber = oAttribSet[AttributeNames.ParentSheetName].Value.ToString();
 
-                    CalloutStyle = oAttribSet["CalloutStyle"].Value.ToString();
-                    ViewLabelStyle = oAttribSet["ViewLabelStyle"].Value.ToString();
-                    LabelText = oAttribSet["LabelText"].Value.ToString();
+                    CalloutStyle = oAttribSet[AttributeNames.CalloutStyle].Value.ToString();
+                    ViewLabelStyle = oAttribSet[AttributeNames.ViewLabelStyle].Value.ToString();
+                    LabelText = oAttribSet[AttributeNames.LabelText].Value.ToString();
                     Valid = true;
                 }
                 catch (Exception ex)
@@ -93,13 +94,13 @@ namespace ViewReference
         /// <returns></returns>
         string ReplaceAttributesWithValues(string startString)
         {
-            return startString.Replace(AttributeNames.ViewName, ViewName)
-                .Replace(AttributeNames.ViewSheetNumber, ViewSheetNumber)
-                .Replace(AttributeNames.ViewSheetName, ViewSheetName)
-                .Replace(AttributeNames.ParentSheetNumber, ParentSheetNumber)
-                .Replace(AttributeNames.ParentSheetName, ParentSheetName)
-                .Replace(AttributeNames.Delim, "<Delimiter/>")
-                .Replace(AttributeNames.Scale, "<DrawingViewScale/>");
+            return startString.Replace(AttributeTags.ViewName, ViewName)
+                .Replace(AttributeTags.ViewSheetNumber, ViewSheetNumber)
+                .Replace(AttributeTags.ViewSheetName, ViewSheetName)
+                .Replace(AttributeTags.ParentSheetNumber, ParentSheetNumber)
+                .Replace(AttributeTags.ParentSheetName, ParentSheetName)
+                .Replace(AttributeTags.Delim, "<Delimiter/>")
+                .Replace(AttributeTags.Scale, "<DrawingViewScale/>");
         }
 
         #endregion

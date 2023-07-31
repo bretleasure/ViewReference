@@ -2,7 +2,7 @@
   "profiles": {
     "ViewReference": {
       "commandName": "Executable",
-      "executablePath": "C:\\Program Files\\Autodesk\\Inventor 2022\\Bin\\Inventor.exe"
+      "executablePath": "C:\\Program Files\\Autodesk\\Inventor 2023\\Bin\\Inventor.exe"
     }
   }
 }
