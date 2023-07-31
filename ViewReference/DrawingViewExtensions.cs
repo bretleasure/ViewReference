@@ -4,8 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Inventor;
-using RemoveOldViewReferences;
-using RemoveOldViewReferences.RemoveOldViewReferences;
 
 namespace ViewReference
 {
@@ -65,7 +63,7 @@ namespace ViewReference
 
             try
             {
-                if (iView != null && iView.Valid)
+                if (iView.Valid)
                 {
                     //Skip if references dont exist in the view label
                     //Can happen if labels were manually edited to remove the references
@@ -77,28 +75,6 @@ namespace ViewReference
                         view.Name = iView.ViewName;
                         view.Label.FormattedText = iView.LabelText;
                     }
-                    else
-                    {
-                        //AddinGlobal.Logger.LogInformation($"{oView.Name} does not contain any references to remove.");
-                    }
-                }
-                else
-                {
-                    if (view.OldReferencesExist())
-                    {
-                        //AddinGlobal.Logger.LogInformation($"View {oView.Name} contains old references. Resetting view now");
-
-                        //Remove Old References
-                        ViewRef_Remove OldVR = new ViewRef_Remove();
-                        OldVR.Remove_ViewRefs(AddinGlobal.InventorApp);
-
-                        //Remove Old ViewReference Attribute Set
-                        if (view.AttributeSets.NameIsUsed["ViewReference"])
-                            view.AttributeSets["ViewReference"].Delete();
-                    }
-
-                    //References were never added, or they were added as the original app
-
                 }
             }
             finally
@@ -106,26 +82,6 @@ namespace ViewReference
                 view.ClearViewAttributes();
             }
 
-        }
-
-        public static bool OldReferencesExist(this DrawingView view)
-        {
-            if (view.AttributeSets.NameIsUsed["ViewReference"])
-                return true;
-            else
-            {
-                if (!view.Label.FormattedText.Contains("<DrawingViewName/>"))
-                {
-                    //Original References Exist
-                    return true;
-                }
-                else
-                {
-                    //No References Exist
-                    return false;
-                }
-
-            }
         }
 
         public static void CreateViewReferences(this DrawingView view, string labelStyle)

@@ -4,11 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Inventor;
-using iAD.Utilities;
 using Path = System.IO.Path;
 using System.Reflection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace ViewReference
 {

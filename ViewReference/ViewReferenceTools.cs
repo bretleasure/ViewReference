@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Inventor;
-using RemoveOldViewReferences.RemoveOldViewReferences;
 using Newtonsoft.Json;
 using File = System.IO.File;
 
@@ -36,12 +35,10 @@ namespace ViewReference
             {
                 if (AddinGlobal.Settings.UpdateBeforeSave)
                 {
-                    //AddinGlobal.Logger.LogInformation("Adding update View References to run before save");
                     AddinGlobal.InventorApp.ApplicationEvents.OnSaveDocument += ApplicationEvents_OnSaveDocument;
                 }
                 else
                 {
-                    //AddinGlobal.Logger.LogInformation("Removing update View References to run before save");
                     AddinGlobal.InventorApp.ApplicationEvents.OnSaveDocument -= ApplicationEvents_OnSaveDocument;
                 }
             }

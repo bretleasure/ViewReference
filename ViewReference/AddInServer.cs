@@ -5,8 +5,6 @@ using System.Runtime.InteropServices;
 using Inventor;
 using Microsoft.Win32;
 using System.Windows.Forms;
-using iAD.Utilities;
-using Microsoft.Extensions.Logging;
 
 namespace ViewReference
 {
@@ -38,12 +36,6 @@ namespace ViewReference
             AddinGlobal.InventorApp = addInSiteObject.Application;
 
             AddinGlobal.Automation = new ViewReferenceAutomation();
-
-            //if (!LicTools.CheckForValidUser(AddinGlobal.InventorApp, "View Reference", AddinGlobal.AppId))
-            //{
-            //    AddinGlobal.Logger.LogWarning("Invalid License");
-            //    return;
-            //}
             
             //Get User Settings
 
@@ -55,8 +47,6 @@ namespace ViewReference
 
             try
             {
-                //AddinGlobal.Logger.LogInformation("Creating Ribbon Buttons");
-
                 //Make sure Icons are marked as Embedded Resource in the properties
 
                 var createUpdateButton = new CreateReferencesButton();
