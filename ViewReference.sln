@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33424.131
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ViewReference", "ViewReference\ViewReference.csproj", "{AAD472AA-862D-4732-8121-C98E3216E9EE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ViewReference", "ViewReference.csproj", "{AAD472AA-862D-4732-8121-C98E3216E9EE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
