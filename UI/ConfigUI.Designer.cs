@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConfigUI));
             this.btn_ViewName = new System.Windows.Forms.Button();
             this.btn_ViewSheetNumber = new System.Windows.Forms.Button();
             this.btn_ViewSheetName = new System.Windows.Forms.Button();
@@ -485,8 +484,7 @@
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(203, 39);
             this.label11.TabIndex = 34;
-            this.label11.Text = "*LABEL MAY NOT INCLUDE \"DETAIL\"\r\nOR \"SECTION\" DEPENDING ON YOUR\r\nVIEW ANNOTATION " +
-    "STYLE";
+            this.label11.Text = "*LABEL MAY NOT INCLUDE \"DETAIL\"\r\nOR \"SECTION\" DEPENDING ON YOUR\r\nVIEW ANNOTATION " + "STYLE";
             // 
             // label12
             // 
@@ -494,11 +492,9 @@
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label12.Location = new System.Drawing.Point(13, 14);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(648, 32);
+            this.label12.Size = new System.Drawing.Size(649, 32);
             this.label12.TabIndex = 34;
-            this.label12.Text = "Configure View Reference by selecting view types to include references and either" +
-    " choosing a preset style or\r\nbuilding your own by using the Attribute Buttons on" +
-    " the left.";
+            this.label12.Text = "Configure View Reference by selecting view types to include references and either" + " choosing a preset style or\r\nbuilding your own by using the Attribute Buttons on" + " the left.";
             // 
             // panel2
             // 
@@ -585,7 +581,6 @@
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label7);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ConfigUI";
@@ -608,7 +603,6 @@
             this.panel3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion
