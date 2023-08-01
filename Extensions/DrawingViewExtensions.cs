@@ -54,7 +54,7 @@ namespace ViewReference.Extensions
             }
             catch (Exception ex)
             {
-                //AddinGlobal.Logger.LogError(ex, $"Failed to add references to view {oView.Name}");
+                
             }
         }
 

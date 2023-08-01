@@ -73,7 +73,6 @@ namespace ViewReference
             }
             catch (Exception ex)
             {
-                //AddinGlobal.Logger.LogInformation(ex, "Could not load addin");
                 MessageBox.Show("Could not load the View Reference Addin.");
             }
 

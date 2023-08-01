@@ -43,7 +43,7 @@ namespace ViewReference
                     LabelText = oAttribSet[AttributeNames.LabelText].Value.ToString();
                     Valid = true;
                 }
-                catch (Exception ex)
+                catch
                 {
                     Valid = false;
                 }
