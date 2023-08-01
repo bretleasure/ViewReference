@@ -10,8 +10,8 @@ namespace ViewReference
 {
     public class ViewReferenceAutomation : AddInAutomation
     {
-        public Task CreateReferences() => CreateReferences(ViewReferenceSettings.Default);
-        public Task CreateReferences(ViewReferenceSettings settings)
+        public Task CreateReferences(DrawingDocument dwgDoc) => CreateReferences(ViewReferenceSettings.Default, dwgDoc);
+        public Task CreateReferences(ViewReferenceSettings settings, DrawingDocument dwgDoc)
         {
             if (settings == null)
             {
@@ -20,37 +20,34 @@ namespace ViewReference
             
             try
             {
-                if (AddinGlobal.InventorApp.ActiveDocument is DrawingDocument dwgDoc)
+                foreach (var view in dwgDoc.AllDrawingViews())
                 {
-                    foreach (var view in dwgDoc.AllDrawingViews())
+                    switch (view.ViewType)
                     {
-                        switch (view.ViewType)
-                        {
-                            case DrawingViewTypeEnum.kDetailDrawingViewType:
-                                if (settings.DetailView)
-                                {
-                                    view.AddReferencesToView(settings.DetailLabelStyle);
-                                }
-                                break;
-                            case DrawingViewTypeEnum.kSectionDrawingViewType:
-                                if (settings.SectionView)
-                                {
-                                    view.AddReferencesToView(settings.SectionLabelStyle);
-                                }
-                                break;
-                            case DrawingViewTypeEnum.kAuxiliaryDrawingViewType:
-                                if (settings.AuxView)
-                                {
-                                    view.AddReferencesToView(settings.AuxLabelStyle);
-                                }
-                                break;
-                            case DrawingViewTypeEnum.kProjectedDrawingViewType:
-                                if (settings.ProjectedView)
-                                {
-                                    view.AddReferencesToView(settings.ProjectedLabelStyle);
-                                }
-                                break;
-                        }
+                        case DrawingViewTypeEnum.kDetailDrawingViewType:
+                            if (settings.DetailView)
+                            {
+                                view.AddReferencesToView(settings.DetailLabelStyle);
+                            }
+                            break;
+                        case DrawingViewTypeEnum.kSectionDrawingViewType:
+                            if (settings.SectionView)
+                            {
+                                view.AddReferencesToView(settings.SectionLabelStyle);
+                            }
+                            break;
+                        case DrawingViewTypeEnum.kAuxiliaryDrawingViewType:
+                            if (settings.AuxView)
+                            {
+                                view.AddReferencesToView(settings.AuxLabelStyle);
+                            }
+                            break;
+                        case DrawingViewTypeEnum.kProjectedDrawingViewType:
+                            if (settings.ProjectedView)
+                            {
+                                view.AddReferencesToView(settings.ProjectedLabelStyle);
+                            }
+                            break;
                     }
                 }
             }
@@ -62,14 +59,11 @@ namespace ViewReference
             return Task.CompletedTask;
         }
 
-        public Task RemoveReferences()
+        public Task RemoveReferences(DrawingDocument dwgDoc)
         {
-            if (AddinGlobal.InventorApp.ActiveDocument is DrawingDocument dwgDoc)
+            foreach (var view in dwgDoc.AllDrawingViews())
             {
-                foreach (var view in dwgDoc.AllDrawingViews())
-                {
-                    view.ResetView(new InvView(view));
-                }
+                view.ResetView(new InvView(view));
             }
 
             return Task.CompletedTask;

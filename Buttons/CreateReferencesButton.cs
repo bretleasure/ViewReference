@@ -10,19 +10,22 @@ namespace ViewReference.Buttons
     {
         public override void Execute(NameValueMap context)
         {
-            var task = AddinGlobal.Automation.CreateReferences(AddinGlobal.Settings);
-            if (task.Status == TaskStatus.Faulted)
+            if (AddinGlobal.InventorApp.ActiveDocument is DrawingDocument dwgDoc)
             {
-                if (task.Exception is NotConfiguredException)
+                var task = AddinGlobal.Automation.CreateReferences(AddinGlobal.Settings, dwgDoc);
+                if (task.Status == TaskStatus.Faulted)
                 {
-                    DialogResult response = MessageBox.Show("You have not configured View Reference. Configure now?", "Configure View Reference", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk);
+                    if (task.Exception is NotConfiguredException)
+                    {
+                        DialogResult response = MessageBox.Show("You have not configured View Reference. Configure now?", "Configure View Reference", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk);
 
-                    if (response == DialogResult.Yes)
-                        AddinGlobal.ShowConfigForm();
-                }
-                else if (task.Exception is AddingViewReferencesException ex)
-                {
-                    MessageBox.Show(ex.Message, "View Reference");
+                        if (response == DialogResult.Yes)
+                            AddinGlobal.ShowConfigForm();
+                    }
+                    else if (task.Exception is AddingViewReferencesException ex)
+                    {
+                        MessageBox.Show(ex.Message, "View Reference");
+                    }
                 }
             }
         }

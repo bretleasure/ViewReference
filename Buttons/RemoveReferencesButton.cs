@@ -4,7 +4,13 @@ namespace ViewReference.Buttons
 {
     public class RemoveReferencesButton : InventorButton
     {
-        public override void Execute(NameValueMap context) => AddinGlobal.Automation.RemoveReferences();
+        public override void Execute(NameValueMap context)
+        {
+            if (AddinGlobal.InventorApp.ActiveDocument is DrawingDocument dwgDoc)
+            {
+                AddinGlobal.Automation.RemoveReferences(dwgDoc);
+            }
+        }
 
         public override string GetButtonName() => "Remove";
 
