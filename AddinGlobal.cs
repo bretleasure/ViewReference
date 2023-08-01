@@ -10,15 +10,13 @@ using ViewReference.UI;
 
 namespace ViewReference
 {
-    public static class AddinGlobal
+    internal static class AddinGlobal
     {
         public static Inventor.Application InventorApp { get; set; }
 
         public static string SettingsFilePath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "appsettings.json");
 
-        public static string AppId { get; } = "5865579890990954428";
-
-        public static ViewReferenceSettings Settings { get; set; }
+        public static ViewReferenceAddinSettings Settings { get; set; }
 
         public static ViewReferenceAutomation Automation { get; set; }
 

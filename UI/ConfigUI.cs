@@ -105,20 +105,24 @@ namespace ViewReference.UI
             if (!ValidateParameters())
                 return;
 
-            AddinGlobal.Settings = new ViewReferenceSettings
+            var viewReferenceSettings = new ViewReferenceSettings
             {
                 CalloutStyle = txb_CalloutStyle.Text,
-                DetailLabelStyle = txb_DetailStyle.Text,
-                SectionLabelStyle = txb_SectionStyle.Text,
-                AuxLabelStyle = txb_AuxStyle.Text,
-                ProjectedLabelStyle = txb_ProjectedStyle.Text,
+                DetailViewLabelStyle = txb_DetailStyle.Text,
+                SectionViewLabelStyle = txb_SectionStyle.Text,
+                AuxiliaryViewLabelStyle = txb_AuxStyle.Text,
+                ProjectedViewLabelStyle = txb_ProjectedStyle.Text,
+                AddReferencesToDetailViews = ckb_Detail.Checked,
+                AddReferencesToSectionViews = ckb_Section.Checked,
+                AddReferencesToAuxiliaryViews = ckb_Aux.Checked,
+                AddReferencesToProjectedViews = ckb_Projected.Checked,
+            };
 
-                DetailView = ckb_Detail.Checked,
-                SectionView = ckb_Section.Checked,
-                AuxView = ckb_Aux.Checked,
-                ProjectedView = ckb_Projected.Checked,
-                UpdateBeforeSave = ckb_UpdateBeforeSave.Checked
-        };
+            AddinGlobal.Settings = new ViewReferenceAddinSettings
+            {
+                UpdateBeforeSave = ckb_UpdateBeforeSave.Checked,
+                ViewReferenceSettings = viewReferenceSettings
+            };
 
             //Save object to XML
             ViewReferenceTools.SaveSettings();
@@ -144,16 +148,17 @@ namespace ViewReference.UI
         {
             if (AddinGlobal.Settings != null)
             {
-                txb_CalloutStyle.Text = AddinGlobal.Settings.CalloutStyle;
-                txb_DetailStyle.Text = AddinGlobal.Settings.DetailLabelStyle;
-                txb_SectionStyle.Text = AddinGlobal.Settings.SectionLabelStyle;
-                txb_AuxStyle.Text = AddinGlobal.Settings.AuxLabelStyle;
-                txb_ProjectedStyle.Text = AddinGlobal.Settings.ProjectedLabelStyle;
+                var viewReferenceSettings = AddinGlobal.Settings.ViewReferenceSettings;
+                txb_CalloutStyle.Text = viewReferenceSettings.CalloutStyle;
+                txb_DetailStyle.Text = viewReferenceSettings.DetailViewLabelStyle;
+                txb_SectionStyle.Text = viewReferenceSettings.SectionViewLabelStyle;
+                txb_AuxStyle.Text = viewReferenceSettings.AuxiliaryViewLabelStyle;
+                txb_ProjectedStyle.Text = viewReferenceSettings.ProjectedViewLabelStyle;
 
-                ckb_Detail.Checked = AddinGlobal.Settings.DetailView;
-                ckb_Section.Checked = AddinGlobal.Settings.SectionView;
-                ckb_Aux.Checked = AddinGlobal.Settings.AuxView;
-                ckb_Projected.Checked = AddinGlobal.Settings.ProjectedView;
+                ckb_Detail.Checked = viewReferenceSettings.AddReferencesToDetailViews;
+                ckb_Section.Checked = viewReferenceSettings.AddReferencesToSectionViews;
+                ckb_Aux.Checked = viewReferenceSettings.AddReferencesToAuxiliaryViews;
+                ckb_Projected.Checked = viewReferenceSettings.AddReferencesToProjectedViews;
 
 				ckb_UpdateBeforeSave.Checked = AddinGlobal.Settings.UpdateBeforeSave;
             }            

@@ -2,7 +2,7 @@
 
 namespace ViewReference.Buttons
 {
-    public class ConfigureButton : InventorButton
+    internal class ConfigureButton : InventorButton
     {
         public override void Execute(NameValueMap context) => AddinGlobal.ShowConfigForm();
 

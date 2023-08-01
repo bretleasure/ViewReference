@@ -7,14 +7,14 @@ using Inventor;
 
 namespace ViewReference.Extensions
 {
-    public static class SheetExtensions
+    internal static class SheetExtensions
     {
-        public static string GetSheetName(this Sheet sheet)
+        internal static string GetSheetName(this Sheet sheet)
         {
             return sheet.Name.Split(':').First();
         }
 
-        public static string GetSheetNumber(this Sheet sheet)
+        internal static string GetSheetNumber(this Sheet sheet)
         {
             return sheet.Name.Split(':').Last();
         }

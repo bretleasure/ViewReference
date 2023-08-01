@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ViewReference
 {
-    public class AttributeNames
+    internal class AttributeNames
     {
         public const string ViewName = "ViewName";
         public const string ViewSheetNumber = "ViewSheetNumber";

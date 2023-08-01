@@ -6,23 +6,24 @@ using ViewReference.Exceptions;
 
 namespace ViewReference.Buttons
 {
-    public class CreateReferencesButton : InventorButton
+    internal class CreateReferencesButton : InventorButton
     {
         public override void Execute(NameValueMap context)
         {
             if (AddinGlobal.InventorApp.ActiveDocument is DrawingDocument dwgDoc)
             {
-                var task = AddinGlobal.Automation.CreateReferences(AddinGlobal.Settings, dwgDoc);
+                var task = AddinGlobal.Automation.CreateReferences(AddinGlobal.Settings.ViewReferenceSettings, dwgDoc);
+
                 if (task.Status == TaskStatus.Faulted)
                 {
-                    if (task.Exception is NotConfiguredException)
+                    if (task.Exception?.InnerException is NotConfiguredException)
                     {
                         DialogResult response = MessageBox.Show("You have not configured View Reference. Configure now?", "Configure View Reference", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk);
 
                         if (response == DialogResult.Yes)
                             AddinGlobal.ShowConfigForm();
                     }
-                    else if (task.Exception is AddingViewReferencesException ex)
+                    else if (task.Exception?.InnerException is AddingViewReferencesException ex)
                     {
                         MessageBox.Show(ex.Message, "View Reference");
                     }

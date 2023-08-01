@@ -7,9 +7,9 @@ using Inventor;
 
 namespace ViewReference.Extensions
 {
-    public static class AttributeSetExtensions
+    internal static class AttributeSetExtensions
     {
-        public static void AssignAttributeValue(this AttributeSet attribSet, string attributeName, string attributeValue)
+        internal static void AssignAttributeValue(this AttributeSet attribSet, string attributeName, string attributeValue)
         {
             if (attribSet.NameIsUsed[attributeName])
             {

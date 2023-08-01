@@ -8,29 +8,33 @@ using File = System.IO.File;
 
 namespace ViewReference
 {
-    public static class ViewReferenceTools
+    internal static class ViewReferenceTools
     {
-        public static void GetSavedSettings()
+        internal static void GetSavedSettings()
         {
             if (System.IO.File.Exists(AddinGlobal.SettingsFilePath))
             {
                 var settingsJson = File.ReadAllText(AddinGlobal.SettingsFilePath);
-                AddinGlobal.Settings = JsonConvert.DeserializeObject<ViewReferenceSettings>(settingsJson);
+                AddinGlobal.Settings = JsonConvert.DeserializeObject<ViewReferenceAddinSettings>(settingsJson);
             }
 			else
-			{
-                AddinGlobal.Settings = ViewReferenceSettings.Default;
+            {
+                AddinGlobal.Settings = new ViewReferenceAddinSettings
+                {
+                    ViewReferenceSettings = ViewReferenceSettings.Default,
+                    UpdateBeforeSave = false
+                };
                 SaveSettings();
 			}
         }
 
-        public static void SaveSettings()
+        internal static void SaveSettings()
         {
             var json = JsonConvert.SerializeObject(AddinGlobal.Settings);
             File.WriteAllText(AddinGlobal.SettingsFilePath, json);
         }   
         
-        public static void CreateUpdateEventListener()
+        internal static void CreateUpdateEventListener()
         {
             if (AddinGlobal.Settings != null)
             {
@@ -43,7 +47,6 @@ namespace ViewReference
                     AddinGlobal.InventorApp.ApplicationEvents.OnSaveDocument -= ApplicationEvents_OnSaveDocument;
                 }
             }
-            
         }
 
         private static void ApplicationEvents_OnSaveDocument(_Document documentObject, EventTimingEnum beforeOrAfter, NameValueMap context, out HandlingCodeEnum handlingCode)
@@ -52,9 +55,9 @@ namespace ViewReference
             {
                 if (documentObject is DrawingDocument dwgDoc)
                 {
-                    if (!dwgDoc.ViewReferencesExistInDocument())
+                    if (dwgDoc.ViewReferencesExistInDocument())
                     {
-                        AddinGlobal.Automation.CreateReferences(AddinGlobal.Settings, dwgDoc);
+                        AddinGlobal.Automation.CreateReferences(AddinGlobal.Settings.ViewReferenceSettings, dwgDoc);
                     }
                 }
             }
@@ -67,7 +70,7 @@ namespace ViewReference
         /// </summary>
         /// <param name="labelText"></param>
         /// <returns></returns>
-        public static string GetViewCalloutTextFromLabelText(this string labelText)
+        internal static string GetViewCalloutTextFromLabelText(this string labelText)
         {
             //DETAIL <DrawingViewName/> 
 

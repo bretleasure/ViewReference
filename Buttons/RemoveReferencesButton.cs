@@ -2,7 +2,7 @@
 
 namespace ViewReference.Buttons
 {
-    public class RemoveReferencesButton : InventorButton
+    internal class RemoveReferencesButton : InventorButton
     {
         public override void Execute(NameValueMap context)
         {

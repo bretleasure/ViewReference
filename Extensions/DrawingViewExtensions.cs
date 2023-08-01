@@ -7,14 +7,38 @@ using Inventor;
 
 namespace ViewReference.Extensions
 {
-    public static class DrawingViewExtensions
+    internal static class DrawingViewExtensions
     {
-        public static bool ViewHasReferences(this DrawingView view)
+        internal static bool ViewHasReferences(this DrawingView view)
         {
             return view.AttributeSets.NameIsUsed[AddinGlobal.AttributeSetName];
         }
 
-        public static void SaveAttributesToView(this DrawingView dwgView, InvView iView)
+        internal static bool GetAddReferences(this DrawingView view, ViewReferenceSettings settings)
+        {
+            return view.ViewType switch
+            {
+                DrawingViewTypeEnum.kDetailDrawingViewType => settings.AddReferencesToDetailViews,
+                DrawingViewTypeEnum.kSectionDrawingViewType => settings.AddReferencesToSectionViews,
+                DrawingViewTypeEnum.kAuxiliaryDrawingViewType => settings.AddReferencesToAuxiliaryViews,
+                DrawingViewTypeEnum.kProjectedDrawingViewType => settings.AddReferencesToProjectedViews,
+                _ => false
+            };
+        }
+
+        internal static string GetReferenceLabelStyle(this DrawingView view, ViewReferenceSettings settings)
+        {
+            return view.ViewType switch
+            {
+                DrawingViewTypeEnum.kDetailDrawingViewType => settings.DetailViewLabelStyle,
+                DrawingViewTypeEnum.kSectionDrawingViewType => settings.SectionViewLabelStyle,
+                DrawingViewTypeEnum.kAuxiliaryDrawingViewType => settings.AuxiliaryViewLabelStyle,
+                DrawingViewTypeEnum.kProjectedDrawingViewType => settings.ProjectedViewLabelStyle,
+                _ => string.Empty
+            };
+        }
+
+        internal static void SaveAttributesToView(this DrawingView dwgView, InvView iView)
         {
             //AddinGlobal.Logger.LogInformation($"Saving attributes to view");
 
@@ -36,31 +60,8 @@ namespace ViewReference.Extensions
 
         }
 
-        public static void AddReferencesToView(this DrawingView view, string labelStyle)
+        internal static void ResetView(this DrawingView view, InvView iView)
         {
-            try
-            {
-                if (view.ParentView != null)
-                {
-                    var currentRefs = new InvView(view);
-
-                    //Step 1 - Remove Current References if they Exist
-                    view.ResetView(currentRefs);
-
-                    //Step 2 - Create New References                    
-                    view.CreateViewReferences(labelStyle); ;
-                }
-
-            }
-            catch (Exception ex)
-            {
-                
-            }
-        }
-
-        public static void ResetView(this DrawingView view, InvView iView)
-        {
-
             try
             {
                 if (iView.Valid)
@@ -84,25 +85,11 @@ namespace ViewReference.Extensions
 
         }
 
-        public static void CreateViewReferences(this DrawingView view, string labelStyle)
-        {
-            var iView = new InvView(view, AddinGlobal.Settings.CalloutStyle, labelStyle);
-
-            //View Callout
-            view.Name = iView.ViewCalloutWithReferences;
-
-            //View Label
-            view.Label.FormattedText = iView.ViewLabelWithReferences;
-
-            //Save View Attributes
-            view.SaveAttributesToView(iView);
-        }
-
         /// <summary>
         /// Clears All attributes from View by Deleting ViewReference Attribute Set
         /// </summary>
         /// <param name="view"></param>
-        public static void ClearViewAttributes(this DrawingView view)
+        internal static void ClearViewAttributes(this DrawingView view)
         {
             //AddinGlobal.Logger.LogInformation($"Clearing attributes for view {oView.Name}");
 

@@ -8,7 +8,7 @@ using ViewReference.Extensions;
 
 namespace ViewReference
 {
-    public class InvView
+    internal class InvView
     {
         public InvView(DrawingView view, string calloutStyle, string viewLabelStyle)
         {
@@ -26,29 +26,22 @@ namespace ViewReference
         
 		public InvView(DrawingView view)
 		{
-            if (view.ViewHasReferences())
+            try
             {
-                try
-                {
-                    AttributeSet oAttribSet = view.AttributeSets[AddinGlobal.AttributeSetName];
-                    View = view;
-                    ViewName = oAttribSet[AttributeNames.ViewName].Value.ToString();
-                    ViewSheetName = oAttribSet[AttributeNames.ViewSheetName].Value.ToString();
-                    ViewSheetNumber = oAttribSet[AttributeNames.ViewSheetNumber].Value.ToString();
-                    ParentSheetName = oAttribSet[AttributeNames.ParentSheetName].Value.ToString();
-                    ParentSheetNumber = oAttribSet[AttributeNames.ParentSheetName].Value.ToString();
+                AttributeSet oAttribSet = view.AttributeSets[AddinGlobal.AttributeSetName];
+                View = view;
+                ViewName = oAttribSet[AttributeNames.ViewName].Value.ToString();
+                ViewSheetName = oAttribSet[AttributeNames.ViewSheetName].Value.ToString();
+                ViewSheetNumber = oAttribSet[AttributeNames.ViewSheetNumber].Value.ToString();
+                ParentSheetName = oAttribSet[AttributeNames.ParentSheetName].Value.ToString();
+                ParentSheetNumber = oAttribSet[AttributeNames.ParentSheetName].Value.ToString();
 
-                    CalloutStyle = oAttribSet[AttributeNames.CalloutStyle].Value.ToString();
-                    ViewLabelStyle = oAttribSet[AttributeNames.ViewLabelStyle].Value.ToString();
-                    LabelText = oAttribSet[AttributeNames.LabelText].Value.ToString();
-                    Valid = true;
-                }
-                catch
-                {
-                    Valid = false;
-                }
+                CalloutStyle = oAttribSet[AttributeNames.CalloutStyle].Value.ToString();
+                ViewLabelStyle = oAttribSet[AttributeNames.ViewLabelStyle].Value.ToString();
+                LabelText = oAttribSet[AttributeNames.LabelText].Value.ToString();
+                Valid = true;
             }
-            else
+            catch
             {
                 Valid = false;
             }

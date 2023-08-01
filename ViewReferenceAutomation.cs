@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -18,44 +19,43 @@ namespace ViewReference
                 return Task.FromException(new NotConfiguredException());
             }
             
-            try
+            var views = dwgDoc.AllDrawingViews()
+                .Where(v => v.ViewHasReferences() || v.GetAddReferences(settings));
+
+            foreach (var view in views)
             {
-                foreach (var view in dwgDoc.AllDrawingViews())
+                if (view.ParentView != null)
                 {
-                    switch (view.ViewType)
+                    //Step 1 - Remove Current References if they Exist
+                    if (view.ViewHasReferences())
                     {
-                        case DrawingViewTypeEnum.kDetailDrawingViewType:
-                            if (settings.DetailView)
-                            {
-                                view.AddReferencesToView(settings.DetailLabelStyle);
-                            }
-                            break;
-                        case DrawingViewTypeEnum.kSectionDrawingViewType:
-                            if (settings.SectionView)
-                            {
-                                view.AddReferencesToView(settings.SectionLabelStyle);
-                            }
-                            break;
-                        case DrawingViewTypeEnum.kAuxiliaryDrawingViewType:
-                            if (settings.AuxView)
-                            {
-                                view.AddReferencesToView(settings.AuxLabelStyle);
-                            }
-                            break;
-                        case DrawingViewTypeEnum.kProjectedDrawingViewType:
-                            if (settings.ProjectedView)
-                            {
-                                view.AddReferencesToView(settings.ProjectedLabelStyle);
-                            }
-                            break;
+                        view.ResetView(new InvView(view)); 
+                    }
+
+                    //Step 2 - Create New References
+                    if (view.GetAddReferences(settings))
+                    {
+                        try
+                        {
+                            var iView = new InvView(view, settings.CalloutStyle, view.GetReferenceLabelStyle(settings));
+
+                            //View Callout
+                            view.Name = iView.ViewCalloutWithReferences;
+
+                            //View Label
+                            view.Label.FormattedText = iView.ViewLabelWithReferences;
+
+                            //Save View Attributes
+                            view.SaveAttributesToView(iView);
+                        }
+                        catch (Exception ex)
+                        {
+                            return Task.FromException(new AddingViewReferencesException(ex));
+                        }
                     }
                 }
             }
-            catch (Exception ex)
-            {
-                return Task.FromException(new AddingViewReferencesException(ex));
-            }
-            
+
             return Task.CompletedTask;
         }
 

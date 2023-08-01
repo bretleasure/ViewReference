@@ -1,6 +1,6 @@
 ﻿namespace ViewReference
 {
-    public class AttributeTags
+    internal class AttributeTags
     {
         public const string ViewName = "<VIEW>";
         public const string ViewSheetNumber = "<VIEW SHEET #>";

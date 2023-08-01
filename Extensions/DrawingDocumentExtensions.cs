@@ -7,16 +7,16 @@ using Inventor;
 
 namespace ViewReference.Extensions
 {
-    public static class DrawingDocumentExtensions
+    internal static class DrawingDocumentExtensions
     {
-        public static List<DrawingView> AllDrawingViews(this DrawingDocument dwgDoc)
+        internal static List<DrawingView> AllDrawingViews(this DrawingDocument dwgDoc)
         {
             return dwgDoc.Sheets.Cast<Sheet>()
                 .SelectMany(sh => sh.DrawingViews.Cast<DrawingView>())
                 .ToList();
         }
 
-        public static bool ViewReferencesExistInDocument(this DrawingDocument dwgDoc)
+        internal static bool ViewReferencesExistInDocument(this DrawingDocument dwgDoc)
         {
             return dwgDoc.AllDrawingViews().Any(v => v.ViewHasReferences());
         }
