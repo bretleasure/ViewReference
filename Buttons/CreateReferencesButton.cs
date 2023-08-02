@@ -18,10 +18,8 @@ namespace ViewReference.Buttons
                 {
                     if (task.Exception?.InnerException is NotConfiguredException)
                     {
-                        DialogResult response = MessageBox.Show("You have not configured View Reference. Configure now?", "Configure View Reference", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk);
-
-                        if (response == DialogResult.Yes)
-                            AddinGlobal.ShowConfigForm();
+                        MessageBox.Show("You have not configured View Reference. Configure now?",
+                            "Configure View Reference", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk);
                     }
                     else if (task.Exception?.InnerException is AddingViewReferencesException ex)
                     {

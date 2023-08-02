@@ -21,11 +21,5 @@ namespace ViewReference
         public static ViewReferenceAutomation Automation { get; set; }
 
 		public static string AttributeSetName { get; } = "ViewReference-v4";
-        
-        public static void ShowConfigForm()
-        {
-            ConfigUI config = new ConfigUI();
-            config.ShowDialog();
-        }
     }
 }
