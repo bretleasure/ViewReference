@@ -22,51 +22,60 @@ namespace ViewReference
             var views = dwgDoc.AllDrawingViews()
                 .Where(v => v.ViewHasReferences() || v.ShouldAddReferences(settings));
 
-            foreach (var view in views)
+            var addRefsToViews = views
+                .Select(v => CreateReferences(v, settings));
+            
+            return Task.WhenAll(addRefsToViews);
+        }
+
+        public Task CreateReferences(DrawingView view, ViewReferenceSettings settings)
+        {
+            if (view.ParentView != null)
             {
-                if (view.ParentView != null)
+                //Step 1 - Remove Current References if they Exist
+                if (view.ViewHasReferences())
                 {
-                    //Step 1 - Remove Current References if they Exist
-                    if (view.ViewHasReferences())
+                    view.ResetView(new InvView(view));
+                }
+
+                //Step 2 - Create New References
+                if (view.ShouldAddReferences(settings))
+                {
+                    try
                     {
-                        view.ResetView(new InvView(view)); 
+                        var iView = new InvView(view, settings.CalloutStyle, view.GetReferenceLabelStyle(settings));
+
+                        //View Callout
+                        view.Name = iView.ViewCalloutWithReferences;
+
+                        //View Label
+                        view.Label.FormattedText = iView.ViewLabelWithReferences;
+
+                        //Save View Attributes
+                        view.SaveAttributesToView(iView);
                     }
-
-                    //Step 2 - Create New References
-                    if (view.ShouldAddReferences(settings))
+                    catch (Exception ex)
                     {
-                        try
-                        {
-                            var iView = new InvView(view, settings.CalloutStyle, view.GetReferenceLabelStyle(settings));
-
-                            //View Callout
-                            view.Name = iView.ViewCalloutWithReferences;
-
-                            //View Label
-                            view.Label.FormattedText = iView.ViewLabelWithReferences;
-
-                            //Save View Attributes
-                            view.SaveAttributesToView(iView);
-                        }
-                        catch (Exception ex)
-                        {
-                            return Task.FromException(new AddingViewReferencesException(ex));
-                        }
+                        return Task.FromException(new AddingViewReferencesException(view.Name, ex));
                     }
                 }
             }
-
+                
             return Task.CompletedTask;
         }
 
         public Task RemoveReferences(DrawingDocument dwgDoc)
         {
-            foreach (var view in dwgDoc.AllDrawingViews())
-            {
-                view.ResetView(new InvView(view));
-            }
+            var removeRefsFromViews = dwgDoc.AllDrawingViews()
+                .Where(v => v.ViewHasReferences())
+                .Select(RemoveReferences);
 
-            return Task.CompletedTask;
+            return Task.WhenAll(removeRefsFromViews);
+        }
+
+        public Task RemoveReferences(DrawingView view)
+        {
+            return Task.Run(() => view.ResetView(new InvView(view)));
         }
     }
 }

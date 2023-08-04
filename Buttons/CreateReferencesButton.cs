@@ -1,4 +1,6 @@
 ﻿using System;
+using System.CodeDom;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Inventor;
@@ -16,14 +18,21 @@ namespace ViewReference.Buttons
 
                 if (task.Status == TaskStatus.Faulted)
                 {
-                    if (task.Exception?.InnerException is NotConfiguredException)
+                    var exceptions = task.Exception.InnerExceptions;
+                    if (exceptions.Any(e => e is NotConfiguredException))
                     {
-                        MessageBox.Show("You have not configured View Reference. Configure now?",
-                            "Configure View Reference", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk);
+                        MessageBox.Show("You have not configured View Reference",
+                            "View Reference", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk);
                     }
-                    else if (task.Exception?.InnerException is AddingViewReferencesException ex)
+                    else if (exceptions.Any(e => e is AddingViewReferencesException))
                     {
-                        MessageBox.Show(ex.Message, "View Reference");
+                        var viewNames = exceptions.Where(e => e is AddingViewReferencesException)
+                            .Cast<AddingViewReferencesException>()
+                            .Select(e => e.ViewName);
+                        
+                        var viewNamesString = string.Join(System.Environment.NewLine, viewNames);
+                        var message = string.Join(System.Environment.NewLine, $"Adding View References Failed for views:{System.Environment.NewLine}", viewNamesString);
+                        MessageBox.Show(message, "View Reference", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
