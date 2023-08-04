@@ -12,7 +12,7 @@ namespace ViewReference.Buttons
         {
             if (AddinGlobal.InventorApp.ActiveDocument is DrawingDocument dwgDoc)
             {
-                var task = AddinGlobal.Automation.CreateReferences(AddinGlobal.Settings.ViewReferenceSettings, dwgDoc);
+                var task = AddinGlobal.Automation.CreateReferences(dwgDoc, AddinGlobal.Settings.ViewReferenceSettings);
 
                 if (task.Status == TaskStatus.Faulted)
                 {

@@ -57,7 +57,7 @@ namespace ViewReference
                 {
                     if (dwgDoc.ViewReferencesExistInDocument())
                     {
-                        AddinGlobal.Automation.CreateReferences(AddinGlobal.Settings.ViewReferenceSettings, dwgDoc);
+                        AddinGlobal.Automation.CreateReferences(dwgDoc, AddinGlobal.Settings.ViewReferenceSettings);
                     }
                 }
             }

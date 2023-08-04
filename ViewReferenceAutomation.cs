@@ -11,8 +11,8 @@ namespace ViewReference
 {
     public class ViewReferenceAutomation : AddInAutomation
     {
-        public Task CreateReferences(DrawingDocument dwgDoc) => CreateReferences(ViewReferenceSettings.Default, dwgDoc);
-        public Task CreateReferences(ViewReferenceSettings settings, DrawingDocument dwgDoc)
+        public Task CreateReferences(DrawingDocument dwgDoc) => CreateReferences(dwgDoc, ViewReferenceSettings.Default);
+        public Task CreateReferences(DrawingDocument dwgDoc, ViewReferenceSettings settings)
         {
             if (settings == null)
             {
