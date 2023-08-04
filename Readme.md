@@ -37,10 +37,7 @@ viewRefAddin.CreateReferences(dwgDoc);
 
 If using the addin in the Inventor UI, settings can be set by clicking the Configure button in the View Reference Ribbon Panel. If using the addin API customizations are made by passing in `ViewReferenceSettings` into the `CreateReferences` methods.
 
-> **_NOTE:_** 
->The API methods will not use the same settings that are set using addin's configure window.
-
-> !Info
+> [!IMPORTANT]
 > The API methods will not use the same settings that are set using addin's configure window.
 
 ### `ViewReferenceSettings`
