@@ -47,5 +47,5 @@ View callouts and view labels use attribute tags to define the styling that shou
 
 | Appears As | Styling String Text | Styling String Using Attribute Tags |
 | - | --- | --- |
-| B (2) | "<VIEW> (<VIEW SHEET #>)" | $"{AttributeTags.ViewName} ({AttributeTags.ViewSheetNumber})"
+| B (2) | "<VIEW> (<VIEW SHEET #>)" | $"{AttributeTags.ViewName} ({AttributeTags.ViewSheetNumber})" 
 | B (Sh. 2) | "<VIEW> (Sh. <VIEW SHEET #>)" | $"{AttributeTags.ViewName} (Sh. {AttributeTags.ViewSheetNumber})" |
