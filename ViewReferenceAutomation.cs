@@ -20,7 +20,7 @@ namespace ViewReference
             }
             
             var views = dwgDoc.AllDrawingViews()
-                .Where(v => v.ViewHasReferences() || v.GetAddReferences(settings));
+                .Where(v => v.ViewHasReferences() || v.ShouldAddReferences(settings));
 
             foreach (var view in views)
             {
@@ -33,7 +33,7 @@ namespace ViewReference
                     }
 
                     //Step 2 - Create New References
-                    if (view.GetAddReferences(settings))
+                    if (view.ShouldAddReferences(settings))
                     {
                         try
                         {

@@ -14,7 +14,7 @@ namespace ViewReference.Extensions
             return view.AttributeSets.NameIsUsed[AddinGlobal.AttributeSetName];
         }
 
-        internal static bool GetAddReferences(this DrawingView view, ViewReferenceSettings settings)
+        internal static bool ShouldAddReferences(this DrawingView view, ViewReferenceSettings settings)
         {
             return view.ViewType switch
             {
