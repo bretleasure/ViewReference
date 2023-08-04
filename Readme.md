@@ -33,13 +33,23 @@ var viewRefAddin = inventorApp.GetViewReferenceAddin();
 viewRefAddin.CreateReferences(dwgDoc);
 ```
 
+## Customization
+
+If using the addin in the Inventor UI, settings can be set by clicking the Configure button in the View Reference Ribbon Panel. If using the addin API customizations are made by passing in `ViewReferenceSettings` into the `CreateReferences` methods.
+
+> **_NOTE:_** 
+>The API methods will not use the same settings that are set using addin's configure window.
+
+> !Info
+> The API methods will not use the same settings that are set using addin's configure window.
+
 ### `ViewReferenceSettings`
 
 `CalloutStyle`, `DetailViewLabelStyle`, `SectionViewLabelStyle`, `ProjectedViewStyle`, and `AuxiliaryViewLabelStyle` 
 
 ### Styling
 
-View callouts and view labels use attribute tags to define the styling that should be used by the addin. The `AttributeTags` class contains all the possible tags that can be used.
+Callout and label styles can be customized in `ViewReferenceSettings`. Attribute tags are used as a template the addin will use to replace info. The `AttributeTags` class contains all the possible tags that can be used.
 
 #### Examples
 
@@ -47,5 +57,8 @@ View callouts and view labels use attribute tags to define the styling that shou
 
 | Appears As | Styling String Text | Styling String Using Attribute Tags |
 | - | --- | --- |
-| B (2) | "<VIEW> (<VIEW SHEET #>)" | $"{AttributeTags.ViewName} ({AttributeTags.ViewSheetNumber})" 
-| B (Sh. 2) | "<VIEW> (Sh. <VIEW SHEET #>)" | $"{AttributeTags.ViewName} (Sh. {AttributeTags.ViewSheetNumber})" |
+| B (2) | "&lt;VIEW&gt; (<VIEW SHEET #>)" | $"{AttributeTags.ViewName} ({AttributeTags.ViewSheetNumber})" 
+| B (Sh. 2) | "&lt;VIEW&gt; (Sh. <VIEW SHEET #>)" | $"{AttributeTags.ViewName} (Sh. {AttributeTags.ViewSheetNumber})" |
+
+#### View Label Styles
+
