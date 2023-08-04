@@ -1,32 +1,22 @@
-	How to Register/Unregister 
-	=======================
+# View Reference Add-in for Autodesk Inventor
 
-	1) Build Project;
+The View Reference add-in creates references between parent and dependent views in Autodesk Inventor drawings. Text is added to the view callout in the parent view and then view label of the dependent view. References can be added to Details Views, Section Views, Projected Views, and Auxiliary Views. 
 
-	2) Copy add-in dll file to one of following locations: 
-		a) Anywhere, then *.addin file <Assembly> setting should be updated to the full path including the dll name
-		b) Inventor <InstallPath>\bin\ folder, then *.addin file <Assembly> setting should be the dll name only: <AddInName>.dll
-		c) Inventor <InstallPath>\bin\XX folder, then *.addin file <Assembly> setting shoule be a relative path: XX\<AddInName>.dll
+## Usage
 
-	3) Copy.addin manifest file to one of following locations:
-		a) Inventor Version Dependent
-		Windows XP:
-			C:\Documents and Settings\All Users\Application Data\Autodesk\Inventor [version]\Addins\
-		Windows7/Vista:
-			C:\ProgramData\Autodesk\Inventor [version]\Addins\
+The addin can either be used via the commmand buttons added to the Inventor UI or by using the addins API with your own code. 
 
-		b) Inventor Version Independent
-		Windows XP:
-			C:\Documents and Settings\All Users\Application Data\Autodesk\Inventor Addins\
-		Windows7/Vista:
-			C:\ProgramData\Autodesk\Inventor Addins\
+## Installation
 
-		c) Per User Override
-		Windows XP:
-			C:\Documents and Settings\<user>\Application Data\Autodesk\Inventor [version]\Addins\
-		Windows7/Vista:
-			C:\Users\<user>\AppData\Roaming\Autodesk\Inventor [version]\Addins\
+## Using the API
 
-	4) Startup Inventor, the AddIn should be loaded
+To use the View Reference Add-in API the dll needs to be referenced. This can be done by either downloading the dll from the Releases or by adding the ViewReference NuGet package. The dll includes an extension method for Inventor.Aplication called `GetViewReferenceAddin()` that makes instantiating the `ViewReferenceAutomation` object easier. 
 
-	To unregister the AddIn, remove the Autodesk.<AddInName>.Inventor.addin from above mentioned .addin manifest file locations directly.
+`ViewReferenceAutomation` includes the following methods that can be used:
+
+* `CreateReferences(ViewReferenceSettings)`
+* `CreateReferences(DrawingDocument, ViewReferenceSettings)`
+* `CreateReferences(DrawingView, ViewReferenceSettings)'
+* 'RemoveReferences(DrawingDocument)`
+* 'RemoveReferences(DrawingView)'
+
