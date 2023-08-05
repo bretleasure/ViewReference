@@ -47,9 +47,9 @@ steps:
 - task: ArchiveFiles@2
   inputs:
     rootFolderOrFile: '$(Build.SourcesDirectory)\bin\Release\net472'
-    includeRootFolder: true
+    includeRootFolder: false
     archiveType: 'zip'
-    archiveFile: 'artifacts/addin/$(Build.DefinitionName)-$(Build.BuildNumber).zip'
+    archiveFile: 'artifacts/addin/$(Build.DefinitionName)Addin-v$(Build.BuildNumber).zip'
     replaceExistingArchive: true
 
 - task: PublishBuildArtifacts@1
