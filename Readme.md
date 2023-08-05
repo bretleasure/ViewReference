@@ -24,7 +24,7 @@ To use the View Reference Add-in API the dll needs to be referenced. This can be
 | `RemoveReferences(DrawingDocument)` | Removes references from all drawing views |
 | `RemoveReferences(DrawingView)` | Removes references from the one view |
 
-### .NET
+### C#
 ```csharp
 var dwgDoc = (DrawingDocument)inventorApp.Documents.Open(@"C:\Work\MyDrawing.idw");
 
