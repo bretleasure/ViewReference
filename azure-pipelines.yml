@@ -46,7 +46,7 @@ steps:
   displayName: 'Create NuGet Package'
   inputs:
     command: 'pack'
-    packagesToPack: 'src\**\*.csproj'
+    packagesToPack: '*.csproj'
     packDirectory: 'artifacts'
     versioningScheme: 'byEnvVar'
     versionEnvVar: 'GITVERSION_NuGetVersion'
