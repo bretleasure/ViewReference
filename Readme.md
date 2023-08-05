@@ -18,11 +18,11 @@ To use the View Reference Add-in API the dll needs to be referenced. This can be
 
 | Method Name | Description |
 | - | --- |
-| `CreateReferences(ViewReferenceSettings)` | Adds references to all drawing views using the default settings |
-| `CreateReferences(DrawingDocument, ViewReferenceSettings)` | Adds references to all drawing views using the provided settings |
-| `CreateReferences(DrawingView, ViewReferenceSettings)` | Adds references to the one view with the provided settings |
-| `RemoveReferences(DrawingDocument)` | Removes references from all drawing views |
-| `RemoveReferences(DrawingView)` | Removes references from the one view |
+| CreateReferences(`ViewReferenceSettings`) | Adds references to all drawing views using the default settings |
+| CreateReferences(`DrawingDocument`, `ViewReferenceSettings`) | Adds references to all drawing views using the provided settings |
+| CreateReferences(`DrawingView`, `ViewReferenceSettings`) | Adds references to the one view with the provided settings |
+| RemoveReferences(`DrawingDocument`) | Removes references from all drawing views |
+| RemoveReferences(`DrawingView`) | Removes references from the one view |
 
 ### C#
 ```csharp
@@ -36,7 +36,7 @@ viewRefAddin.CreateReferences(dwgDoc);
 ### iLogic
 ```vb
 AddReference "ViewReference"
-AddReference "C:\Work\lib\ViewReference.dll"
+AddReference "C:\Work\lib\ViewReference.dll" 'This path should match the location the .dll is saved in
 
 Imports ViewReference
 
@@ -46,12 +46,14 @@ viewRefAddin = ThisApplication.GetViewReferenceAddin()
 viewRefAddin.CreateReferences(ThisDoc.Document)
 ```
 
-## Customization
+## Configuration
 
-If using the addin in the Inventor UI, settings can be set by clicking the Configure button in the View Reference Ribbon Panel. If using the addin API customizations are made by passing in `ViewReferenceSettings` into the `CreateReferences` methods.
+If using the addin in the Inventor UI, settings can be set by clicking the Configure button in the View Reference Ribbon Panel. If using the addin API, customizations are made by passing in `ViewReferenceSettings` into the `CreateReferences` methods.
+
 
 > [!IMPORTANT]
 > The API methods will not use the same settings that are set using the addin's configure window.
+
 
 ### `ViewReferenceSettings`
 
@@ -82,7 +84,7 @@ Attribute tags are used to create templates for how the callouts and labels will
 
 ### Examples
 
-| Appears As | Template String | Template String Using Attribute Tags |
+| Appears As | Template String | Template String Using `AttributeTags` Properties |
 | - | --- | --- |
 | B (2) | "&lt;VIEW&gt; (<VIEW SHEET #>)" | $"{AttributeTags.ViewName} ({AttributeTags.ViewSheetNumber})" 
 | B (Sh. 2) | "&lt;VIEW&gt; (Sh. <VIEW SHEET #>)" | $"{AttributeTags.ViewName} (Sh. {AttributeTags.ViewSheetNumber})" |
