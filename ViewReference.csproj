@@ -4,6 +4,15 @@
     <TargetFramework>net472</TargetFramework>
     <GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
     <LangVersion>latest</LangVersion>
+    <Authors>Bret Leasure</Authors>
+    <Copyright>2023</Copyright>
+    <PackageTags>Autodesk Inventor CAD View References</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <RepositoryUrl>https://github.com/bretleasure/ViewReference</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <Description>View Reference addin for Autodesk Inventor</Description>
+    <PackageReadmeFile>Readme.md</PackageReadmeFile>
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="Resources\**" />
@@ -27,15 +36,25 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Autodesk.Inventor.Interop">
-      <HintPath>lib\Autodesk.Inventor.Interop.dll</HintPath>
-      <Private>false</Private>
+      <HintPath>..\..\lib\Autodesk.Inventor.Interop.dll</HintPath>
+      <PackagePath>lib\net472\</PackagePath>
+      <Pack>true</Pack>
     </Reference>
     <Reference Include="System.Windows.Forms" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\..\lib\Autodesk.iLogic.Interfaces.dll">
+      <PackagePath>lib\net472\</PackagePath>
+      <Pack>true</Pack>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Update="ViewReference.addin">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
   <PropertyGroup>
     <ApplicationIcon>ViewRef-Add.ico</ApplicationIcon>
