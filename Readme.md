@@ -4,7 +4,7 @@ The View Reference add-in creates references between parent and dependent views 
 
 ## Usage
 
-The addin can either be used via the commmand buttons added to the Inventor UI or by using the addins API with your own code. 
+The addin can either be used via the commmand buttons added to the Inventor UI or by using the API with your own code. 
 
 ## Installation
 
@@ -38,24 +38,38 @@ viewRefAddin.CreateReferences(dwgDoc);
 If using the addin in the Inventor UI, settings can be set by clicking the Configure button in the View Reference Ribbon Panel. If using the addin API customizations are made by passing in `ViewReferenceSettings` into the `CreateReferences` methods.
 
 > [!IMPORTANT]
-> The API methods will not use the same settings that are set using addin's configure window.
+> The API methods will not use the same settings that are set using the addin's configure window.
 
 ### `ViewReferenceSettings`
 
-`CalloutStyle`, `DetailViewLabelStyle`, `SectionViewLabelStyle`, `ProjectedViewStyle`, and `AuxiliaryViewLabelStyle` 
+| Setting | Type | Description |
+| - | --- | --- |
+| CalloutStyle | string | Style string template for the view callouts |
+| DetailViewLabelStyle | string | Style string template for detail view labels |
+| SectionViewLabelStyle | string | Style string template for section view labels |
+| ProjectedViewStyle | string | Style string template for projected view labels |
+| AuxiliaryViewLabelStyle | string | Style string template for auxiliary view labels |
+| AddReferencesToDetailViews | boolean | Whether references should be added to detail views |
+| AddReferencesToSectionViews | boolean | Whether references should be added to section views |
+| AddReferencesToProjectedViews | boolean | Whether references should be added to projected views |
+| AddReferencestoAuxiliaryViews | boolean | Whether references should be added to auxiliary views |
 
-### Styling
+## Styling
 
-Callout and label styles can be customized in `ViewReferenceSettings`. Attribute tags are used as a template the addin will use to replace info. The `AttributeTags` class contains all the possible tags that can be used.
+Attribute tags are used to create templates for how the callouts and labels will appear. The `AttributeTags` class contains all the possible tag strings.
+| Tag | Description |
+| - | --- |
+| &lt;VIEW&GT; | View Name |
+| &lt;VIEW SHEET #&gt; | Sheet number the view is located on |
+| &lt;VIEW SHEET NAME&gt; | Sheet name the view is located on |
+| &lt;PARENT SHEET #&gt; | Sheet number the parent view is located on (where the view callout is located) |
+| &lt;PARENT SHEET NAME&gt; | Sheet name the parent view is located on (where the view callout is located) |
+| &lt;DELIM&gt; | Delimeter (only available in view labels) |
+| &lt;SCALE&gt; | View Scale (only available in view labels) |
 
-#### Examples
+### Examples
 
-##### Callout Styles
-
-| Appears As | Styling String Text | Styling String Using Attribute Tags |
+| Appears As | Template String | Template String Using Attribute Tags |
 | - | --- | --- |
 | B (2) | "&lt;VIEW&gt; (<VIEW SHEET #>)" | $"{AttributeTags.ViewName} ({AttributeTags.ViewSheetNumber})" 
 | B (Sh. 2) | "&lt;VIEW&gt; (Sh. <VIEW SHEET #>)" | $"{AttributeTags.ViewName} (Sh. {AttributeTags.ViewSheetNumber})" |
-
-#### View Label Styles
-
