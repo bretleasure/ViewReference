@@ -36,17 +36,11 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Autodesk.Inventor.Interop">
-      <HintPath>..\..\lib\Autodesk.Inventor.Interop.dll</HintPath>
+      <HintPath>lib\Autodesk.Inventor.Interop.dll</HintPath>
       <PackagePath>lib\net472\</PackagePath>
       <Pack>true</Pack>
     </Reference>
     <Reference Include="System.Windows.Forms" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="..\..\lib\Autodesk.iLogic.Interfaces.dll">
-      <PackagePath>lib\net472\</PackagePath>
-      <Pack>true</Pack>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Update="ViewReference.addin">
@@ -54,7 +48,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
+    <None Include="Readme.md" Pack="true" PackagePath="\" />
   </ItemGroup>
   <PropertyGroup>
     <ApplicationIcon>ViewRef-Add.ico</ApplicationIcon>
