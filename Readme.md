@@ -24,13 +24,26 @@ To use the View Reference Add-in API the dll needs to be referenced. This can be
 | `RemoveReferences(DrawingDocument)` | Removes references from all drawing views |
 | `RemoveReferences(DrawingView)` | Removes references from the one view |
 
+### .NET
 ```csharp
 var dwgDoc = (DrawingDocument)inventorApp.Documents.Open(@"C:\Work\MyDrawing.idw");
 
 var viewRefAddin = inventorApp.GetViewReferenceAddin();
 
-//Uses Default ViewReferenceSettings
 viewRefAddin.CreateReferences(dwgDoc);
+```
+
+### iLogic
+```vb
+AddReference "ViewReference"
+AddReference "C:\Work\lib\ViewReference.dll"
+
+Imports ViewReference
+
+Dim viewRefAddin As ViewReferenceAutomation
+viewRefAddin = ThisApplication.GetViewReferenceAddin()
+
+viewRefAddin.CreateReferences(ThisDoc.Document)
 ```
 
 ## Customization
