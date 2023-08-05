@@ -12,7 +12,7 @@ Add installation steps
 
 ## Using the API
 
-To use the View Reference Add-in API the dll needs to be referenced. This can be done by either downloading the dll from the Releases or by adding the ViewReference NuGet package. The dll includes an extension method for Inventor.Aplication called `GetViewReferenceAddin()` that makes instantiating the `ViewReferenceAutomation` object easier. 
+To use the View Reference Add-in API the dll needs to be referenced. This can be done by either downloading the dll from the Releases or by adding the ViewReference NuGet package. The dll includes an extension method for Inventor.Aplication called `GetViewReferenceAddin()` that can be used to get the instance of `ViewReferenceAutomation`.
 
 `ViewReferenceAutomation` includes the following methods that can be used:
 
