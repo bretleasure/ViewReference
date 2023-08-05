@@ -16,7 +16,11 @@ The addin can either be used via the commmand buttons added to the Inventor UI o
 3. The ViewReference.dll needs to be added as a reference to your project
     * NuGet package available on [NuGet.org](https://www.nuget.org/packages/ViewReference) and [GitHub Packages](https://github.com/bretleasure/ViewReference/pkgs/nuget/ViewReference)
 
-### 
+## Addin UI
+
+The View Reference panel is added to the Place Views tab when a drawing document is open.
+
+![image](https://github.com/bretleasure/ViewReference/assets/30269827/a0700722-7e19-4270-ae5a-9d0043328ea7)
 
 ## Using the API
 
