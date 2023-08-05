@@ -8,11 +8,19 @@ The addin can either be used via the commmand buttons added to the Inventor UI o
 
 ## Installation
 
-Add installation steps
+1. Download the ViewReferenceAddin-vX.X.X.zip file from the latest release
+2. Unzip the contents into `C:\ProgramData\Autodesk\ApplicationPlugins`
+
+**If using the Addin's API outside of iLogic:**
+
+3. The ViewReference.dll needs to be added as a reference to your project
+    * NuGet package available on [NuGet.org](https://www.nuget.org/packages/ViewReference) and [GitHub Packages](https://github.com/bretleasure/ViewReference/pkgs/nuget/ViewReference)
+
+### 
 
 ## Using the API
 
-To use the View Reference Add-in API the dll needs to be referenced. This can be done by either downloading the dll from the Releases or by adding the ViewReference NuGet package. The dll includes an extension method for Inventor.Aplication called `GetViewReferenceAddin()` that can be used to get the instance of `ViewReferenceAutomation`.
+The `GetViewReferenceAddin()` extension method for `Inventor.Aplication` can be used to get the instance of `ViewReferenceAutomation`.
 
 `ViewReferenceAutomation` includes the following methods that can be used:
 
@@ -36,8 +44,6 @@ viewRefAddin.CreateReferences(dwgDoc);
 ### iLogic
 ```vb
 AddReference "ViewReference"
-AddReference "C:\Work\lib\ViewReference.dll" 'This path should match the location the .dll is saved in
-
 Imports ViewReference
 
 Dim viewRefAddin As ViewReferenceAutomation
@@ -72,6 +78,7 @@ If using the addin in the Inventor UI, settings can be set by clicking the Confi
 ## Styling
 
 Attribute tags are used to create templates for how the callouts and labels will appear. The `AttributeTags` class contains all the possible tag strings.
+
 | Tag | Description |
 | - | --- |
 | &lt;VIEW&GT; | View Name |
