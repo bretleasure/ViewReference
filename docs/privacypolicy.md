@@ -1,1 +1,0 @@
-This application does not collect or store personal data.
