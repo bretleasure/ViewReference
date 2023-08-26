@@ -21,5 +21,7 @@ namespace ViewReference
         public static ViewReferenceAutomation Automation { get; set; }
 
 		public static string AttributeSetName { get; } = "ViewReference-v4";
+
+        public static Theme ActiveTheme => InventorApp.ThemeManager.ActiveTheme;
     }
 }

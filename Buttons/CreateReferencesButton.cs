@@ -22,7 +22,7 @@ namespace ViewReference.Buttons
                     if (exceptions.Any(e => e is NotConfiguredException))
                     {
                         MessageBox.Show("You have not configured View Reference",
-                            "View Reference", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk);
+                            "View Reference", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                     }
                     else if (exceptions.Any(e => e is AddingViewReferencesException))
                     {
@@ -43,7 +43,25 @@ namespace ViewReference.Buttons
         public override string GetDescriptionText() => "Create/Update View References";
 
         public override string GetToolTipText() => "Create/Update View References in this document.";
+        
+        public override string GetLargeIconResourceName()
+        {
+            throw new NotImplementedException();
+        }
 
-        public override string GetIconResourceName() => "Icons.ViewRef-Add.ico";
+        public override string GetDarkThemeLargeIconResourceName()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override string GetSmallIconResourceName()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override string GetDarkThemeSmallIconResourceName()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

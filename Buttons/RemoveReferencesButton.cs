@@ -17,7 +17,25 @@ namespace ViewReference.Buttons
         public override string GetDescriptionText() => "Remove View References";
 
         public override string GetToolTipText() => "Remove View References in this document.";
+        
+        public override string GetLargeIconResourceName()
+        {
+            throw new System.NotImplementedException();
+        }
 
-        public override string GetIconResourceName() => "Icons.ViewRef-Remove.ico";
+        public override string GetDarkThemeLargeIconResourceName()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override string GetSmallIconResourceName()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override string GetDarkThemeSmallIconResourceName()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

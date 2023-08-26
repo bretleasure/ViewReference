@@ -16,7 +16,25 @@ namespace ViewReference.Buttons
         public override string GetDescriptionText() => "Configure View Reference";
 
         public override string GetToolTipText() => "Select Options for View Reference.";
+        
+        public override string GetLargeIconResourceName()
+        {
+            throw new System.NotImplementedException();
+        }
 
-        public override string GetIconResourceName() => "Icons.gear.ico";
+        public override string GetDarkThemeLargeIconResourceName()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override string GetSmallIconResourceName()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override string GetDarkThemeSmallIconResourceName()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
