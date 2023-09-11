@@ -44,7 +44,6 @@
     <EmbeddedResource Include="Buttons\Icons\delete-dark-16px.bmp" />
     <EmbeddedResource Include="Buttons\Icons\delete-dark-32px.bmp" />
     <EmbeddedResource Include="Buttons\Icons\delete-light-16px.bmp" />
-    <EmbeddedResource Include="Buttons\Icons\delete-light-16px.png" />
     <EmbeddedResource Include="Buttons\Icons\delete-light-32px.bmp" />
     <EmbeddedResource Include="Buttons\Icons\edit-dark-16px.bmp" />
     <EmbeddedResource Include="Buttons\Icons\edit-dark-32px.bmp" />
