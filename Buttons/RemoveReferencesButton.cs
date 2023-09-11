@@ -20,22 +20,22 @@ namespace ViewReference.Buttons
         
         public override string GetLargeIconResourceName()
         {
-            throw new System.NotImplementedException();
+            return "ViewReference.Buttons.Icons.delete-light-32px.bmp";
         }
 
         public override string GetDarkThemeLargeIconResourceName()
         {
-            throw new System.NotImplementedException();
+            return "ViewReference.Buttons.Icons.delete-dark-32px.bmp";
         }
 
         public override string GetSmallIconResourceName()
         {
-            throw new System.NotImplementedException();
+            return "ViewReference.Buttons.Icons.delete-light-16px.bmp";
         }
 
         public override string GetDarkThemeSmallIconResourceName()
         {
-            throw new System.NotImplementedException();
+            return "ViewReference.Buttons.Icons.delete-dark-16px.bmp";
         }
     }
 }

@@ -46,22 +46,22 @@ namespace ViewReference.Buttons
         
         public override string GetLargeIconResourceName()
         {
-            throw new NotImplementedException();
+            return "ViewReference.Buttons.Icons.add-light-32px.bmp";
         }
 
         public override string GetDarkThemeLargeIconResourceName()
         {
-            throw new NotImplementedException();
+            return "ViewReference.Buttons.Icons.add-dark-32px.bmp";
         }
 
         public override string GetSmallIconResourceName()
-        {
-            throw new NotImplementedException();
+        {   
+            return "ViewReference.Buttons.Icons.add-light-16px.bmp";
         }
 
         public override string GetDarkThemeSmallIconResourceName()
         {
-            throw new NotImplementedException();
+            return "ViewReference.Buttons.Icons.add-dark-16px.bmp";
         }
     }
 }
