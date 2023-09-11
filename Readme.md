@@ -1,4 +1,4 @@
-![viewRef_img](img/open-graph-preview-img.png)
+[![viewRef_img](img/open-graph-preview-img.png)](https://github.com/bretleasure/ViewReference/blob/27ee56f470b92748bee48287c9f5969306e723ef/img/open-graph-preview-img.png)
 
 ## Usage
 
