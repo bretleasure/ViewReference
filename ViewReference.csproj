@@ -71,6 +71,9 @@
   <ItemGroup>
     <None Include="Readme.md" Pack="true" PackagePath="\" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="img\open-graph-preview-img.png" Pack="true" PackagePath="\img\" />
+  </ItemGroup>
   <PropertyGroup>
     <ApplicationIcon>ViewRef-Add.ico</ApplicationIcon>
   </PropertyGroup>

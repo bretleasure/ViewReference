@@ -1,6 +1,4 @@
-# View Reference Add-in for Autodesk Inventor
-
-The View Reference add-in creates references between parent and dependent views in Autodesk Inventor drawings. Text is added to the view callout in the parent view and then view label of the dependent view. References can be added to Details Views, Section Views, Projected Views, and Auxiliary Views. 
+![viewRef_img](img/open-graph-preview-img.png)
 
 ## Usage
 
@@ -22,8 +20,6 @@ The addin can either be used via the commmand buttons added to the Inventor UI o
 ## Addin UI
 
 The View Reference panel is added to the Place Views tab when a drawing document is open.
-
-![image](https://github.com/bretleasure/ViewReference/assets/30269827/a0700722-7e19-4270-ae5a-9d0043328ea7)
 
 ## Using the API
 
@@ -102,3 +98,7 @@ Attribute tags are used to create templates for how the callouts and labels will
 | - | --- | --- |
 | B (2) | "&lt;VIEW&gt; (<VIEW SHEET #>)" | $"{AttributeTags.ViewName} ({AttributeTags.ViewSheetNumber})" 
 | B (Sh. 2) | "&lt;VIEW&gt; (Sh. <VIEW SHEET #>)" | $"{AttributeTags.ViewName} (Sh. {AttributeTags.ViewSheetNumber})" |
+
+## Privacy Policy
+
+This application does not collect or store any personal data.
