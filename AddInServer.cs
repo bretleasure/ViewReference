@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Drawing;
+using System.Linq;
 using System.Runtime.InteropServices;
 using Inventor;
 using Microsoft.Win32;
@@ -46,29 +47,13 @@ namespace ViewReference
 
             ViewReferenceTools.CreateUpdateEventListener();
 
+            AddinGlobal.InventorApp.ApplicationEvents.OnApplicationOptionChange += UpdateButtons;
+
             try
             {
                 if (firstTime)
                 {
-                    var createButton = new CreateReferencesButton();
-                    var removeButton = new RemoveReferencesButton();
-                    var configButton = new ConfigureButton();
-
-                    UserInterfaceManager uiMan = AddinGlobal.InventorApp.UserInterfaceManager;
-
-                    if (uiMan.InterfaceStyle == InterfaceStyleEnum.kRibbonInterface)
-                    {
-                        Ribbon ribbon = uiMan.Ribbons["Drawing"];
-                        RibbonTab tab = ribbon.RibbonTabs["id_TabPlaceViews"];
-
-                        RibbonPanel panel = tab.RibbonPanels.Add("View Reference", "vr_Panel", Guid.NewGuid().ToString());
-                        CommandControls controls = panel.CommandControls;
-
-                        controls.AddButton(createButton.Definition, true, true);
-                        controls.AddButton(removeButton.Definition, true, true);
-                        controls.AddButton(configButton.Definition, false, true);
-
-                    }
+                    InitializeUIComponents();
                 }
             }
             catch (Exception ex)
@@ -77,6 +62,46 @@ namespace ViewReference
             }
 
 
+        }
+
+        private void InitializeUIComponents()
+        {
+            var createButton = new CreateReferencesButton();
+            var removeButton = new RemoveReferencesButton();
+            var configButton = new ConfigureButton();
+
+            UserInterfaceManager uiMan = AddinGlobal.InventorApp.UserInterfaceManager;
+
+            if (uiMan.InterfaceStyle == InterfaceStyleEnum.kRibbonInterface)
+            {
+                Ribbon ribbon = uiMan.Ribbons["Drawing"];
+                RibbonTab tab = ribbon.RibbonTabs["id_TabPlaceViews"];
+                
+                var existingPanel = tab.RibbonPanels.Cast<RibbonPanel>().FirstOrDefault(p => p.InternalName == AppConstants.UIPanelId);
+                if (existingPanel != null)
+                {
+                    existingPanel.Delete();
+                }
+
+                RibbonPanel panel = tab.RibbonPanels.Add("View Reference", "vr_Panel", Guid.NewGuid().ToString());
+                CommandControls controls = panel.CommandControls;
+
+                controls.AddButton(createButton.Definition, true, true);
+                controls.AddButton(removeButton.Definition, true, true);
+                controls.AddButton(configButton.Definition, false, true);
+            }
+        }
+        
+        private void UpdateButtons(EventTimingEnum beforeOrAfter, NameValueMap context, out HandlingCodeEnum handlingCode)
+        {
+            if (beforeOrAfter == EventTimingEnum.kAfter)
+            {
+                InitializeUIComponents();
+                
+                handlingCode = HandlingCodeEnum.kEventHandled;
+            }
+            
+            handlingCode = HandlingCodeEnum.kEventNotHandled;
         }
 
         public void Deactivate()

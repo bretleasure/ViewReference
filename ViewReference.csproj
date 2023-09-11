@@ -20,14 +20,35 @@
     <None Remove="Resources\**" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="Buttons\Icons\add-dark-16px.bmp" />
+    <None Remove="Buttons\Icons\add-dark-32px.bmp" />
+    <None Remove="Buttons\Icons\add-light-16px.bmp" />
+    <None Remove="Buttons\Icons\add-light-32px.bmp" />
+    <None Remove="Buttons\Icons\add-light-32px.png" />
+    <None Remove="Buttons\Icons\delete-dark-16px.bmp" />
+    <None Remove="Buttons\Icons\delete-dark-32px.bmp" />
+    <None Remove="Buttons\Icons\delete-light-16px.bmp" />
+    <None Remove="Buttons\Icons\delete-light-16px.png" />
+    <None Remove="Buttons\Icons\delete-light-32px.bmp" />
+    <None Remove="Buttons\Icons\edit-dark-16px.bmp" />
+    <None Remove="Buttons\Icons\edit-dark-32px.bmp" />
+    <None Remove="Buttons\Icons\edit-light-16px.bmp" />
+    <None Remove="Buttons\Icons\edit-light-32px.bmp" />
     <None Remove="Buttons\Icons\gear.ico" />
-    <None Remove="Buttons\Icons\ViewRef-Add.ico" />
-    <None Remove="Buttons\Icons\ViewRef-Remove.ico" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Buttons\Icons\gear.ico" />
-    <EmbeddedResource Include="Buttons\Icons\ViewRef-Add.ico" />
-    <EmbeddedResource Include="Buttons\Icons\ViewRef-Remove.ico" />
+    <EmbeddedResource Include="Buttons\Icons\add-dark-16px.bmp" />
+    <EmbeddedResource Include="Buttons\Icons\add-dark-32px.bmp" />
+    <EmbeddedResource Include="Buttons\Icons\add-light-16px.bmp" />
+    <EmbeddedResource Include="Buttons\Icons\add-light-32px.bmp" />
+    <EmbeddedResource Include="Buttons\Icons\delete-dark-16px.bmp" />
+    <EmbeddedResource Include="Buttons\Icons\delete-dark-32px.bmp" />
+    <EmbeddedResource Include="Buttons\Icons\delete-light-16px.bmp" />
+    <EmbeddedResource Include="Buttons\Icons\delete-light-32px.bmp" />
+    <EmbeddedResource Include="Buttons\Icons\edit-dark-16px.bmp" />
+    <EmbeddedResource Include="Buttons\Icons\edit-dark-32px.bmp" />
+    <EmbeddedResource Include="Buttons\Icons\edit-light-16px.bmp" />
+    <EmbeddedResource Include="Buttons\Icons\edit-light-32px.bmp" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
