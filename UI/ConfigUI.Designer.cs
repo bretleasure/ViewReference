@@ -584,6 +584,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ConfigUI";
+            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "View Reference - Configure";
             this.Load += new System.EventHandler(this.ConfigUI_Load);

@@ -17,7 +17,25 @@ namespace ViewReference.Buttons
         public override string GetDescriptionText() => "Remove View References";
 
         public override string GetToolTipText() => "Remove View References in this document.";
+        
+        public override string GetLargeIconResourceName()
+        {
+            return "ViewReference.Buttons.Icons.delete-light-32px.bmp";
+        }
 
-        public override string GetIconResourceName() => "Icons.ViewRef-Remove.ico";
+        public override string GetDarkThemeLargeIconResourceName()
+        {
+            return "ViewReference.Buttons.Icons.delete-dark-32px.bmp";
+        }
+
+        public override string GetSmallIconResourceName()
+        {
+            return "ViewReference.Buttons.Icons.delete-light-16px.bmp";
+        }
+
+        public override string GetDarkThemeSmallIconResourceName()
+        {
+            return "ViewReference.Buttons.Icons.delete-dark-16px.bmp";
+        }
     }
 }

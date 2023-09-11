@@ -16,7 +16,25 @@ namespace ViewReference.Buttons
         public override string GetDescriptionText() => "Configure View Reference";
 
         public override string GetToolTipText() => "Select Options for View Reference.";
+        
+        public override string GetLargeIconResourceName()
+        {
+            return "ViewReference.Buttons.Icons.edit-light-32px.bmp";
+        }
 
-        public override string GetIconResourceName() => "Icons.gear.ico";
+        public override string GetDarkThemeLargeIconResourceName()
+        {
+            return "ViewReference.Buttons.Icons.edit-dark-32px.bmp";
+        }
+
+        public override string GetSmallIconResourceName()
+        {
+            return "ViewReference.Buttons.Icons.edit-light-16px.bmp";
+        }
+
+        public override string GetDarkThemeSmallIconResourceName()
+        {
+            return "ViewReference.Buttons.Icons.edit-dark-16px.bmp";
+        }
     }
 }
