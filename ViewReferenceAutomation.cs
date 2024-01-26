@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Inventor;
 using ViewReference.Exceptions;
-using ViewReference.Extensions;
 
 namespace ViewReference
 {
