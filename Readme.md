@@ -27,13 +27,14 @@ The `GetViewReferenceAddin()` extension method for `Inventor.Aplication` can be 
 
 `ViewReferenceAutomation` includes the following methods that can be used:
 
-| Method Name | Description |
-| - | --- |
-| CreateReferences(`ViewReferenceSettings`) | Adds references to all drawing views using the default settings |
+| Method Name                                                  | Description                                                      |
+|--------------------------------------------------------------|------------------------------------------------------------------|
+| CreateReferences(`ViewReferenceSettings`)                    | Adds references to all drawing views using the default settings  |
 | CreateReferences(`DrawingDocument`, `ViewReferenceSettings`) | Adds references to all drawing views using the provided settings |
-| CreateReferences(`DrawingView`, `ViewReferenceSettings`) | Adds references to the one view with the provided settings |
-| RemoveReferences(`DrawingDocument`) | Removes references from all drawing views |
-| RemoveReferences(`DrawingView`) | Removes references from the one view |
+| CreateReferences(`DrawingView`)                              | Adds references to the one view using the default settings       |
+| CreateReferences(`DrawingView`, `ViewReferenceSettings`)     | Adds references to the one view using the provided settings      |
+| RemoveReferences(`DrawingDocument`)                          | Removes references from all drawing views                        |
+| RemoveReferences(`DrawingView`)                              | Removes references from the one view                             |
 
 ### C#
 ```csharp
@@ -54,6 +55,25 @@ viewRefAddin = ThisApplication.GetViewReferenceAddin()
 
 viewRefAddin.CreateReferences(ThisDoc.Document)
 ```
+
+### Extension Methods
+
+#### `DrawingDocument`
+
+| Method Name | Description                                                                  |
+| - |------------------------------------------------------------------------------|
+| AddViewReferences() | Adds references to all views in the drawing document using default settings  |
+| AddViewReferences(`ViewReferenceSettings`) | Adds references to all views in the drawing document using provided settings |
+| RemoveViewReferences() | Removes references from all views in the drawing document |
+
+#### `DrawingView`
+
+| Method Name | Description                                             |
+| - |---------------------------------------------------------|
+| AddViewReference() | Adds references to drawing view using default settings  |
+| AddViewReference(`ViewReferenceSettings`) | Adds references to drawing view using provided settings |
+| RemoveViewReference() | Removes references from drawing view                    |
+
 
 ## Configuration
 

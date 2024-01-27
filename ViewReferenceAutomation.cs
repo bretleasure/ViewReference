@@ -27,6 +27,7 @@ namespace ViewReference
             return Task.WhenAll(addRefsToViews);
         }
 
+        public Task CreateReferences(DrawingView view) => CreateReferences(view, ViewReferenceSettings.Default);
         public Task CreateReferences(DrawingView view, ViewReferenceSettings settings)
         {
             if (view.ParentView != null)

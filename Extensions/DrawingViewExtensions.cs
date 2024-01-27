@@ -7,7 +7,7 @@ using ViewReference;
 
 namespace Inventor
 {
-    internal static class DrawingViewExtensions
+    public static class DrawingViewExtensions
     {
         internal static bool ViewHasReferences(this DrawingView view)
         {
@@ -99,6 +99,9 @@ namespace Inventor
                 .ForEach(set => set.Delete());
         }
 
+        public static Task AddViewReference(this DrawingView view)
+            => AddinGlobal.Automation.CreateReferences(view);
+        
         public static Task AddViewReference(this DrawingView view, ViewReferenceSettings settings)
             => AddinGlobal.Automation.CreateReferences(view, settings);
 

@@ -7,7 +7,7 @@ using ViewReference;
 
 namespace Inventor
 {
-    internal static class DrawingDocumentExtensions
+    public static class DrawingDocumentExtensions
     {
         internal static List<DrawingView> AllDrawingViews(this DrawingDocument dwgDoc)
         {
