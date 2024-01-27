@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Inventor;
 using Newtonsoft.Json;
-using ViewReference.Extensions;
 using File = System.IO.File;
 
 namespace ViewReference

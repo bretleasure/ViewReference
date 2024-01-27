@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Inventor;
+using ViewReference;
 
-namespace ViewReference.Extensions
+namespace Inventor
 {
-    internal static class DrawingViewExtensions
+    public static class DrawingViewExtensions
     {
         internal static bool ViewHasReferences(this DrawingView view)
         {
@@ -98,5 +98,14 @@ namespace ViewReference.Extensions
                 .ToList()
                 .ForEach(set => set.Delete());
         }
+
+        public static Task AddViewReference(this DrawingView view)
+            => AddinGlobal.Automation.CreateReferences(view);
+        
+        public static Task AddViewReference(this DrawingView view, ViewReferenceSettings settings)
+            => AddinGlobal.Automation.CreateReferences(view, settings);
+
+        public static Task RemoveViewReference(this DrawingView view)
+            => AddinGlobal.Automation.RemoveReferences(view);
     }
 }

@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Inventor;
 using ViewReference.Exceptions;
-using ViewReference.Extensions;
 
 namespace ViewReference
 {
@@ -28,6 +27,7 @@ namespace ViewReference
             return Task.WhenAll(addRefsToViews);
         }
 
+        public Task CreateReferences(DrawingView view) => CreateReferences(view, ViewReferenceSettings.Default);
         public Task CreateReferences(DrawingView view, ViewReferenceSettings settings)
         {
             if (view.ParentView != null)
