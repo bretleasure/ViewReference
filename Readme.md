@@ -36,27 +36,9 @@ The `GetViewReferenceAddin()` extension method for `Inventor.Aplication` can be 
 | RemoveReferences(`DrawingDocument`)                          | Removes references from all drawing views                        |
 | RemoveReferences(`DrawingView`)                              | Removes references from the one view                             |
 
-### C#
-```csharp
-var dwgDoc = (DrawingDocument)inventorApp.Documents.Open(@"C:\Work\MyDrawing.idw");
-
-var viewRefAddin = inventorApp.GetViewReferenceAddin();
-
-viewRefAddin.CreateReferences(dwgDoc);
-```
-
-### iLogic
-```vb
-AddReference "ViewReference"
-Imports ViewReference
-
-Dim viewRefAddin As ViewReferenceAutomation
-viewRefAddin = ThisApplication.GetViewReferenceAddin()
-
-viewRefAddin.CreateReferences(ThisDoc.Document)
-```
-
 ### Extension Methods
+
+Extension methods on the `DrawingDocument` and `DrawingView` types can also be used. Using these extension methods does not require getting an instance of `ViewReferenceAutomation`.
 
 #### `DrawingDocument`
 
@@ -74,6 +56,40 @@ viewRefAddin.CreateReferences(ThisDoc.Document)
 | AddViewReference(`ViewReferenceSettings`) | Adds references to drawing view using provided settings |
 | RemoveViewReference() | Removes references from drawing view                    |
 
+### C# Example
+```csharp
+var dwgDoc = (DrawingDocument)inventorApp.Documents.Open(@"C:\Work\MyDrawing.idw");
+
+//Using ViewReferenceAutomation method
+
+var viewRefAddin = inventorApp.GetViewReferenceAddin();
+
+viewRefAddin.CreateReferences(dwgDoc);
+
+//or using Extension method
+
+dwgDoc.AddViewReferences();
+```
+
+### iLogic Example
+```vb
+AddReference "ViewReference"
+Imports ViewReference
+
+Dim dwgDoc As DrawingDocument
+dwgDoc = ThisDoc.Document
+
+'Using ViewReferenceAutomation method
+
+Dim viewRefAddin As ViewReferenceAutomation
+viewRefAddin = ThisApplication.GetViewReferenceAddin()
+
+viewRefAddin.CreateReferences(dwgDoc)
+
+'or using Extension method
+
+dwgDoc.AddViewRerences()
+```
 
 ## Configuration
 
