@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using Inventor;
+using Inventor.InternalNames.Ribbon;
 using Microsoft.Win32;
 using System.Windows.Forms;
 using ViewReference.Buttons;
@@ -74,8 +75,8 @@ namespace ViewReference
 
             if (uiMan.InterfaceStyle == InterfaceStyleEnum.kRibbonInterface)
             {
-                Ribbon ribbon = uiMan.Ribbons["Drawing"];
-                RibbonTab tab = ribbon.RibbonTabs["id_TabPlaceViews"];
+                Ribbon ribbon = uiMan.Ribbons[InventorRibbons.Drawing];
+                RibbonTab tab = ribbon.RibbonTabs[DrawingRibbonTabs.PlaceViews];
                 
                 var existingPanel = tab.RibbonPanels.Cast<RibbonPanel>().FirstOrDefault(p => p.InternalName == AppConstants.UIPanelId);
                 if (existingPanel != null)
