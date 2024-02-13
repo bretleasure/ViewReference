@@ -16,7 +16,7 @@ namespace Inventor
 
         internal static bool ShouldAddReferences(this DrawingView view, ViewReferenceSettings settings)
         {
-            return view.ViewType switch
+            var shouldAddToViewType = view.ViewType switch
             {
                 DrawingViewTypeEnum.kDetailDrawingViewType => settings.AddReferencesToDetailViews,
                 DrawingViewTypeEnum.kSectionDrawingViewType => settings.AddReferencesToSectionViews,
@@ -24,6 +24,10 @@ namespace Inventor
                 DrawingViewTypeEnum.kProjectedDrawingViewType => settings.AddReferencesToProjectedViews,
                 _ => false
             };
+            
+            var labelContainsDrawingViewName = view.Label.FormattedText.Contains("<DrawingViewName/>");
+            
+            return shouldAddToViewType && labelContainsDrawingViewName;
         }
 
         internal static string GetReferenceLabelStyle(this DrawingView view, ViewReferenceSettings settings)
