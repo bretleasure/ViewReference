@@ -10,7 +10,7 @@ The addin can either be used via the commmand buttons added to the Inventor UI o
 
 ### [Check out the Wiki](https://github.com/bretleasure/ViewReference/wiki)
 
-## Questions and Support
+# Questions and Support
 
 Post on [GitHub Discussions](https://github.com/bretleasure/ViewReference/discussions)
 
