@@ -27,7 +27,7 @@ namespace ViewReference
 		{
             try
             {
-                AttributeSet oAttribSet = view.AttributeSets[AddinGlobal.AttributeSetName];
+                AttributeSet oAttribSet = view.AttributeSets[AddinServer.AttributeSetName];
                 View = view;
                 ViewName = oAttribSet[AttributeNames.ViewName].Value.ToString();
                 ViewSheetName = oAttribSet[AttributeNames.ViewSheetName].Value.ToString();

@@ -4,17 +4,18 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Inventor;
+using Inventor.InternalNames.Ribbon;
 using ViewReference.Exceptions;
 
 namespace ViewReference.Buttons
 {
     internal class CreateReferencesButton : InventorButton
     {
-        public override void Execute(NameValueMap context)
+        protected override void Execute(NameValueMap context, Inventor.Application inventor)
         {
-            if (AddinGlobal.InventorApp.ActiveDocument is DrawingDocument dwgDoc)
+            if (inventor.ActiveDocument is DrawingDocument dwgDoc)
             {
-                var task = AddinGlobal.Automation.CreateReferences(dwgDoc, AddinGlobal.Settings.ViewReferenceSettings);
+                var task = AddinServer.AppAutomation.CreateReferences(dwgDoc, AddinServer.Settings.ViewReferenceSettings);
 
                 if (task.Status == TaskStatus.Faulted)
                 {
@@ -37,31 +38,41 @@ namespace ViewReference.Buttons
                 }
             }
         }
-
-        public override string GetButtonName() => "Create /\rUpdate";
-
-        public override string GetDescriptionText() => "Create/Update View References";
-
-        public override string GetToolTipText() => "Create/Update View References in this document.";
         
-        public override string GetLargeIconResourceName()
+        protected override string GetRibbonName() => InventorRibbons.Drawing;
+
+        protected override string GetRibbonTabName() => DrawingRibbonTabs.PlaceViews;
+
+        protected override string GetRibbonPanelName() => "View Reference";
+
+        protected override string GetButtonName() => "Create /\rUpdate";
+
+        protected override string GetDescriptionText() => "Create/Update View References";
+
+        protected override string GetToolTipText() => "Create/Update View References in this document.";
+        
+        protected override string GetLargeIconResourceName()
         {
             return "ViewReference.Buttons.Icons.add-light-32px.bmp";
         }
 
-        public override string GetDarkThemeLargeIconResourceName()
+        protected override string GetDarkThemeLargeIconResourceName()
         {
             return "ViewReference.Buttons.Icons.add-dark-32px.bmp";
         }
 
-        public override string GetSmallIconResourceName()
+        protected override string GetSmallIconResourceName()
         {   
             return "ViewReference.Buttons.Icons.add-light-16px.bmp";
         }
 
-        public override string GetDarkThemeSmallIconResourceName()
+        protected override string GetDarkThemeSmallIconResourceName()
         {
             return "ViewReference.Buttons.Icons.add-dark-16px.bmp";
         }
+        
+        protected override bool UseLargeIcon => true;
+
+        internal override int SequenceNumber => 0;
     }
 }

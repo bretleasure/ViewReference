@@ -1,41 +1,52 @@
 ﻿using Inventor;
+using Inventor.InternalNames.Ribbon;
 
 namespace ViewReference.Buttons
 {
     internal class RemoveReferencesButton : InventorButton
     {
-        public override void Execute(NameValueMap context)
+        protected override void Execute(NameValueMap context, Inventor.Application inventor)
         {
-            if (AddinGlobal.InventorApp.ActiveDocument is DrawingDocument dwgDoc)
+            if (inventor.ActiveDocument is DrawingDocument dwgDoc)
             {
-                AddinGlobal.Automation.RemoveReferences(dwgDoc);
+                AddinServer.AppAutomation.RemoveReferences(dwgDoc);
             }
         }
 
-        public override string GetButtonName() => "Remove";
+        protected override string GetRibbonName() => InventorRibbons.Drawing;
 
-        public override string GetDescriptionText() => "Remove View References";
+        protected override string GetRibbonTabName() => DrawingRibbonTabs.PlaceViews;
 
-        public override string GetToolTipText() => "Remove View References in this document.";
+        protected override string GetRibbonPanelName() => "View Reference";
+
+        protected override string GetButtonName() => "Remove";
+
+        protected override string GetDescriptionText() => "Remove View References";
+
+        protected override string GetToolTipText() => "Remove View References in this document.";
         
-        public override string GetLargeIconResourceName()
+        protected override string GetLargeIconResourceName()
         {
             return "ViewReference.Buttons.Icons.delete-light-32px.bmp";
         }
 
-        public override string GetDarkThemeLargeIconResourceName()
+        protected override string GetDarkThemeLargeIconResourceName()
         {
             return "ViewReference.Buttons.Icons.delete-dark-32px.bmp";
         }
 
-        public override string GetSmallIconResourceName()
+        protected override string GetSmallIconResourceName()
         {
             return "ViewReference.Buttons.Icons.delete-light-16px.bmp";
         }
 
-        public override string GetDarkThemeSmallIconResourceName()
+        protected override string GetDarkThemeSmallIconResourceName()
         {
             return "ViewReference.Buttons.Icons.delete-dark-16px.bmp";
         }
+        
+        protected override bool UseLargeIcon => true;
+
+        internal override int SequenceNumber => 1;
     }
 }

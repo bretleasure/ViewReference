@@ -11,7 +11,7 @@ namespace Inventor
     {
         internal static bool ViewHasReferences(this DrawingView view)
         {
-            return view.AttributeSets.NameIsUsed[AddinGlobal.AttributeSetName];
+            return view.AttributeSets.NameIsUsed[AddinServer.AttributeSetName];
         }
 
         internal static bool ShouldAddReferences(this DrawingView view, ViewReferenceSettings settings)
@@ -46,12 +46,12 @@ namespace Inventor
         {
             //AddinGlobal.Logger.LogInformation($"Saving attributes to view");
 
-            if (!dwgView.AttributeSets.NameIsUsed[AddinGlobal.AttributeSetName])
+            if (!dwgView.AttributeSets.NameIsUsed[AddinServer.AttributeSetName])
             {
-                dwgView.AttributeSets.Add(AddinGlobal.AttributeSetName, true);
+                dwgView.AttributeSets.Add(AddinServer.AttributeSetName, true);
             }
 
-            AttributeSet oAttribSet = dwgView.AttributeSets[AddinGlobal.AttributeSetName];
+            AttributeSet oAttribSet = dwgView.AttributeSets[AddinServer.AttributeSetName];
 
             oAttribSet.AssignAttributeValue(AttributeNames.ViewName, iView.ViewName);
             oAttribSet.AssignAttributeValue(AttributeNames.ViewSheetName, iView.ViewSheetName);
@@ -104,12 +104,12 @@ namespace Inventor
         }
 
         public static Task AddViewReference(this DrawingView view)
-            => AddinGlobal.Automation.CreateReferences(view);
+            => AddinServer.AppAutomation.CreateReferences(view);
         
         public static Task AddViewReference(this DrawingView view, ViewReferenceSettings settings)
-            => AddinGlobal.Automation.CreateReferences(view, settings);
+            => AddinServer.AppAutomation.CreateReferences(view, settings);
 
         public static Task RemoveViewReference(this DrawingView view)
-            => AddinGlobal.Automation.RemoveReferences(view);
+            => AddinServer.AppAutomation.RemoveReferences(view);
     }
 }

@@ -11,14 +11,14 @@ namespace ViewReference
     {
         internal static void GetSavedSettings()
         {
-            if (System.IO.File.Exists(AddinGlobal.SettingsFilePath))
+            if (System.IO.File.Exists(AddinServer.SettingsFilePath))
             {
-                var settingsJson = File.ReadAllText(AddinGlobal.SettingsFilePath);
-                AddinGlobal.Settings = JsonConvert.DeserializeObject<ViewReferenceAddinSettings>(settingsJson);
+                var settingsJson = File.ReadAllText(AddinServer.SettingsFilePath);
+                AddinServer.Settings = JsonConvert.DeserializeObject<ViewReferenceAddinSettings>(settingsJson);
             }
 			else
             {
-                AddinGlobal.Settings = new ViewReferenceAddinSettings
+                AddinServer.Settings = new ViewReferenceAddinSettings
                 {
                     ViewReferenceSettings = ViewReferenceSettings.Default,
                     UpdateBeforeSave = false
@@ -29,21 +29,21 @@ namespace ViewReference
 
         internal static void SaveSettings()
         {
-            var json = JsonConvert.SerializeObject(AddinGlobal.Settings);
-            File.WriteAllText(AddinGlobal.SettingsFilePath, json);
+            var json = JsonConvert.SerializeObject(AddinServer.Settings);
+            File.WriteAllText(AddinServer.SettingsFilePath, json);
         }   
         
         internal static void CreateUpdateEventListener()
         {
-            if (AddinGlobal.Settings != null)
+            if (AddinServer.Settings != null)
             {
-                if (AddinGlobal.Settings.UpdateBeforeSave)
+                if (AddinServer.Settings.UpdateBeforeSave)
                 {
-                    AddinGlobal.InventorApp.ApplicationEvents.OnSaveDocument += ApplicationEvents_OnSaveDocument;
+                    AddinServer.InventorApp.ApplicationEvents.OnSaveDocument += ApplicationEvents_OnSaveDocument;
                 }
                 else
                 {
-                    AddinGlobal.InventorApp.ApplicationEvents.OnSaveDocument -= ApplicationEvents_OnSaveDocument;
+                    AddinServer.InventorApp.ApplicationEvents.OnSaveDocument -= ApplicationEvents_OnSaveDocument;
                 }
             }
         }
@@ -56,7 +56,7 @@ namespace ViewReference
                 {
                     if (dwgDoc.ViewReferencesExistInDocument())
                     {
-                        AddinGlobal.Automation.CreateReferences(dwgDoc, AddinGlobal.Settings.ViewReferenceSettings);
+                        AddinServer.AppAutomation.CreateReferences(dwgDoc, AddinServer.Settings.ViewReferenceSettings);
                     }
                 }
             }
@@ -81,7 +81,7 @@ namespace ViewReference
 
         static void Get_DefaultViewText(out string detailText, out string sectionText, out string auxText)
         {
-            DrawingDocument oDoc = (DrawingDocument)AddinGlobal.InventorApp.ActiveDocument;
+            DrawingDocument oDoc = (DrawingDocument)AddinServer.InventorApp.ActiveDocument;
 
             DrawingStylesManager oStylesMan = oDoc.StylesManager;
 
