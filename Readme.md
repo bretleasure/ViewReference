@@ -1,6 +1,10 @@
 ![viewRef_img](https://raw.githubusercontent.com/bretleasure/ViewReference/main/img/open-graph-preview-img.png)
 
-[![NuGet version (ViewReference)](https://buildstats.info/nuget/ViewReference)](https://www.nuget.org/packages/ViewReference)
+![GitHub Release](https://img.shields.io/github/v/release/bretleasure/viewreference?display_name=release&logo=github&label=release&link=https%3A%2F%2Fgithub.com%2Fbretleasure%2Fviewreference%2Freleases)
+![GitHub Release](https://img.shields.io/github/v/release/bretleasure/viewreference?include_prereleases&display_name=release&logo=github&label=latest%20build&link=https%3A%2F%2Fgithub.com%2Fbretleasure%2Fviewreference%2Freleases)
+![NuGet Downloads](https://img.shields.io/nuget/dt/viewreference?logo=nuget&color=9932CC)
+![GitHub License](https://img.shields.io/github/license/bretleasure/viewreference?color=salmon)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/bretleasure/viewreference/build-deploy.yml?logo=githubactions&logoColor=white&label=Build%20and%20Deploy&link=https%3A%2F%2Fgithub.com%2Fbretleasure%2FSheetList%2Factions%2Fworkflows%2Fbuild-deploy.yml)
 
 # Usage
 
