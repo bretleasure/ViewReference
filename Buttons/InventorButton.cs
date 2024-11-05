@@ -12,7 +12,8 @@ namespace ViewReference.Buttons
     {
         private void OnExecute(NameValueMap context) => Execute(context, AddinServer.InventorApp);
 
-        protected abstract void Execute(NameValueMap context, Inventor.Application inventor); protected abstract string GetRibbonName();
+        protected abstract void Execute(NameValueMap context, Inventor.Application inventor); 
+        protected abstract string GetRibbonName();
 
         /// <summary>
         /// Name of the ribbon tab where the button will be placed. If the tab does not exist, it will be created.
