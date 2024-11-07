@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ViewReference.UI
@@ -51,53 +44,52 @@ namespace ViewReference.UI
 
         private void btn_Callout1_Click(object sender, EventArgs e)
         {
-            txb_CalloutStyle.Text = "<VIEW> (Sh. <VIEW SHEET #>)";
+            txb_CalloutStyle.Text = $"{AttributeTags.ViewName} (Sh. {AttributeTags.ViewSheetNumber})";
         }
 
         private void btn_Callout2_Click(object sender, EventArgs e)
         {
-            txb_CalloutStyle.Text = "<VIEW> (<VIEW SHEET #>)";
+            txb_CalloutStyle.Text = $"{AttributeTags.ViewName} ({AttributeTags.ViewSheetNumber})";
         }
 
         private void btn_Callout3_Click(object sender, EventArgs e)
         {
-            txb_CalloutStyle.Text = "<VIEW> (SH <VIEW SHEET #>)";
+            txb_CalloutStyle.Text = $"{AttributeTags.ViewName} (SH {AttributeTags.ViewSheetNumber})";
         }
 
         private void btn_Callout4_Click(object sender, EventArgs e)
         {
-            txb_CalloutStyle.Text = "<VIEW><PARENT SHEET #> SH<VIEW SHEET #>";
+            txb_CalloutStyle.Text = $"{AttributeTags.ViewName}{AttributeTags.ParentSheetNumber} SH{AttributeTags.ViewSheetNumber}";
         }
 
         private void btn_Label1_Click(object sender, EventArgs e)
         {
             //DETAIL A
             //SHEET 1
-
-            txb_DetailStyle.Text = "<VIEW><DELIM>SHEET <PARENT SHEET #>";            
-            txb_SectionStyle.Text = "<VIEW>-<VIEW><DELIM>SHEET <PARENT SHEET #>";
-            txb_AuxStyle.Text = "<VIEW>-<VIEW><DELIM>SHEET <PARENT SHEET #>";
-            txb_ProjectedStyle.Text = "<VIEW>-<VIEW><DELIM>SHEET <PARENT SHEET #>";
+            txb_DetailStyle.Text = $"{AttributeTags.ViewName}{AttributeTags.Delim}SHEET {AttributeTags.ParentSheetNumber}";
+            txb_SectionStyle.Text = $"{AttributeTags.ViewName}-{AttributeTags.ViewName}{AttributeTags.Delim}SHEET {AttributeTags.ParentSheetNumber}";
+            txb_AuxStyle.Text = $"{AttributeTags.ViewName}-{AttributeTags.ViewName}{AttributeTags.Delim}SHEET {AttributeTags.ParentSheetNumber}";
+            txb_ProjectedStyle.Text = $"{AttributeTags.ViewName}-{AttributeTags.ViewName}{AttributeTags.Delim}SHEET {AttributeTags.ParentSheetNumber}";
         }
 
         private void btn_Label2_Click(object sender, EventArgs e)
         {
             //DETAIL A (1)
 
-            txb_DetailStyle.Text = "<VIEW> (<PARENT SHEET #>)";
-            txb_SectionStyle.Text = "<VIEW>-<VIEW> (<PARENT SHEET #>)";
-            txb_AuxStyle.Text = "<VIEW>-<VIEW> (<PARENT SHEET #>)";
-            txb_ProjectedStyle.Text = "<VIEW>-<VIEW> (<PARENT SHEET #>)";
+            txb_DetailStyle.Text = $"{AttributeTags.ViewName} ({AttributeTags.ParentSheetNumber})";
+            txb_SectionStyle.Text = $"{AttributeTags.ViewName}-{AttributeTags.ViewName} ({AttributeTags.ParentSheetNumber})";
+            txb_AuxStyle.Text = $"{AttributeTags.ViewName}-{AttributeTags.ViewName} ({AttributeTags.ParentSheetNumber})";
+            txb_ProjectedStyle.Text = $"{AttributeTags.ViewName}-{AttributeTags.ViewName} ({AttributeTags.ParentSheetNumber})";
         }
 
         private void btn_Label3_Click(object sender, EventArgs e)
         {
             //DETAIL A1
 
-            txb_DetailStyle.Text = "<VIEW><PARENT SHEET #>";
-            txb_SectionStyle.Text = "<VIEW><PARENT SHEET #>-<VIEW><PARENT SHEET #>";
-            txb_AuxStyle.Text = "<VIEW><PARENT SHEET #>-<VIEW><PARENT SHEET #>";
-            txb_ProjectedStyle.Text = "<VIEW><PARENT SHEET #>-<VIEW><PARENT SHEET #>";
+            txb_DetailStyle.Text = $"{AttributeTags.ViewName}{AttributeTags.ParentSheetNumber}";
+            txb_SectionStyle.Text = $"{AttributeTags.ViewName}{AttributeTags.ParentSheetNumber}-{AttributeTags.ViewName}{AttributeTags.ParentSheetNumber}";
+            txb_AuxStyle.Text = $"{AttributeTags.ViewName}{AttributeTags.ParentSheetNumber}-{AttributeTags.ViewName}{AttributeTags.ParentSheetNumber}";
+            txb_ProjectedStyle.Text = $"{AttributeTags.ViewName}{AttributeTags.ParentSheetNumber}-{AttributeTags.ViewName}{AttributeTags.ParentSheetNumber}";
         }
 
         private void btn_SaveSettings_Click(object sender, EventArgs e)
@@ -118,7 +110,7 @@ namespace ViewReference.UI
                 AddReferencesToProjectedViews = ckb_Projected.Checked,
             };
 
-            AddinGlobal.Settings = new ViewReferenceAddinSettings
+            AddinServer.Settings = new ViewReferenceAddinSettings
             {
                 UpdateBeforeSave = ckb_UpdateBeforeSave.Checked,
                 ViewReferenceSettings = viewReferenceSettings
@@ -146,9 +138,9 @@ namespace ViewReference.UI
 
         private void ImportParameters()
         {
-            if (AddinGlobal.Settings != null)
+            if (AddinServer.Settings != null)
             {
-                var viewReferenceSettings = AddinGlobal.Settings.ViewReferenceSettings;
+                var viewReferenceSettings = AddinServer.Settings.ViewReferenceSettings;
                 txb_CalloutStyle.Text = viewReferenceSettings.CalloutStyle;
                 txb_DetailStyle.Text = viewReferenceSettings.DetailViewLabelStyle;
                 txb_SectionStyle.Text = viewReferenceSettings.SectionViewLabelStyle;
@@ -160,7 +152,7 @@ namespace ViewReference.UI
                 ckb_Aux.Checked = viewReferenceSettings.AddReferencesToAuxiliaryViews;
                 ckb_Projected.Checked = viewReferenceSettings.AddReferencesToProjectedViews;
 
-				ckb_UpdateBeforeSave.Checked = AddinGlobal.Settings.UpdateBeforeSave;
+				ckb_UpdateBeforeSave.Checked = AddinServer.Settings.UpdateBeforeSave;
             }            
         }
 
@@ -180,11 +172,11 @@ namespace ViewReference.UI
                     //Only certain attributes are allowed for Callouts
                     switch (s)
                     {
-                        case "<VIEW>":
-                        case "<VIEW SHEET #>":
-                        case "<VIEW SHEET NAME>":
-                        case "<PARENT SHEET #>":
-                        case "<PARENT SHEET NAME>":
+                        case AttributeTags.ViewName:
+                        case AttributeTags.ViewSheetNumber:
+                        case AttributeTags.ViewSheetName:
+                        case AttributeTags.ParentSheetNumber:
+                        case AttributeTags.ParentSheetName:
                             ActiveTextbox.Text = ActiveTextbox.Text.Insert(ActiveTextbox.SelectionStart, s);
                             break;
                         default:

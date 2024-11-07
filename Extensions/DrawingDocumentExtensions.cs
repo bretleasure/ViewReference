@@ -22,12 +22,12 @@ namespace Inventor
         }
 
         public static Task AddViewReferences(this DrawingDocument dwgDoc)
-            => AddinGlobal.Automation.CreateReferences(dwgDoc);
+            => AddinServer.AppAutomation.CreateReferences(dwgDoc);
 
         public static Task AddViewReferences(this DrawingDocument dwgDoc, ViewReferenceSettings settings)
-            => AddinGlobal.Automation.CreateReferences(dwgDoc, settings);
+            => AddinServer.AppAutomation.CreateReferences(dwgDoc, settings);
 
         public static Task RemoveViewReferences(this DrawingDocument dwgDoc)
-            => AddinGlobal.Automation.RemoveReferences(dwgDoc);
+            => AddinServer.AppAutomation.RemoveReferences(dwgDoc);
     }
 }
