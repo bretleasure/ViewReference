@@ -6,6 +6,11 @@
 ![GitHub License](https://img.shields.io/github/license/bretleasure/viewreference?color=salmon)
 ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/bretleasure/viewreference/build-deploy.yml?logo=githubactions&logoColor=white&label=Build%20and%20Deploy&link=https%3A%2F%2Fgithub.com%2Fbretleasure%2FSheetList%2Factions%2Fworkflows%2Fbuild-deploy.yml)
 
+# ARCHIVED: This repository is no longer actively maintained.
+
+Autodesk Inventor 2026 now includes native functionality for creating View References, making this add-in obsolete.
+
+
 # Usage
 
 The addin can either be used via the commmand buttons added to the Inventor UI or by using the API with your own code. 
